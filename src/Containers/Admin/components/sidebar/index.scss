@@ -1,0 +1,8 @@
+.sideBar__list {
+  list-style-type: none;
+  li {
+    &:hover {
+      text-decoration: none;
+    }
+  }
+}

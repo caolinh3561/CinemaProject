@@ -1,0 +1,12 @@
+.MuiPagination-root {
+  display: flex;
+  justify-content: center;
+  .MuiPagination-ul {
+    width: 420px;
+    .MuiButtonBase-root {
+      &:focus {
+        outline: none;
+      }
+    }
+  }
+}
