@@ -19,9 +19,12 @@ function MovieItem(props) {
 
   return (
     <>
-      {props.movieList.map((item) => {
+      {props.movieList.map((item, index) => {
         return (
-          <tr key={item.maPhim}>
+          <tr
+            style={{ backgroundColor: index % 2 === 0 ? "beige" : "white" }}
+            key={item.maPhim}
+          >
             <td>{item.maPhim}</td>
             <td>{item.tenPhim}</td>
             <td>{item.danhGia}</td>
