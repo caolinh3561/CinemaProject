@@ -71,7 +71,7 @@ function MovieModal(props) {
     const validationSchema = Yup.object().shape({
       tenPhim: Yup.string()
         .required("K được bỏ trống trường này!")
-        .min(5, "Tài khoản phải có 6 ký tự trở lên!"),
+        .min(6, "Tài khoản phải có 6 ký tự trở lên!"),
       moTa: Yup.string().required("K được bỏ trống trường này!"),
       ngayKhoiChieu: Yup.string().required("K được bỏ trống trường này!"),
       trailer: Yup.string().required("K được bỏ trống trường này!"),

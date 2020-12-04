@@ -72,7 +72,7 @@ function MovieManagement(props) {
   return (
     <>
       <h1 className="text-center text-success">Movie Management</h1>
-      <nav className="d-flex justify-content-between">
+      <nav className="d-flex justify-content-between mb-4">
         <input type="search" />
         <Button
           className="text-success border-success"
@@ -90,10 +90,11 @@ function MovieManagement(props) {
       <table className="table">
         <thead>
           <tr>
-            <th>Ma Phim</th>
-            <th>Ten Phim</th>
-            <th>Danh Gia</th>
-            <th>Ngay Khoi Chieu</th>
+            <th>Mã Phim</th>
+            <th>Tên Phim</th>
+            <th>Dánh Giá</th>
+            <th>Ngày Khởi Chiếu</th>
+            <th>Hình Ảnh</th>
             <th>Action</th>
           </tr>
         </thead>
