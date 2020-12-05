@@ -95,7 +95,7 @@ function MovieManagement(props) {
             <th>Đánh Giá</th>
             <th>Ngày Khởi Chiếu</th>
             <th>Hình Ảnh</th>
-            <th>Action</th>
+            <th className="text-center">Action</th>
           </tr>
         </thead>
         <tbody>

@@ -1,3 +1,4 @@
+import React from "react";
 import {
   Button,
   FormControl,
@@ -5,270 +6,204 @@ import {
   Grid,
   Input,
   InputLabel,
-  Modal,
   Paper,
   Select,
   Typography,
 } from "@material-ui/core";
-import { Field, Form, withFormik } from "formik";
-import React, { Component } from "react";
-import { connect } from "react-redux";
+import { Field, Form, Formik } from "formik";
 import * as Yup from "yup";
 import { actAddNewUser } from "./../../modules/action";
 
-class AddUserModal extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      user: {
-        taiKhoan: "",
-        matKhau: "",
-        email: "",
-        soDt: "",
-        maNhom: "GP01",
-        maLoaiNguoiDung: "",
-        hoTen: "",
-      },
-      modal: false,
-    };
+export default function AddUserModal(props) {
+  const { initialState } = props;
+
+  let updatingUser;
+
+  function handleSubmit(values) {
+    console.log(values);
   }
 
-  // handleOnChange = (e) => {
-  //   let { name, value } = e.target;
-  //   this.setState({
-  //     [name]: value,
-  //   });
-  // };
-
-  // handleSubmit = (e) => {
-  //   e.preventDefault();
-  //   // console.log(this.state)
-  //   this.props.addNewUser(this.state);
-  // };
-  // handleOnClose = () => {
-  //   this.props.handleClose();
-  // };
-  handleopen = () => {
-    this.setState({
-      modal: true,
+  function renderModal() {
+    const validationSchema = Yup.object().shape({
+      taiKhoan: Yup.string()
+        .required("K được bỏ trống trường này!")
+        .min(5, "Tài khoản phải có 6 ký tự trở lên!"),
+      matKhau: Yup.string().required("K được bỏ trống trường này!"),
+      email: Yup.string()
+        .required("K được bỏ trống trường này!")
+        .email("Email không hợp lệ!"),
+      hoTen: Yup.string().required("K được bỏ trống trường này!"),
     });
-    // console.log(open);
-  };
-  handleclose = () => {
-    this.setState({
-      modal: false,
-    });
-    // console.log(open);
-  };
-
-  render() {
     return (
       <>
-        <button
-          type="button"
-          onClick={() => {
-            this.handleopen();
-          }}
-        >
-          Thêm Tài Khoản
-        </button>
-        <Modal
-          handleOpen={this.handleopen}
-          handleClose={this.handleclose}
-          open={this.state.modal}
-          onClose={() => {
-            this.handleclose();
-          }}
-          aria-labelledby="simple-modal-title"
-          aria-describedby="simple-modal-description"
-        >
-          <Form>
-            <Grid container spacing={0} justify="center" alignContent="center">
-              <Grid item xs={6} md={4}>
-                <Paper
-                  elevation={4}
-                  style={{ padding: "20px 15px", marginTop: "30px" }}
-                >
-                  <Typography variant="h4" display-4="true" gutterBottom>
+        <div className="modal-body">
+          <Formik
+            initialValues={initialState}
+            validationSchema={validationSchema}
+            enableReinitialize
+            // onSubmit={(values) => console.log(values)}
+            onSubmit={(values, actions) => {
+              console.log(values);
+              // handleSubmit(values);
+              setTimeout(() => {
+                // actions.resetForm({});
+                actions.setSubmitting(false);
+              }, 1000);
+            }}
+          >
+            {(formikProps) => {
+              const { values, touched, errors, setFieldValue } = formikProps;
+              return (
+                <Form>
+                  {/* <Paper
+                        elevation={4}
+                        style={{ padding: "20px 15px", marginTop: "30px" }}
+                      > */}
+                  {/* <Typography variant="h4" display-4="true" gutterBottom>
                     Signup
-                  </Typography>
+                  </Typography> */}
                   <FormControl
-                    style={{ width: "48%", marginRight: "10px" }}
+                    fullWidth
                     margin="normal"
-                    error={!!this.props.errors.ho && this.props.touched.ho}
-                  >
-                    <InputLabel>Họ</InputLabel>
-                    <Field name="ho">
-                      {({ field }) => <Input fullWidth {...field} />}
-                    </Field>
-                    {this.props.touched.ho && (
-                      <FormHelperText>{this.props.errors.ho}</FormHelperText>
-                    )}
-                  </FormControl>
-                  <FormControl
-                    style={{ width: "48%" }}
-                    margin="normal"
-                    error={!!this.props.errors.ten && this.props.touched.ten}
+                    error={!!errors.hoTen && touched.hoTen}
                   >
                     <InputLabel>Tên</InputLabel>
-                    <Field name="ten">
+                    <Field name="hoTen">
                       {({ field }) => <Input fullWidth {...field} />}
                     </Field>
-                    {this.props.touched.ten && (
-                      <FormHelperText>{this.props.errors.ten}</FormHelperText>
+                    {touched.hoTen && (
+                      <FormHelperText>{errors.hoTen}</FormHelperText>
                     )}
                   </FormControl>
                   <FormControl
                     fullWidth
                     margin="normal"
-                    error={
-                      !!this.props.errors.taiKhoan &&
-                      this.props.touched.taiKhoan
-                    }
+                    error={!!errors.taiKhoan && touched.taiKhoan}
                   >
                     <InputLabel>Tài Khoản</InputLabel>
                     <Field name="taiKhoan">
                       {({ field }) => <Input fullWidth {...field} />}
                     </Field>
-                    {this.props.touched.taiKhoan && (
-                      <FormHelperText>
-                        {this.props.errors.taiKhoan}
-                      </FormHelperText>
+                    {touched.taiKhoan && (
+                      <FormHelperText>{errors.taiKhoan}</FormHelperText>
                     )}
                   </FormControl>
                   <FormControl
                     fullWidth
                     margin="normal"
-                    error={
-                      !!this.props.errors.matKhau && this.props.touched.matKhau
-                    }
+                    error={!!errors.matKhau && touched.matKhau}
                   >
                     <InputLabel>Password</InputLabel>
                     <Field name="matKhau">
-                      {({ field }) => <Input fullWidth {...field} />}
+                      {({ field }) => (
+                        <Input type="password" fullWidth {...field} />
+                      )}
                     </Field>
-                    {this.props.touched.matKhau && (
-                      <FormHelperText>
-                        {this.props.errors.matKhau}
-                      </FormHelperText>
+                    {touched.matKhau && (
+                      <FormHelperText>{errors.matKhau}</FormHelperText>
                     )}
                   </FormControl>
                   <FormControl
                     fullWidth
                     margin="normal"
-                    error={
-                      !!this.props.errors.email && this.props.touched.email
-                    }
+                    error={!!errors.email && touched.email}
                   >
                     <InputLabel>Email</InputLabel>
                     <Field name="email">
                       {({ field }) => <Input fullWidth {...field} />}
                     </Field>
-                    {this.props.touched.email && (
-                      <FormHelperText>{this.props.errors.email}</FormHelperText>
+                    {touched.email && (
+                      <FormHelperText>{errors.email}</FormHelperText>
                     )}
                   </FormControl>
                   <FormControl
                     fullWidth
                     margin="normal"
-                    error={
-                      !!this.props.errors.maLoaiNguoiDung &&
-                      this.props.touched.maLoaiNguoiDung
-                    }
+                    error={!!errors.maLoaiNguoiDung && touched.maLoaiNguoiDung}
                   >
                     <InputLabel>Loại tài khoản</InputLabel>
                     <Field name="maLoaiNguoiDung">
                       {({ field }) => <Input fullWidth {...field} />}
                     </Field>
-                    {this.props.touched.maLoaiNguoiDung && (
-                      <FormHelperText>
-                        {this.props.errors.maLoaiNguoiDung}
-                      </FormHelperText>
+                    {touched.maLoaiNguoiDung && (
+                      <FormHelperText>{errors.maLoaiNguoiDung}</FormHelperText>
                     )}
                   </FormControl>
 
                   <FormControl
                     fullWidth
                     margin="normal"
-                    error={!!this.props.errors.soDt && this.props.touched.soDt}
+                    error={!!errors.soDt && touched.soDt}
                   >
                     <InputLabel>Số Điện Thoại</InputLabel>
                     <Field name="soDt">
                       {({ field }) => <Input type="tel" fullWidth {...field} />}
                     </Field>
-                    {this.props.touched.soDt && (
-                      <FormHelperText>{this.props.errors.soDt}</FormHelperText>
+                    {touched.soDt && (
+                      <FormHelperText>{errors.soDt}</FormHelperText>
                     )}
                   </FormControl>
                   <FormControl fullWidth margin="normal">
                     <Button variant="contained" color="primary" type="submit">
-                      Signup
+                      Thêm Mới
                     </Button>
                   </FormControl>
-                </Paper>
-              </Grid>
-            </Grid>
-          </Form>
-        </Modal>
+                  {/* </Paper> */}
+                </Form>
+              );
+            }}
+          </Formik>
+        </div>
+        {/* <div className="modal-footer">
+          <Button
+            type="submit"
+            variant="contained"
+            className="btn btn-primary"
+            onClick={handleSubmit}
+          >
+            Signup
+          </Button>
+        </div> */}
       </>
     );
   }
+
+  return (
+    <>
+      <div
+        className="modal fade"
+        id="userModal"
+        tabIndex={-1}
+        role="dialog"
+        aria-labelledby="userModalLabel"
+        aria-hidden="true"
+      >
+        <div className="modal-dialog" role="document">
+          <div className="modal-content">
+            <div className="modal-header">
+              <h5
+                className={
+                  updatingUser
+                    ? "modal-title text-primary"
+                    : "modal-title text-success"
+                }
+                id="userModalLabel"
+              >
+                {updatingUser ? "Cập nhật Người Dùng" : "Thêm Người Dùng"}
+              </h5>
+              <button
+                type="button"
+                className="close"
+                data-dismiss="modal"
+                aria-label="Close"
+              >
+                <span aria-hidden="true">×</span>
+              </button>
+            </div>
+            {renderModal()}
+          </div>
+        </div>
+      </div>
+    </>
+  );
 }
-
-const mapDispatchToProps = (dispatch) => {
-  return {
-    addNewUser: (user) => {
-      dispatch(actAddNewUser(user));
-    },
-  };
-};
-
-const FormikForm = withFormik({
-  enableReinitialize: true,
-  mapPropsToValues() {
-    return {
-      ho: "",
-      ten: "",
-      taiKhoan: "",
-      matKhau: "",
-      email: "",
-      soDt: "",
-      maNhom: "GP01",
-      maLoaiNguoiDung: "",
-      hoTen: "",
-    };
-  },
-
-  validationSchema: Yup.object().shape({
-    taiKhoan: Yup.string()
-      .required("K được bỏ trống trường này!")
-      .min(5, "Tài khoản phải có 6 ký tự trở lên!"),
-    matKhau: Yup.string().required("K được bỏ trống trường này!"),
-    email: Yup.string()
-      .required("K được bỏ trống trường này!")
-      .email("Email không hợp lệ!"),
-    ho: Yup.string().required("K được bỏ trống trường này!"),
-    ten: Yup.string().required("K được bỏ trống trường này!"),
-  }),
-  handleSubmit: (values, { props, setSubmitting }) => {
-    setTimeout(() => {
-      // alert(JSON.stringify(values, null, 2));
-      let user = {
-        taiKhoan: values.taiKhoan,
-        matKhau: values.matKhau,
-        email: values.email,
-        maNhom: values.maNhom,
-        maLoaiNguoiDung: values.maLoaiNguoiDung,
-        hoTen: values.ho + " " + values.ten,
-        soDt: values.soDt,
-      };
-      console.log(user);
-      props.addNewUser(user);
-      setSubmitting(false);
-    }, 1000);
-  },
-
-  displayName: "BasicForm",
-})(AddUserModal);
-
-export default connect(null, mapDispatchToProps)(FormikForm);

@@ -5,6 +5,7 @@ import {
   ADD_NEW_USER_FAIL,
   ADD_NEW_USER_SUCCESS,
   ADD_NEW_USER_REQUEST,
+  USER_NEED_UPDATE,
 } from "./constant";
 
 let initialState = {
@@ -12,6 +13,7 @@ let initialState = {
   data: null,
   err: null,
   user: null,
+  userNeedUpdate: null,
 };
 
 const userReducer = (state = initialState, action) => {
@@ -26,6 +28,10 @@ const userReducer = (state = initialState, action) => {
     case GET_USER_FAIL:
       state.loading = false;
       state.err = action.payload;
+      return { ...state };
+
+    case USER_NEED_UPDATE:
+      state.userNeedUpdate = action.payload;
       return { ...state };
 
     case ADD_NEW_USER_REQUEST:

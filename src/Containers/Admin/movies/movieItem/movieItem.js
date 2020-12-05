@@ -33,10 +33,10 @@ function MovieItem(props) {
               <img
                 src={item.hinhAnh}
                 alt="hinhAnh"
-                style={{ width: "50px", height: "80px" }}
+                style={{ width: "45px", height: "70px" }}
               />
             </td>
-            <td>
+            <td className="d-flex justify-content-center">
               <Button
                 size="small"
                 style={{
