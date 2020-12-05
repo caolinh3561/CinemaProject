@@ -2,7 +2,7 @@
   display: flex;
   justify-content: center;
   .MuiPagination-ul {
-    width: 450px;
+    width: fit-content;
     .MuiButtonBase-root {
       &:focus {
         outline: none;

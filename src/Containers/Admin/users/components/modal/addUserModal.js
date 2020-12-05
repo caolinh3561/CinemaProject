@@ -1,38 +1,33 @@
-import React from "react";
 import {
   Button,
   FormControl,
   FormHelperText,
-  Grid,
   Input,
   InputLabel,
-  Paper,
+  MenuItem,
   Select,
-  Typography,
 } from "@material-ui/core";
 import { Field, Form, Formik } from "formik";
+import React from "react";
 import * as Yup from "yup";
-import { actAddNewUser } from "./../../modules/action";
 
 export default function AddUserModal(props) {
-  const { initialState } = props;
-
-  let updatingUser;
-
-  function handleSubmit(values) {
-    console.log(values);
-  }
+  const { initialState, updatingUser, handleSubmit, handleUpdate } = props;
 
   function renderModal() {
     const validationSchema = Yup.object().shape({
       taiKhoan: Yup.string()
-        .required("K được bỏ trống trường này!")
+        .required("Không được bỏ trống trường này!")
         .min(5, "Tài khoản phải có 6 ký tự trở lên!"),
-      matKhau: Yup.string().required("K được bỏ trống trường này!"),
+      matKhau: Yup.string().required("Không được bỏ trống trường này!"),
       email: Yup.string()
-        .required("K được bỏ trống trường này!")
+        .required("Không được bỏ trống trường này!")
         .email("Email không hợp lệ!"),
-      hoTen: Yup.string().required("K được bỏ trống trường này!"),
+      hoTen: Yup.string().required("Không được bỏ trống trường này!"),
+      soDt: Yup.number("chỉ được chứa ký tự số!")
+        .required("Không được bỏ trống trường này!")
+        .positive("chỉ được chứa ký tự số!"),
+      maLoaiNguoiDung: Yup.string().required("Mời chọn loại tài khoản!"),
     });
     return (
       <>
@@ -43,16 +38,29 @@ export default function AddUserModal(props) {
             enableReinitialize
             // onSubmit={(values) => console.log(values)}
             onSubmit={(values, actions) => {
-              console.log(values);
-              // handleSubmit(values);
               setTimeout(() => {
-                // actions.resetForm({});
+                if (!updatingUser) {
+                  handleSubmit(values);
+                } else {
+                  handleUpdate(values);
+                }
+
+                actions.resetForm({
+                  taiKhoan: "",
+                  matKhau: "",
+                  email: "",
+                  soDt: "",
+                  maNhom: "GP01",
+                  maLoaiNguoiDung: "",
+                  hoTen: "",
+                });
                 actions.setSubmitting(false);
               }, 1000);
             }}
           >
             {(formikProps) => {
-              const { values, touched, errors, setFieldValue } = formikProps;
+              const { touched, errors } = formikProps;
+              // console.log({ values, touched, errors });
               return (
                 <Form>
                   {/* <Paper
@@ -63,11 +71,11 @@ export default function AddUserModal(props) {
                     Signup
                   </Typography> */}
                   <FormControl
-                    fullWidth
+                    style={{ width: "48%", marginRight: "2%" }}
                     margin="normal"
                     error={!!errors.hoTen && touched.hoTen}
                   >
-                    <InputLabel>Tên</InputLabel>
+                    <InputLabel>Họ Tên</InputLabel>
                     <Field name="hoTen">
                       {({ field }) => <Input fullWidth {...field} />}
                     </Field>
@@ -75,8 +83,28 @@ export default function AddUserModal(props) {
                       <FormHelperText>{errors.hoTen}</FormHelperText>
                     )}
                   </FormControl>
+
                   <FormControl
-                    fullWidth
+                    style={{ width: "48%", marginRight: "2%" }}
+                    margin="normal"
+                    error={!!errors.maLoaiNguoiDung && touched.maLoaiNguoiDung}
+                  >
+                    <InputLabel>Loại tài khoản</InputLabel>
+                    <Field name="maLoaiNguoiDung">
+                      {({ field }) => (
+                        <Select fullWidth {...field}>
+                          <MenuItem value={"KhachHang"}>Khách Hàng</MenuItem>
+                          <MenuItem value={"QuanTri"}>Quản Trị</MenuItem>
+                        </Select>
+                      )}
+                    </Field>
+                    {touched.maLoaiNguoiDung && (
+                      <FormHelperText>{errors.maLoaiNguoiDung}</FormHelperText>
+                    )}
+                  </FormControl>
+
+                  <FormControl
+                    style={{ width: "48%", marginRight: "2%" }}
                     margin="normal"
                     error={!!errors.taiKhoan && touched.taiKhoan}
                   >
@@ -89,11 +117,11 @@ export default function AddUserModal(props) {
                     )}
                   </FormControl>
                   <FormControl
-                    fullWidth
+                    style={{ width: "48%", marginRight: "2%" }}
                     margin="normal"
                     error={!!errors.matKhau && touched.matKhau}
                   >
-                    <InputLabel>Password</InputLabel>
+                    <InputLabel>Mật khẩu</InputLabel>
                     <Field name="matKhau">
                       {({ field }) => (
                         <Input type="password" fullWidth {...field} />
@@ -104,7 +132,7 @@ export default function AddUserModal(props) {
                     )}
                   </FormControl>
                   <FormControl
-                    fullWidth
+                    style={{ width: "48%", marginRight: "2%" }}
                     margin="normal"
                     error={!!errors.email && touched.email}
                   >
@@ -116,22 +144,9 @@ export default function AddUserModal(props) {
                       <FormHelperText>{errors.email}</FormHelperText>
                     )}
                   </FormControl>
-                  <FormControl
-                    fullWidth
-                    margin="normal"
-                    error={!!errors.maLoaiNguoiDung && touched.maLoaiNguoiDung}
-                  >
-                    <InputLabel>Loại tài khoản</InputLabel>
-                    <Field name="maLoaiNguoiDung">
-                      {({ field }) => <Input fullWidth {...field} />}
-                    </Field>
-                    {touched.maLoaiNguoiDung && (
-                      <FormHelperText>{errors.maLoaiNguoiDung}</FormHelperText>
-                    )}
-                  </FormControl>
 
                   <FormControl
-                    fullWidth
+                    style={{ width: "48%", marginRight: "2%" }}
                     margin="normal"
                     error={!!errors.soDt && touched.soDt}
                   >
@@ -144,8 +159,16 @@ export default function AddUserModal(props) {
                     )}
                   </FormControl>
                   <FormControl fullWidth margin="normal">
-                    <Button variant="contained" color="primary" type="submit">
-                      Thêm Mới
+                    <Button
+                      className={
+                        !updatingUser
+                          ? "mt-4 text-success"
+                          : "mt-4 text-primary"
+                      }
+                      variant="outlined"
+                      type="submit"
+                    >
+                      {!updatingUser ? "Thêm Mới" : "Cập Nhật"}
                     </Button>
                   </FormControl>
                   {/* </Paper> */}
@@ -177,6 +200,7 @@ export default function AddUserModal(props) {
         role="dialog"
         aria-labelledby="userModalLabel"
         aria-hidden="true"
+        data-focus="false"
       >
         <div className="modal-dialog" role="document">
           <div className="modal-content">

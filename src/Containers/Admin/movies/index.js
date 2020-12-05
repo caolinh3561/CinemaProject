@@ -56,19 +56,6 @@ function MovieManagement(props) {
     dispatch(actDeleteMovie(id));
   }
 
-  function handleSubmit(e) {
-    e.preventDefault();
-    console.log(movie);
-  }
-
-  function handleOnChange(e) {
-    const { value, name, files } = e.target;
-    setMovie({
-      ...movie,
-      [name]: value,
-      hinhAnh: files,
-    });
-  }
   return (
     <>
       <h1 className="text-center text-success">Movie Management</h1>
@@ -118,9 +105,9 @@ function MovieManagement(props) {
       <MovieModal
         movie={updatingMovie ? movieNeedUpdate : movie}
         updatingMovie={updatingMovie}
-        handleUpdate={handleUpdate}
-        handleSubmit={handleSubmit}
-        handleOnChange={handleOnChange}
+        // handleUpdate={handleUpdate}
+        // handleSubmit={handleSubmit}
+        // handleOnChange={handleOnChange}
       />
     </>
   );
