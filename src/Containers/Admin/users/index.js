@@ -143,6 +143,7 @@ function UserManagement(props) {
           variant="outlined"
           data-toggle="modal"
           data-target="#userModal"
+          style={{ outline: "none" }}
           onClick={() => {
             setUpdatingUser(false);
             // dispatch(actSendMovieUpdating({}));

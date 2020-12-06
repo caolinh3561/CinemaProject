@@ -71,6 +71,7 @@ function MovieManagement(props) {
           variant="outlined"
           data-toggle="modal"
           data-target="#movieModal"
+          style={{ outline: "none" }}
           onClick={() => {
             setUpdatingMovie(false);
             // dispatch(actSendMovieUpdating({}));

@@ -7,6 +7,7 @@ import movieDetailReducer from "./../Containers/Home/MovieDetail/modules/reducer
 import loginReducer from "./../Containers/Admin/login/modules/reducer";
 import userReducer from "./../Containers/Admin/users/modules/reducer";
 import movieListWithPaginationReducer from "./../Containers/Admin/movies/modules/reducer";
+import scheduleMovieReducer from "./../Containers/Admin/movies/components/scheduleModal/modules/reducer";
 const rootReducer = combineReducers({
   moviesReducer,
   heThongRapReducer,
@@ -16,6 +17,7 @@ const rootReducer = combineReducers({
   loginReducer,
   userReducer,
   movieListWithPaginationReducer,
+  scheduleMovieReducer,
 });
 
 export default rootReducer;

@@ -174,6 +174,7 @@ function MovieModal(props) {
                   handleImageChange(e, setFieldValue);
                 }}
               />
+              <br />
               {touched.hinhAnh && (
                 <small className="text-danger">{errors.hinhAnh}</small>
               )}
@@ -235,9 +236,10 @@ function MovieModal(props) {
 
               <hr />
               <Button
-                className={"text-success"}
+                className="text-success"
                 type="submit"
                 variant="outlined"
+                style={{ outline: "none" }}
                 // color={updatingMovie ? "" : "primary"}
               >
                 {updatingMovie ? "Cập nhật" : "Thêm Phim"}

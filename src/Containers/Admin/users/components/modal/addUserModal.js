@@ -167,6 +167,7 @@ export default function AddUserModal(props) {
                       }
                       variant="outlined"
                       type="submit"
+                      style={{ outline: "none" }}
                     >
                       {!updatingUser ? "Thêm Mới" : "Cập Nhật"}
                     </Button>
