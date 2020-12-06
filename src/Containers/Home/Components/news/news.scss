@@ -48,6 +48,47 @@
                     }
                 }
             }
+            .news__right {
+                margin-top: 50px;
+                height: 100%;
+                .news__slider {
+                    position: absolute;
+                    padding: 1.5% 29.3% 0 29.3%;
+                    top: 0;
+                    left: 0;
+                    width: 100%;
+                    height: 490px;
+                    .slick-list {
+                        overflow: hidden;
+                        border-radius: 20px;
+                    }
+                    .news__img {
+                        background-position: center;
+                        background-repeat: no-repeat;
+                        background-size: cover;
+                        height: 490px;
+                        width: 195px !important;
+                        vertical-align: middle;
+                        border: 0;
+                        // border-radius: 15px;
+                    }
+                    .news__img2 {
+                        background-image: url(../../../../assets/img/mobileNews/slide2.jpg);
+                    }
+                    .news__img1 {
+                        background-image: url(../../../../assets/img/mobileNews/slide1.jpg);
+                    }
+                    .news__img3 {
+                        background-image: url(../../../../assets/img/mobileNews/slide3.jpg);
+                    }
+                    .news__img4 {
+                        background-image: url(../../../../assets/img/mobileNews/slide4.jpg);
+                    }
+                    .news__img5 {
+                        background-image: url(../../../../assets/img/mobileNews/slide5.jpg);
+                    }
+                }
+            }
         }
     }
 }
