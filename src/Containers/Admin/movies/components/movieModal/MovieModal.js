@@ -10,7 +10,7 @@ import { Field, Form, Formik } from "formik";
 import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import * as Yup from "yup";
-import { actPostNewMovie, actUpdateMovie } from "./../modules/actions";
+import { actPostNewMovie, actUpdateMovie } from "./../../modules/actions";
 import "./MovieModal.scss";
 
 function MovieModal(props) {
@@ -235,7 +235,7 @@ function MovieModal(props) {
 
               <hr />
               <Button
-                className={updatingMovie ? "text-primary" : "text-success"}
+                className={"text-success"}
                 type="submit"
                 variant="outlined"
                 // color={updatingMovie ? "" : "primary"}
@@ -262,14 +262,7 @@ function MovieModal(props) {
         <div className="modal-dialog" role="document">
           <div className="modal-content">
             <div className="modal-header">
-              <h5
-                className={
-                  updatingMovie
-                    ? "modal-title text-primary"
-                    : "modal-title text-success"
-                }
-                id="exampleModalLabel"
-              >
+              <h5 className={"modal-title text-success"} id="exampleModalLabel">
                 {updatingMovie ? "Cập nhật phim" : "Thêm Phim Mới"}
               </h5>
               <button

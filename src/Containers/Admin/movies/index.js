@@ -7,8 +7,9 @@ import {
   actDeleteMovie,
   actSendMovieUpdating,
 } from "./modules/actions";
-import MovieItem from "./movieItem/movieItem";
-import MovieModal from "./movieModal/MovieModal";
+import MovieItem from "./components/movieItem/movieItem";
+import MovieModal from "./components/movieModal/MovieModal";
+import ScheduleModal from "./components/scheduleModal/scheduleModal";
 function MovieManagement(props) {
   const responseData = useSelector(
     (state) => state.movieListWithPaginationReducer.movieList
@@ -28,6 +29,10 @@ function MovieManagement(props) {
     maNhom: "GP01",
     ngayKhoiChieu: "",
     danhGia: 0,
+  });
+  const [movieNeedAddSchedule, setMovieNeedAddSchedule] = useState({
+    maPhim: 0,
+    tenPhim: "",
   });
 
   const dispatch = useDispatch();
@@ -90,6 +95,7 @@ function MovieManagement(props) {
             movieList={responseData.items ? responseData.items : []}
             handleDelete={handleDelete}
             handleUpdate={handleUpdate}
+            handleSchedule={setMovieNeedAddSchedule}
           />
         </tbody>
       </table>
@@ -109,6 +115,7 @@ function MovieManagement(props) {
         // handleSubmit={handleSubmit}
         // handleOnChange={handleOnChange}
       />
+      <ScheduleModal movie={movieNeedAddSchedule} />
     </>
   );
 }

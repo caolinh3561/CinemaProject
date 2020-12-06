@@ -18,6 +18,7 @@ export const actLogin = (user, history) => {
           dispatch(actCheckLoginSuccess(res.data));
           history.push("/admin/movies");
         } else {
+          localStorage.setItem("userMember", JSON.stringify(res.data));
           history.push("");
           alert("Access denied!");
         }
