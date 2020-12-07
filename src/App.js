@@ -5,6 +5,8 @@ import { BrowserRouter, Switch, Route } from "react-router-dom";
 import Home from "./Containers/Home";
 import Admin from "./Containers/Admin";
 import LoginPage from "./Containers/Admin/login";
+import CheckOut from "Containers/Home/HomePage/checkout";
+import MovieDetail from "Containers/Home/HomePage/MovieDetail";
 function App() {
   const showLayoutHomePage = (routes) => {
     if (routes && routes.length > 0) {
@@ -41,6 +43,8 @@ function App() {
         {showLayoutAdminPage(routesAdminPage)}
 
         <Route path="/admin/login" component={LoginPage} />
+        <Route path="/movie/:id" component={MovieDetail} />
+        <Route path="/checkout/:scheduleId" component={CheckOut} />
         <Route path="" />
       </Switch>
     </BrowserRouter>

@@ -1,7 +1,8 @@
+import CheckOut from "Containers/Home/HomePage/checkout";
 import MovieManagement from "../Containers/Admin/movies";
 import UserManagement from "../Containers/Admin/users";
 import HomePage from "../Containers/Home/HomePage";
-import MovieDetail from "../Containers/Home/MovieDetail";
+import MovieDetail from "../Containers/Home/HomePage/MovieDetail";
 // import MovieDetailComponent from "../Containers/Home/MovieDetail";
 
 const routesHomePage = [
@@ -10,11 +11,16 @@ const routesHomePage = [
     exact: true,
     component: HomePage,
   },
-  {
-    path: "/movie/:id",
-    exact: false,
-    component: MovieDetail,
-  },
+  // {
+  //   path: "/movie/:id",
+  //   exact: false,
+  //   component: MovieDetail,
+  // },
+  // {
+  //   path: "/checkout/:scheduleId",
+  //   exact: false,
+  //   component: CheckOut,
+  // },
 ];
 const routesAdminPage = [
   {
