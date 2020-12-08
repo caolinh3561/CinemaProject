@@ -24,6 +24,7 @@ class CarouselComponent extends Component {
   render() {
     return (
       <Swiper
+        className="carouselMovie"
         spaceBetween={30}
         slidesPerView={1}
         navigation

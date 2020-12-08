@@ -54,8 +54,8 @@ export default function News() {
             <div className="col-sm-6 news__right text-center">
               <img
                 src="/img/mobilenews/mobilenews.png"
-                height={490}
-                width={195}
+                height={422}
+                width={220}
                 alt="Loading"
               />
               <Slider className="text-center news__slider" {...settings}>
