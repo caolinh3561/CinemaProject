@@ -32,6 +32,9 @@
     text-align: center;
     gap: 8px;
     .span__item {
+      cursor: default;
+      pointer-events: none;
+      user-select: none;
       padding: 0;
       outline: none;
       min-width: 25px;
@@ -45,6 +48,9 @@
     display: grid;
     gap: 8px;
     .column__item {
+      cursor: default;
+      pointer-events: none;
+      user-select: none;
       width: 40px;
       height: 25px;
     }

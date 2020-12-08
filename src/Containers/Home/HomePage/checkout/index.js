@@ -1,47 +1,142 @@
-import React, { useEffect } from "react";
+import { Button } from "@material-ui/core";
+import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import "./index.scss";
 import { actGetTicketRoom } from "./modules/actions";
-import Crop32Icon from "@material-ui/icons/Crop32";
-import StopSharpIcon from "@material-ui/icons/StopSharp";
-import { green, red } from "@material-ui/core/colors";
-import { Button, IconButton } from "@material-ui/core";
 
 export default function CheckOut() {
   const ticketRoom = useSelector((state) => state.ticketRoomReducer.ticketRoom);
   const dispatch = useDispatch();
+  const [state, setstate] = useState([]);
 
   useEffect(() => {
     dispatch(actGetTicketRoom());
   }, [dispatch]);
+  useEffect(() => {
+    if (ticketRoom && ticketRoom.danhSachGhe) {
+      let DSG = [...ticketRoom.danhSachGhe];
+      DSG = DSG.map((item) => {
+        if (+item.stt / 16 <= 1) {
+          return { ...item, dangChon: false, tenGhe: `A${item.tenGhe}` };
+        } else if (+item.stt / 16 <= 2) {
+          return {
+            ...item,
+            dangChon: false,
+            tenGhe: `B${+item.tenGhe % 16 === 0 ? 16 : +item.tenGhe % 16}`,
+          };
+        } else if (+item.stt / 16 <= 3) {
+          return {
+            ...item,
+            dangChon: false,
+            tenGhe: `C${+item.tenGhe % 16 === 0 ? 16 : +item.tenGhe % 16}`,
+          };
+        } else if (+item.stt / 16 <= 4) {
+          return {
+            ...item,
+            dangChon: false,
+            tenGhe: `D${+item.tenGhe % 16 === 0 ? 16 : +item.tenGhe % 16}`,
+          };
+        } else if (+item.stt / 16 <= 5) {
+          return {
+            ...item,
+            dangChon: false,
+            tenGhe: `E${+item.tenGhe % 16 === 0 ? 16 : +item.tenGhe % 16}`,
+          };
+        } else if (+item.stt / 16 <= 6) {
+          return {
+            ...item,
+            dangChon: false,
+            tenGhe: `F${+item.tenGhe % 16 === 0 ? 16 : +item.tenGhe % 16}`,
+          };
+        } else if (+item.stt / 16 <= 7) {
+          return {
+            ...item,
+            dangChon: false,
+            tenGhe: `G${+item.tenGhe % 16 === 0 ? 16 : +item.tenGhe % 16}`,
+          };
+        } else if (+item.stt / 16 <= 8) {
+          return {
+            ...item,
+            dangChon: false,
+            tenGhe: `H${+item.tenGhe % 16 === 0 ? 16 : +item.tenGhe % 16}`,
+          };
+        } else if (+item.stt / 16 <= 9) {
+          return {
+            ...item,
+            dangChon: false,
+            tenGhe: `I${+item.tenGhe % 16 === 0 ? 16 : +item.tenGhe % 16}`,
+          };
+        } else if (+item.stt / 16 <= 10) {
+          return {
+            ...item,
+            dangChon: false,
+            tenGhe: `K${+item.tenGhe % 16 === 0 ? 16 : +item.tenGhe % 16}`,
+          };
+        }
+      });
+      setstate(DSG);
+    }
+    return () => {
+      // cleanup
+    };
+  }, [dispatch, ticketRoom]);
+
+  const handleButtonChange = (stt, dangChon) => {
+    if (
+      dangChon === false &&
+      ((stt % 16 == 2 && state[stt - 2].dangChon === false) ||
+        (stt % 16 == 3 && state[stt].dangChon === false) ||
+        (stt % 16 == 14 && state[stt - 2].dangChon === false) ||
+        (stt % 16 == 15 && state[stt].dangChon === false) ||
+        (stt % 16 == 6 && state[stt - 2].dangChon === false) ||
+        (stt % 16 == 11 && state[stt].dangChon === false))
+    ) {
+      alert("Bạn không thể bỏ trống ghế đầu mỗi dãy!");
+    }
+    let cloneState = [...state];
+    cloneState[stt - 1].dangChon = !dangChon;
+    setstate(cloneState);
+  };
 
   const renderSeats = () => {
     if (ticketRoom && ticketRoom.danhSachGhe) {
-      return ticketRoom.danhSachGhe.map((item) => {
+      console.log(state);
+      return state.map((item) => {
         if (item.daDat === true) {
           return (
             <Button
-              key={item.tenGhe}
+              key={item.stt}
               disabled
               style={{ backgroundColor: "dimgray" }}
             >
-              {/* <StopSharpIcon
-                style={{ color: "gray" }}
-                disabled
-                fontSize="large"
-              /> */}
               X
             </Button>
           );
         } else if (item.loaiGhe === "Vip") {
           return (
-            <Button key={item.tenGhe} style={{ backgroundColor: "orange" }}>
+            <Button
+              onClick={() => {
+                handleButtonChange(item.stt, item.dangChon);
+              }}
+              key={item.stt}
+              style={{
+                backgroundColor: item.dangChon === true ? "#00c000" : "orange",
+              }}
+            >
               {/* <StopSharpIcon style={{ color: green[500] }} fontSize="large" /> */}
             </Button>
           );
         } else {
           return (
-            <Button key={item.tenGhe} style={{ backgroundColor: "darkgray" }}>
+            <Button
+              onClick={() => {
+                handleButtonChange(item.stt, item.dangChon);
+              }}
+              key={item.stt}
+              style={{
+                backgroundColor: item.dangChon ? "#00c000" : "darkgray",
+              }}
+            >
               {/* <StopSharpIcon fontSize="large" /> */}
             </Button>
           );
