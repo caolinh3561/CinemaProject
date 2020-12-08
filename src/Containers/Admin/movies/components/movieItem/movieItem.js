@@ -1,6 +1,6 @@
 import React from "react";
 import PropTypes from "prop-types";
-import { Button } from "@material-ui/core";
+import { Button, Icon } from "@material-ui/core";
 import BuildIcon from "@material-ui/icons/Build";
 import DeleteIcon from "@material-ui/icons/Delete";
 import { red } from "@material-ui/core/colors";
@@ -51,10 +51,28 @@ function MovieItem(props) {
                 data-target="#movieModal"
               >
                 <BuildIcon
-                  className="text-primary"
+                  className="text-success"
                   fontSize="small"
                   style={{ padding: 0 }}
                 />
+              </Button>
+              <Button
+                className="text-primary"
+                size="small"
+                style={{
+                  outline: "none",
+                  minWidth: "32px",
+                  marginRight: "10px",
+                }}
+                onClick={() => {
+                  props.handleSchedule(item);
+                }}
+                data-toggle="modal"
+                data-target="#scheduleModal"
+              >
+                <Icon fontSize="small" style={{ padding: 0 }}>
+                  add_circle
+                </Icon>
               </Button>
               <Button
                 size="small"

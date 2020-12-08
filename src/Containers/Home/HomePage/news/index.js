@@ -36,6 +36,7 @@ export default function News() {
                   <a
                     className="tagA"
                     target="_blank"
+                    rel="noopener noreferrer"
                     href="https://itunes.apple.com/us/app/123phim-mua-ve-lien-tay-chon/id615186197?mt=8"
                   >
                     iOS
@@ -44,6 +45,7 @@ export default function News() {
                   <a
                     className="tagA"
                     target="_blank"
+                    rel="noopener noreferrer"
                     href="https://play.google.com/store/apps/details?id=vn.com.vng.phim123"
                   >
                     Android

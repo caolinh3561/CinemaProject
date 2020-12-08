@@ -7,8 +7,9 @@ import {
   actDeleteMovie,
   actSendMovieUpdating,
 } from "./modules/actions";
-import MovieItem from "./movieItem/movieItem";
-import MovieModal from "./movieModal/MovieModal";
+import MovieItem from "./components/movieItem/movieItem";
+import MovieModal from "./components/movieModal/MovieModal";
+import ScheduleModal from "./components/scheduleModal/scheduleModal";
 function MovieManagement(props) {
   const responseData = useSelector(
     (state) => state.movieListWithPaginationReducer.movieList
@@ -28,6 +29,10 @@ function MovieManagement(props) {
     maNhom: "GP01",
     ngayKhoiChieu: "",
     danhGia: 0,
+  });
+  const [movieNeedAddSchedule, setMovieNeedAddSchedule] = useState({
+    maPhim: 0,
+    tenPhim: "",
   });
 
   const dispatch = useDispatch();
@@ -56,19 +61,6 @@ function MovieManagement(props) {
     dispatch(actDeleteMovie(id));
   }
 
-  function handleSubmit(e) {
-    e.preventDefault();
-    console.log(movie);
-  }
-
-  function handleOnChange(e) {
-    const { value, name, files } = e.target;
-    setMovie({
-      ...movie,
-      [name]: value,
-      hinhAnh: files,
-    });
-  }
   return (
     <>
       <h1 className="text-center text-success">Movie Management</h1>
@@ -79,6 +71,7 @@ function MovieManagement(props) {
           variant="outlined"
           data-toggle="modal"
           data-target="#movieModal"
+          style={{ outline: "none" }}
           onClick={() => {
             setUpdatingMovie(false);
             // dispatch(actSendMovieUpdating({}));
@@ -103,6 +96,7 @@ function MovieManagement(props) {
             movieList={responseData.items ? responseData.items : []}
             handleDelete={handleDelete}
             handleUpdate={handleUpdate}
+            handleSchedule={setMovieNeedAddSchedule}
           />
         </tbody>
       </table>
@@ -118,10 +112,11 @@ function MovieManagement(props) {
       <MovieModal
         movie={updatingMovie ? movieNeedUpdate : movie}
         updatingMovie={updatingMovie}
-        handleUpdate={handleUpdate}
-        handleSubmit={handleSubmit}
-        handleOnChange={handleOnChange}
+        // handleUpdate={handleUpdate}
+        // handleSubmit={handleSubmit}
+        // handleOnChange={handleOnChange}
       />
+      <ScheduleModal movie={movieNeedAddSchedule} />
     </>
   );
 }

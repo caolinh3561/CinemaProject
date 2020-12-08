@@ -11,10 +11,11 @@ class HeaderComponent extends Component {
   onScroll = () => {
     window.onscroll = function () {
       var header = document.getElementsByClassName("header__content")[0];
+      if (!header) return;
       if (window.pageYOffset > 400) {
         header.classList.add("header__change");
       } else {
-        if (header && header.classList.contains("header__change")) {
+        if (header.classList.contains("header__change")) {
           header.classList.remove("header__change");
         }
       }
