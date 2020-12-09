@@ -69,3 +69,17 @@
     cursor: default;
   }
 }
+.checkout__right {
+  position: relative;
+  height: 100%;
+  .btnDatVe {
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    outline: none;
+    height: 75px;
+    color: white;
+    background-image: linear-gradient(223deg, #e7cb28 0, #f79400 100%);
+    border-radius: 0;
+  }
+}

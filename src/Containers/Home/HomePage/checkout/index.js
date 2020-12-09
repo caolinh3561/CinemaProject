@@ -16,6 +16,7 @@ export default function CheckOut() {
     taiKhoanNguoiDung: "",
     danhSachVe: [],
   });
+  const [listGheDangChon, setListGheDangChon] = useState([]);
 
   useEffect(() => {
     const username = JSON.parse(localStorage.getItem("userMember")).taiKhoan;
@@ -148,89 +149,67 @@ export default function CheckOut() {
             tenGhe: `I${+item.tenGhe % 16 === 0 ? 16 : +item.tenGhe % 16}`,
           };
         }
-        // if (+item.stt / 16 <= 1) {
-        //   return { ...item, dangChon: false, tenGhe: `A${item.tenGhe}` };
-        // } else if (+item.stt / 16 <= 2) {
-        //   return {
-        //     ...item,
-        //     dangChon: false,
-        //     tenGhe: `B${+item.tenGhe % 16 === 0 ? 16 : +item.tenGhe % 16}`,
-        //   };
-        // } else if (+item.stt / 16 <= 3) {
-        //   return {
-        //     ...item,
-        //     dangChon: false,
-        //     tenGhe: `C${+item.tenGhe % 16 === 0 ? 16 : +item.tenGhe % 16}`,
-        //   };
-        // } else if (+item.stt / 16 <= 4) {
-        //   return {
-        //     ...item,
-        //     dangChon: false,
-        //     tenGhe: `D${+item.tenGhe % 16 === 0 ? 16 : +item.tenGhe % 16}`,
-        //   };
-        // } else if (+item.stt / 16 <= 5) {
-        //   return {
-        //     ...item,
-        //     dangChon: false,
-        //     tenGhe: `E${+item.tenGhe % 16 === 0 ? 16 : +item.tenGhe % 16}`,
-        //   };
-        // } else if (+item.stt / 16 <= 6) {
-        //   return {
-        //     ...item,
-        //     dangChon: false,
-        //     tenGhe: `F${+item.tenGhe % 16 === 0 ? 16 : +item.tenGhe % 16}`,
-        //   };
-        // } else if (+item.stt / 16 <= 7) {
-        //   return {
-        //     ...item,
-        //     dangChon: false,
-        //     tenGhe: `G${+item.tenGhe % 16 === 0 ? 16 : +item.tenGhe % 16}`,
-        //   };
-        // } else if (+item.stt / 16 <= 8) {
-        //   return {
-        //     ...item,
-        //     dangChon: false,
-        //     tenGhe: `H${+item.tenGhe % 16 === 0 ? 16 : +item.tenGhe % 16}`,
-        //   };
-        // } else if (+item.stt / 16 <= 9) {
-        //   return {
-        //     ...item,
-        //     dangChon: false,
-        //     tenGhe: `I${+item.tenGhe % 16 === 0 ? 16 : +item.tenGhe % 16}`,
-        //   };
-        // } else if (+item.stt / 16 <= 10) {
-        //   return {
-        //     ...item,
-        //     dangChon: false,
-        //     tenGhe: `K${+item.tenGhe % 16 === 0 ? 16 : +item.tenGhe % 16}`,
-        //   };
-        // }
       });
       setstate(DSG);
       // console.log(datVe);
     }
   }, [dispatch, ticketRoom]);
 
-  const handleButtonChange = (stt, dangChon) => {
-    if (
-      dangChon === false &&
-      ((+stt % 16 === 2 && state[+stt - 2].dangChon === false) ||
-        (+stt % 16 === 3 && state[+stt].dangChon === false) ||
-        (+stt % 16 === 14 && state[+stt - 2].dangChon === false) ||
-        (+stt % 16 === 15 && state[+stt].dangChon === false) ||
-        (+stt % 16 === 6 && state[+stt - 2].dangChon === false) ||
-        (+stt % 16 === 11 && state[+stt].dangChon === false))
-    ) {
-      alert("Bạn không thể bỏ trống ghế đầu của mỗi dãy!");
+  const handleButtonChange = (item) => {
+    setWarning(false);
+    if (!item.dangChon) {
+      if (
+        (+item.stt % 16 === 2 && state[+item.stt - 2].dangChon === false) ||
+        (+item.stt % 16 === 3 && state[+item.stt].dangChon === false) ||
+        (+item.stt % 16 === 14 && state[+item.stt - 2].dangChon === false) ||
+        (+item.stt % 16 === 15 && state[+item.stt].dangChon === false) ||
+        (+item.stt % 16 === 6 && state[+item.stt - 2].dangChon === false) ||
+        (+item.stt % 16 === 11 && state[+item.stt].dangChon === false)
+      ) {
+        alert("Bạn không thể bỏ trống ghế đầu của mỗi dãy!");
+        setWarning(true);
+      }
+
+      if (
+        (state[+item.stt].dangChon === false &&
+          state[+item.stt + 1].dangChon === true &&
+          state[+item.stt + 1].daDat === false) ||
+        (state[+item.stt - 2].dangChon === false &&
+          state[+item.stt - 3].dangChon === true &&
+          state[+item.stt - 3].daDat === false)
+      ) {
+        alert("Bạn không thể bỏ trống 1 ghế ở giữa!");
+        setWarning(true);
+      }
+
+      let cloneListGhe = [...listGheDangChon];
+      cloneListGhe.push(item);
+      cloneListGhe.sort((a, b) => a.stt - b.stt);
+      setListGheDangChon(cloneListGhe);
+    } else {
+      if (
+        state[+item.stt].dangChon === true &&
+        state[+item.stt - 2].dangChon === true
+      ) {
+        alert("Bạn không thể bỏ trống 1 ghế ở giữa!");
+        setWarning(true);
+      }
+
+      let cloneListGhe = [...listGheDangChon];
+
+      let index = cloneListGhe.findIndex((ghe) => ghe.maGhe === item.maGhe);
+      cloneListGhe.splice(index, 1);
+      cloneListGhe.sort((a, b) => a.stt - b.stt);
+      setListGheDangChon(cloneListGhe);
     }
     let cloneState = [...state];
-    cloneState[stt - 1].dangChon = !dangChon;
+    cloneState[+item.stt - 1].dangChon = !item.dangChon;
     setstate(cloneState);
   };
 
   const renderSeats = () => {
+    console.log(listGheDangChon);
     if (ticketRoom && ticketRoom.danhSachGhe) {
-      console.log(state);
       return state.map((item) => {
         if (item.daDat === true) {
           return (
@@ -246,7 +225,7 @@ export default function CheckOut() {
           return (
             <Button
               onClick={() => {
-                handleButtonChange(item.stt, item.dangChon);
+                handleButtonChange(item);
               }}
               key={item.stt}
               style={{
@@ -260,7 +239,7 @@ export default function CheckOut() {
           return (
             <Button
               onClick={() => {
-                handleButtonChange(item.stt, item.dangChon);
+                handleButtonChange(item);
               }}
               key={item.stt}
               style={{
@@ -273,6 +252,57 @@ export default function CheckOut() {
         }
       });
     }
+  };
+
+  const renderGiaVe = () => {
+    if (listGheDangChon.length === 0) return 0;
+    let tongGiaVe = 0;
+    for (let i = 0; i < listGheDangChon.length; i++) {
+      tongGiaVe += listGheDangChon[i].giaVe;
+    }
+    return tongGiaVe.toString().replace(/(\d)(?=(\d{3})+(?!\d))/g, "$1.") + "đ";
+  };
+
+  const renderThongTinDatVe = () => {
+    if (!ticketRoom || !ticketRoom.thongTinPhim) return;
+    const {
+      tenPhim,
+      ngayChieu,
+      gioChieu,
+      tenRap,
+      tenCumRap,
+    } = ticketRoom.thongTinPhim;
+
+    return (
+      <>
+        <div className="ticketRoom__info" style={{ padding: "0 15px" }}>
+          <h1 className="text-center" style={{ color: "#f79400" }}>
+            {renderGiaVe()}
+          </h1>
+          <hr />
+          <h5>{tenPhim}</h5>
+          <p>{tenCumRap}</p>
+          <p>
+            {ngayChieu} - {gioChieu} - {tenRap}
+          </p>
+          <hr />
+          <form>
+            <label className="d-block">Email:</label>
+            <input style={{ width: "100%" }} type="email" />
+            <label className="d-block">Số ĐT:</label>
+            <input style={{ width: "100%" }} type="tel" />
+          </form>
+          <hr />
+          <div className="payType">
+            <h6>Hình thức thanh toán</h6>
+          </div>
+        </div>
+        <hr />
+        <Button fullWidth className="btnDatVe">
+          Đặt vé
+        </Button>
+      </>
+    );
   };
 
   return (
@@ -360,16 +390,18 @@ export default function CheckOut() {
       </div>
 
       <div
-        className="col-lg-3"
+        className="col-lg-3 checkout__right"
         style={{
           position: "fixed",
           top: 0,
           right: 0,
-          height: 600,
-          backgroundColor: "gray",
+          height: 580,
+          // backgroundColor: "gray",
           padding: 0,
         }}
-      ></div>
+      >
+        {renderThongTinDatVe()}
+      </div>
     </div>
   );
 }
