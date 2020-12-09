@@ -5,12 +5,11 @@ import {
   GET_TICKET_ROOM_SUCCESS,
 } from "./constants";
 
-export const actGetTicketRoom = () => {
+export const actGetTicketRoom = (scheduleId) => {
   return (dispatch) => {
     dispatch(actGetTicketRoomRequest());
     Axios({
-      url:
-        "https://movie0706.cybersoft.edu.vn/api/QuanLyDatVe/LayDanhSachPhongVe?MaLichChieu=40793",
+      url: `https://movie0706.cybersoft.edu.vn/api/QuanLyDatVe/LayDanhSachPhongVe?MaLichChieu=${scheduleId}`,
     })
       .then((res) => {
         dispatch(actGetTicketRoomSuccess(res.data));

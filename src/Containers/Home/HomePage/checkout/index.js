@@ -1,97 +1,227 @@
 import { Button } from "@material-ui/core";
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
+import { useParams } from "react-router-dom";
 import "./index.scss";
 import { actGetTicketRoom } from "./modules/actions";
 
 export default function CheckOut() {
   const ticketRoom = useSelector((state) => state.ticketRoomReducer.ticketRoom);
   const dispatch = useDispatch();
+  const { scheduleId } = useParams();
+  const [warning, setWarning] = useState(false);
   const [state, setstate] = useState([]);
+  const [datVe, setDatVe] = useState({
+    maLichChieu: "",
+    taiKhoanNguoiDung: "",
+    danhSachVe: [],
+  });
 
   useEffect(() => {
-    dispatch(actGetTicketRoom());
-  }, [dispatch]);
+    const username = JSON.parse(localStorage.getItem("userMember")).taiKhoan;
+    const datVeClone = {
+      ...datVe,
+      maLichChieu: scheduleId,
+      taiKhoanNguoiDung: username,
+    };
+    setDatVe(datVeClone);
+    dispatch(actGetTicketRoom(scheduleId));
+  }, []);
   useEffect(() => {
     if (ticketRoom && ticketRoom.danhSachGhe) {
       let DSG = [...ticketRoom.danhSachGhe];
       DSG = DSG.map((item) => {
-        if (+item.stt / 16 <= 1) {
+        if (+item.stt / 16 <= 1 && item.daDat === false) {
           return { ...item, dangChon: false, tenGhe: `A${item.tenGhe}` };
-        } else if (+item.stt / 16 <= 2) {
+        } else if (+item.stt / 16 <= 1 && item.daDat === true) {
+          return {
+            ...item,
+            dangChon: true,
+            tenGhe: `A${item.tenGhe}`,
+          };
+        } else if (+item.stt / 16 <= 2 && item.daDat === false) {
           return {
             ...item,
             dangChon: false,
             tenGhe: `B${+item.tenGhe % 16 === 0 ? 16 : +item.tenGhe % 16}`,
           };
-        } else if (+item.stt / 16 <= 3) {
+        } else if (+item.stt / 16 <= 2 && item.daDat === true) {
+          return {
+            ...item,
+            dangChon: true,
+            tenGhe: `B${+item.tenGhe % 16 === 0 ? 16 : +item.tenGhe % 16}`,
+          };
+        } else if (+item.stt / 16 <= 3 && item.daDat === false) {
           return {
             ...item,
             dangChon: false,
             tenGhe: `C${+item.tenGhe % 16 === 0 ? 16 : +item.tenGhe % 16}`,
           };
-        } else if (+item.stt / 16 <= 4) {
+        } else if (+item.stt / 16 <= 3 && item.daDat === true) {
+          return {
+            ...item,
+            dangChon: true,
+            tenGhe: `C${+item.tenGhe % 16 === 0 ? 16 : +item.tenGhe % 16}`,
+          };
+        } else if (+item.stt / 16 <= 4 && item.daDat === false) {
           return {
             ...item,
             dangChon: false,
             tenGhe: `D${+item.tenGhe % 16 === 0 ? 16 : +item.tenGhe % 16}`,
           };
-        } else if (+item.stt / 16 <= 5) {
+        } else if (+item.stt / 16 <= 4 && item.daDat === true) {
+          return {
+            ...item,
+            dangChon: true,
+            tenGhe: `D${+item.tenGhe % 16 === 0 ? 16 : +item.tenGhe % 16}`,
+          };
+        } else if (+item.stt / 16 <= 5 && item.daDat === false) {
           return {
             ...item,
             dangChon: false,
             tenGhe: `E${+item.tenGhe % 16 === 0 ? 16 : +item.tenGhe % 16}`,
           };
-        } else if (+item.stt / 16 <= 6) {
+        } else if (+item.stt / 16 <= 5 && item.daDat === true) {
+          return {
+            ...item,
+            dangChon: true,
+            tenGhe: `E${+item.tenGhe % 16 === 0 ? 16 : +item.tenGhe % 16}`,
+          };
+        } else if (+item.stt / 16 <= 6 && item.daDat === false) {
           return {
             ...item,
             dangChon: false,
             tenGhe: `F${+item.tenGhe % 16 === 0 ? 16 : +item.tenGhe % 16}`,
           };
-        } else if (+item.stt / 16 <= 7) {
+        } else if (+item.stt / 16 <= 6 && item.daDat === true) {
+          return {
+            ...item,
+            dangChon: true,
+            tenGhe: `F${+item.tenGhe % 16 === 0 ? 16 : +item.tenGhe % 16}`,
+          };
+        } else if (+item.stt / 16 <= 7 && item.daDat === false) {
           return {
             ...item,
             dangChon: false,
             tenGhe: `G${+item.tenGhe % 16 === 0 ? 16 : +item.tenGhe % 16}`,
           };
-        } else if (+item.stt / 16 <= 8) {
+        } else if (+item.stt / 16 <= 7 && item.daDat === true) {
+          return {
+            ...item,
+            dangChon: true,
+            tenGhe: `G${+item.tenGhe % 16 === 0 ? 16 : +item.tenGhe % 16}`,
+          };
+        } else if (+item.stt / 16 <= 8 && item.daDat === false) {
           return {
             ...item,
             dangChon: false,
             tenGhe: `H${+item.tenGhe % 16 === 0 ? 16 : +item.tenGhe % 16}`,
           };
-        } else if (+item.stt / 16 <= 9) {
+        } else if (+item.stt / 16 <= 8 && item.daDat === true) {
+          return {
+            ...item,
+            dangChon: true,
+            tenGhe: `H${+item.tenGhe % 16 === 0 ? 16 : +item.tenGhe % 16}`,
+          };
+        } else if (+item.stt / 16 <= 9 && item.daDat === false) {
           return {
             ...item,
             dangChon: false,
             tenGhe: `I${+item.tenGhe % 16 === 0 ? 16 : +item.tenGhe % 16}`,
           };
-        } else if (+item.stt / 16 <= 10) {
+        } else if (+item.stt / 16 <= 9 && item.daDat === true) {
+          return {
+            ...item,
+            dangChon: true,
+            tenGhe: `I${+item.tenGhe % 16 === 0 ? 16 : +item.tenGhe % 16}`,
+          };
+        } else if (+item.stt / 16 <= 10 && item.daDat === false) {
           return {
             ...item,
             dangChon: false,
-            tenGhe: `K${+item.tenGhe % 16 === 0 ? 16 : +item.tenGhe % 16}`,
+            tenGhe: `I${+item.tenGhe % 16 === 0 ? 16 : +item.tenGhe % 16}`,
+          };
+        } else if (+item.stt / 16 <= 10 && item.daDat === true) {
+          return {
+            ...item,
+            dangChon: true,
+            tenGhe: `I${+item.tenGhe % 16 === 0 ? 16 : +item.tenGhe % 16}`,
           };
         }
+        // if (+item.stt / 16 <= 1) {
+        //   return { ...item, dangChon: false, tenGhe: `A${item.tenGhe}` };
+        // } else if (+item.stt / 16 <= 2) {
+        //   return {
+        //     ...item,
+        //     dangChon: false,
+        //     tenGhe: `B${+item.tenGhe % 16 === 0 ? 16 : +item.tenGhe % 16}`,
+        //   };
+        // } else if (+item.stt / 16 <= 3) {
+        //   return {
+        //     ...item,
+        //     dangChon: false,
+        //     tenGhe: `C${+item.tenGhe % 16 === 0 ? 16 : +item.tenGhe % 16}`,
+        //   };
+        // } else if (+item.stt / 16 <= 4) {
+        //   return {
+        //     ...item,
+        //     dangChon: false,
+        //     tenGhe: `D${+item.tenGhe % 16 === 0 ? 16 : +item.tenGhe % 16}`,
+        //   };
+        // } else if (+item.stt / 16 <= 5) {
+        //   return {
+        //     ...item,
+        //     dangChon: false,
+        //     tenGhe: `E${+item.tenGhe % 16 === 0 ? 16 : +item.tenGhe % 16}`,
+        //   };
+        // } else if (+item.stt / 16 <= 6) {
+        //   return {
+        //     ...item,
+        //     dangChon: false,
+        //     tenGhe: `F${+item.tenGhe % 16 === 0 ? 16 : +item.tenGhe % 16}`,
+        //   };
+        // } else if (+item.stt / 16 <= 7) {
+        //   return {
+        //     ...item,
+        //     dangChon: false,
+        //     tenGhe: `G${+item.tenGhe % 16 === 0 ? 16 : +item.tenGhe % 16}`,
+        //   };
+        // } else if (+item.stt / 16 <= 8) {
+        //   return {
+        //     ...item,
+        //     dangChon: false,
+        //     tenGhe: `H${+item.tenGhe % 16 === 0 ? 16 : +item.tenGhe % 16}`,
+        //   };
+        // } else if (+item.stt / 16 <= 9) {
+        //   return {
+        //     ...item,
+        //     dangChon: false,
+        //     tenGhe: `I${+item.tenGhe % 16 === 0 ? 16 : +item.tenGhe % 16}`,
+        //   };
+        // } else if (+item.stt / 16 <= 10) {
+        //   return {
+        //     ...item,
+        //     dangChon: false,
+        //     tenGhe: `K${+item.tenGhe % 16 === 0 ? 16 : +item.tenGhe % 16}`,
+        //   };
+        // }
       });
       setstate(DSG);
+      // console.log(datVe);
     }
-    return () => {
-      // cleanup
-    };
   }, [dispatch, ticketRoom]);
 
   const handleButtonChange = (stt, dangChon) => {
     if (
       dangChon === false &&
-      ((stt % 16 == 2 && state[stt - 2].dangChon === false) ||
-        (stt % 16 == 3 && state[stt].dangChon === false) ||
-        (stt % 16 == 14 && state[stt - 2].dangChon === false) ||
-        (stt % 16 == 15 && state[stt].dangChon === false) ||
-        (stt % 16 == 6 && state[stt - 2].dangChon === false) ||
-        (stt % 16 == 11 && state[stt].dangChon === false))
+      ((+stt % 16 === 2 && state[+stt - 2].dangChon === false) ||
+        (+stt % 16 === 3 && state[+stt].dangChon === false) ||
+        (+stt % 16 === 14 && state[+stt - 2].dangChon === false) ||
+        (+stt % 16 === 15 && state[+stt].dangChon === false) ||
+        (+stt % 16 === 6 && state[+stt - 2].dangChon === false) ||
+        (+stt % 16 === 11 && state[+stt].dangChon === false))
     ) {
-      alert("Bạn không thể bỏ trống ghế đầu mỗi dãy!");
+      alert("Bạn không thể bỏ trống ghế đầu của mỗi dãy!");
     }
     let cloneState = [...state];
     cloneState[stt - 1].dangChon = !dangChon;
