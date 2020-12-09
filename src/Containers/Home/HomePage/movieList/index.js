@@ -20,9 +20,9 @@ class MovieList extends Component {
       return <p>Loading...!!!</p>;
     }
     return (
-      <div className="container">
+      <div className="container py-5">
         <div className="row">
-          {movieList.slice(1, 9).map((item, index) => {
+          {movieList.slice(0, 8).map((item, index) => {
             return <MovieItem key={index} movie={item} />;
           })}
         </div>
