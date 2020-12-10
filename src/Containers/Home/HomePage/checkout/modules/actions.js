@@ -37,3 +37,24 @@ const actGetTicketRoomFail = (err) => {
     payload: err,
   };
 };
+
+export const actBookingTickets = (ticketInfor) => {
+  const accessToken = JSON.parse(localStorage.getItem("userMember"))
+    .accessToken;
+  return (dispatch) => {
+    Axios({
+      url: "https://movie0706.cybersoft.edu.vn/api/QuanLyDatVe/DatVe",
+      data: ticketInfor,
+      method: "POST",
+      headers: {
+        Authorization: `Bearer ${accessToken}`,
+      },
+    })
+      .then((res) => {
+        console.log(res.data);
+      })
+      .catch((err) => {
+        console.log(err.message);
+      });
+  };
+};

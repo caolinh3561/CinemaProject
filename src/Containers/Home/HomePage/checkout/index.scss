@@ -82,4 +82,8 @@
     background-image: linear-gradient(223deg, #e7cb28 0, #f79400 100%);
     border-radius: 0;
   }
+  .MuiButton-root.Mui-disabled {
+    background-color: rgb(170, 170, 170);
+    background-image: none;
+  }
 }
