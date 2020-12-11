@@ -1,0 +1,18 @@
+.movie__item {
+  padding: 5px 15px 10px;
+  .image__movie {
+    margin-right: 15px;
+    height: 80px;
+    width: 55px;
+  }
+}
+
+.listSuatChieuPhim {
+  .row {
+    .btn__datVe {
+      outline: none;
+      background-color: rgba(216, 216, 216, 0.568);
+      margin-right: 15px;
+    }
+  }
+}

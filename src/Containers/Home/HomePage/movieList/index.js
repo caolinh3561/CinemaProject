@@ -9,7 +9,7 @@ class MovieList extends Component {
   }
   render() {
     const { movieList, loading, err } = this.props;
-
+    // console.log(movieList);
     if (err) {
       // TODO: <ErrorMessage />
       return <p>{err || "Something went wrong"}</p>;

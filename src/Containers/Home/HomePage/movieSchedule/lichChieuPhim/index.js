@@ -1,3 +1,4 @@
+import dayjs from "dayjs";
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import { actGetScheduleMovie } from "./modules/actions";
@@ -19,8 +20,6 @@ class LichChieuPhimComponent extends Component {
     let { lichChieuTheoHTR, maCumRap } = this.props;
     if (lichChieuTheoHTR && lichChieuTheoHTR !== null && maCumRap !== null) {
       movieList = lichChieuTheoHTR[0].lstCumRap;
-
-      console.log(movieList, "movieList");
       return movieList.map((item, index) => {
         return item.maCumRap === maCumRap ? item.danhSachPhim : null;
       });
@@ -28,22 +27,37 @@ class LichChieuPhimComponent extends Component {
   };
   renderMovies = () => {
     const movieList = this.getMovieList();
+
     if (movieList && movieList.length > 0) {
       let lastMovieList = movieList.filter((item) => {
         return item !== null;
       });
+
+      // dayjs(item.ngayChieuGioChieu).format("DD/MM/YYYY") === now
+
       if (lastMovieList[0] && lastMovieList[0] !== null) {
-        return lastMovieList[0].map((item) => {
-          return <MovieItem key={item.maPhim} movie={item} />;
+        let now = dayjs().format("DD/MM/YYYY");
+        let isCheck = false;
+        return lastMovieList[0].map((movie) => {
+          for (let i = 0; i < movie.lstLichChieuTheoPhim.length; i++) {
+            if (
+              dayjs(movie.lstLichChieuTheoPhim[i].ngayChieuGioChieu).format(
+                "DD/MM/YYYY"
+              ) === now
+            )
+              isCheck = true;
+          }
+          if (isCheck) {
+            return <MovieItem key={movie.maPhim} movie={movie} now={now} />;
+          } else return null;
         });
       }
-      // return movieList.map((item) => {
-      //   if (item !== null) {
-      //     return item.map((res, index) => {
-      //       return <MovieItem key={index} movie={res} />;
-      //     });
-      //   }
-      // });
+
+      // if (lastMovieList[0] && lastMovieList[0] !== null) {
+      //   return lastMovieList[0].map((item) => {
+      //     return <MovieItem key={item.maPhim} movie={item} />;
+      //   });
+      // }
     }
   };
   render() {
