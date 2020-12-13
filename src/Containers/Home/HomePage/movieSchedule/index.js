@@ -24,15 +24,15 @@ class MovieSchedule extends Component {
   // };
   render() {
     return (
-      <div className="container my-4">
+      <div className="my-5" style={{ width: "80%", margin: "0 auto" }}>
         <div className="row">
-          <div className="col-sm-2 text-center" style={{ minHeight: "705px" }}>
+          <div className="heThongRap__content">
             <HeThongRapComponent maHTR={this.sendProps} />
           </div>
-          <div className="col-sm-4" style={{ minHeight: "705px" }}>
+          <div className="heThongCumRap__content">
             <HeThongCumRapComponent />
           </div>
-          <div className="col-sm-6" style={{ minHeight: "705px" }}>
+          <div className="listMovie__content">
             <LichChieuPhimComponent />
           </div>
         </div>

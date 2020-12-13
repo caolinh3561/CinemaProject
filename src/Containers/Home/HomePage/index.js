@@ -6,7 +6,9 @@ class HomePage extends Component {
   render() {
     return (
       <>
-        <h1 className="my-4 text-center text-success">Phim đang chiếu</h1>
+        <h1 className="my-4 text-center" style={{ color: "#f79400" }}>
+          Phim đang chiếu
+        </h1>
         <MovieList />
         <MovieSchedule />
         <NewsComponent />

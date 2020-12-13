@@ -1,18 +1,23 @@
 .movie__item {
-  padding: 5px 15px 10px;
-  .image__movie {
-    margin-right: 15px;
-    height: 80px;
-    width: 55px;
+  .movie__infor {
+    margin-bottom: 15px;
+    .image__movie {
+      margin-right: 15px;
+      height: 80px;
+      width: 55px;
+    }
   }
+  padding: 20px 0;
+  border-bottom: 1px solid #ebebec;
 }
 
 .listSuatChieuPhim {
-  .row {
-    .btn__datVe {
-      outline: none;
-      background-color: rgba(216, 216, 216, 0.568);
-      margin-right: 15px;
+  .btn__datVe {
+    outline: none;
+    background-color: rgba(216, 216, 216, 0.568);
+    margin-right: 15px;
+    &:hover {
+      color: #f79400;
     }
   }
 }

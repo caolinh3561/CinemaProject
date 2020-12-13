@@ -1,5 +1,5 @@
 import { Button } from "@material-ui/core";
-import React, { useEffect, useRef, useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
 import "./index.scss";
@@ -253,6 +253,11 @@ export default function CheckOut() {
   };
   const isValidCheckoutStep2 = () => {
     //check listGhe/ tìm ghế trống ở giữa
+    if (listGheDangChon.length < 1) return true;
+    if (listGheDangChon.length > 10) {
+      alert("Bạn không thể đặt trên 10 ghế cùng lúc!");
+      return true;
+    }
     let isCheck = false;
     for (let i = 0; i < listGheDangChon.length; i++) {
       isCheck = isValidCheckoutStep1(listGheDangChon[i]);
@@ -341,9 +346,12 @@ export default function CheckOut() {
               }}
               key={item.stt}
               style={{
-                backgroundColor: item.dangChon === true ? "#00c000" : "orange",
+                color: "#582819",
+                backgroundColor:
+                  item.dangChon === true ? "rgb(77 232 26)" : "orange",
               }}
             >
+              {item.dangChon ? item.tenGhe.slice(-2) : ""}
               {/* <StopSharpIcon style={{ color: green[500] }} fontSize="large" /> */}
             </Button>
           );
@@ -355,10 +363,11 @@ export default function CheckOut() {
               }}
               key={item.stt}
               style={{
-                backgroundColor: item.dangChon ? "#00c000" : "darkgray",
+                color: "#582819",
+                backgroundColor: item.dangChon ? "rgb(77 232 26)" : "darkgray",
               }}
             >
-              {/* <StopSharpIcon fontSize="large" /> */}
+              {item.dangChon ? item.tenGhe.slice(-2) : ""}
             </Button>
           );
         }
@@ -381,14 +390,14 @@ export default function CheckOut() {
       return listGheDangChon.map((item, index) => {
         if (index === count - 1) {
           return (
-            <span key={item.stt} className="mr-1" style={{ color: "#00c000" }}>
+            <span key={item.stt} className="ml-1" style={{ color: "#f79400" }}>
               {item.tenGhe}
             </span>
           );
         } else {
           return (
-            <span key={item.stt} className="mr-1" style={{ color: "#00c000" }}>
-              {item.tenGhe} ,
+            <span key={item.stt} className="ml-1" style={{ color: "#f79400" }}>
+              {item.tenGhe},
             </span>
           );
         }
@@ -434,8 +443,13 @@ export default function CheckOut() {
             {ngayChieu} - {gioChieu} - {tenRap}
           </p>
           <hr />
-          {listGheDangChon.length !== 0 && <p>Ghế: {renderDSGhe()} </p>}
-          {listGheDangChon.length !== 0 && <hr />}
+          {listGheDangChon.length !== 0 && (
+            <div className="listGheDangChon__render">
+              Ghế: {renderDSGhe()}
+              <hr />
+            </div>
+          )}
+
           <form>
             <label className="d-block">Email:</label>
             <input style={{ width: "100%" }} type="email" />
@@ -443,7 +457,7 @@ export default function CheckOut() {
             <input style={{ width: "100%" }} type="tel" />
           </form>
           <hr />
-          <div className="payType">
+          <div className="payType" style={{ minHeight: "200px" }}>
             <h6>Hình thức thanh toán</h6>
           </div>
         </div>

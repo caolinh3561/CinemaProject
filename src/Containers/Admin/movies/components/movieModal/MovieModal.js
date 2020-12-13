@@ -211,29 +211,6 @@ function MovieModal(props) {
                 )}
               </div>
 
-              {/* <FormControl
-                fullWidth
-                // style={{ width: "48%", marginRight: "10px" }}
-                margin="normal"
-                error={!!errors.hinhAnh && touched.hinhAnh}
-              >
-                <InputLabel>Hình ảnh</InputLabel>
-                <Field name="hinhAnh">
-                  {({ field }) => (
-                    <Input
-                      type="file"
-                      {...field}
-                      onChange={(e) => {
-                        handleImageChange(e, setFieldValue);
-                      }}
-                    />
-                  )}
-                </Field>
-                {touched.hinhAnh && (
-                  <FormHelperText>{errors.hinhAnh}</FormHelperText>
-                )}
-              </FormControl> */}
-
               <hr />
               <Button
                 className="text-success"

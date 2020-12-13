@@ -113,6 +113,7 @@ export default function ScheduleModal(props) {
               <FormControl
                 style={{ width: "48%", marginRight: "2%" }}
                 margin="normal"
+                error={!!errors.heThongRap && touched.heThongRap}
               >
                 <InputLabel>Hệ Thống Rạp</InputLabel>
                 <Field name="heThongRap">
@@ -128,11 +129,15 @@ export default function ScheduleModal(props) {
                     </Select>
                   )}
                 </Field>
+                {touched.heThongRap && (
+                  <FormHelperText>{errors.heThongRap}</FormHelperText>
+                )}
               </FormControl>
               <FormControl
                 style={{ width: "48%", marginRight: "2%" }}
                 margin="normal"
                 disabled={listCumRap.length === 0 ? true : false}
+                error={!!errors.cumRap && touched.cumRap}
               >
                 <InputLabel>Cụm Rạp</InputLabel>
                 <Field name="cumRap">
@@ -148,11 +153,15 @@ export default function ScheduleModal(props) {
                     </Select>
                   )}
                 </Field>
+                {touched.cumRap && (
+                  <FormHelperText>{errors.cumRap}</FormHelperText>
+                )}
               </FormControl>
               <FormControl
                 style={{ width: "48%", marginRight: "2%" }}
                 margin="normal"
                 disabled={!values.cumRap ? true : false}
+                error={!!errors.maRap && touched.maRap}
               >
                 <InputLabel>Rạp</InputLabel>
                 <Field name="maRap">
@@ -168,10 +177,14 @@ export default function ScheduleModal(props) {
                     </Select>
                   )}
                 </Field>
+                {touched.maRap && (
+                  <FormHelperText>{errors.maRap}</FormHelperText>
+                )}
               </FormControl>
               <FormControl
                 style={{ width: "48%", marginRight: "2%" }}
                 margin="normal"
+                error={!!errors.ngayChieuGioChieu && touched.ngayChieuGioChieu}
               >
                 <InputLabel>ngày giờ chiếu</InputLabel>
                 <Field name="ngayChieuGioChieu">
@@ -183,18 +196,22 @@ export default function ScheduleModal(props) {
                     />
                   )}
                 </Field>
-                {/* {touched.ngayChieuGioChieu && (
+                {touched.ngayChieuGioChieu && (
                   <FormHelperText>{errors.ngayChieuGioChieu}</FormHelperText>
-                )} */}
+                )}
               </FormControl>
               <FormControl
                 style={{ width: "48%", marginRight: "2%" }}
                 margin="normal"
+                error={!!errors.giaVe && touched.giaVe}
               >
                 <InputLabel>Giá Vé</InputLabel>
                 <Field name="giaVe">
                   {({ field }) => <Input {...field} />}
                 </Field>
+                {touched.giaVe && (
+                  <FormHelperText>{errors.giaVe}</FormHelperText>
+                )}
               </FormControl>
               <FormControl className="mt-2" fullWidth margin="normal">
                 <Button

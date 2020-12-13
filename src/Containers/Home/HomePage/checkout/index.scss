@@ -76,14 +76,21 @@
     position: absolute;
     bottom: 0;
     right: 0;
+    left: 0;
     outline: none;
     height: 75px;
+    font-size: 20px;
     color: white;
-    background-image: linear-gradient(223deg, #e7cb28 0, #f79400 100%);
+    background-image: linear-gradient(223deg, #f79400 0, #ffe867 100%);
     border-radius: 0;
   }
   .MuiButton-root.Mui-disabled {
     background-color: rgb(170, 170, 170);
     background-image: none;
   }
+}
+
+.listGheDangChon__render {
+  display: flex;
+  flex-wrap: wrap;
 }

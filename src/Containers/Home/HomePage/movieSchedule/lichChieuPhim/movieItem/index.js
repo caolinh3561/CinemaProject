@@ -13,12 +13,21 @@ class MovieItem extends Component {
   };
 
   renderSuatchieu = () => {
-    const { movie, now } = this.props;
+    const { movie } = this.props;
     const { lstLichChieuTheoPhim } = movie;
-    return lstLichChieuTheoPhim.map((item) => {
-      if (dayjs(item.ngayChieuGioChieu).format("DD/MM/YYYY") === now)
+    let date = dayjs().format("DD/MM/YYYY");
+    let time = dayjs().format("HH:mm");
+    const lstLichChieuTheoPhimSorted = lstLichChieuTheoPhim.sort((a, b) =>
+      dayjs(a.ngayChieuGioChieu).diff(dayjs(b.ngayChieuGioChieu))
+    );
+    return lstLichChieuTheoPhimSorted.map((item) => {
+      if (dayjs(item.ngayChieuGioChieu).format("DD/MM/YYYY") === date)
         return (
           <Button
+            disabled={
+              time >
+              dayjs(item.ngayChieuGioChieu).add("15", "minute").format("HH:mm")
+            }
             key={item.maLichChieu}
             className="btn__datVe"
             onClick={() => {
@@ -34,20 +43,25 @@ class MovieItem extends Component {
   renderMovie = () => {
     const { movie } = this.props;
     return (
-      <div key={movie.maPhim} className="movie__item row">
-        <img className="image__movie" src={movie.hinhAnh} alt={movie.tenPhim} />
-        <div className="listSuatChieuPhim">
-          <h6>{movie.tenPhim}</h6>
-          <div className="row">{this.renderSuatchieu()}</div>
+      <>
+        <div key={movie.maPhim} className="movie__item">
+          <div className="movie__infor row">
+            <img
+              className="image__movie"
+              src={movie.hinhAnh}
+              alt={movie.tenPhim}
+            />
+            <div className="information">
+              <h6>{movie.tenPhim}</h6>
+            </div>
+          </div>
+          <div className="listSuatChieuPhim">{this.renderSuatchieu()}</div>
         </div>
-      </div>
+      </>
     );
   };
 
   render() {
-    // console.log(this.props.movie.maCumRap); //// tao ne`
-    // console.log(this.props.movie.lstLichChieuTheoPhim);
-
     return <>{this.renderMovie()}</>;
   }
 }

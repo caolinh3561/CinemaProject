@@ -51,9 +51,11 @@ export const actBookingTickets = (ticketInfor) => {
       },
     })
       .then((res) => {
+        alert("Đặt vé thành công!");
         console.log(res.data);
       })
       .catch((err) => {
+        alert("Đặt vé thất bại! mời thử lại.");
         console.log(err.message);
       });
   };
