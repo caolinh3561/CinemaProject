@@ -2,7 +2,9 @@ import React, { Component } from "react";
 import MovieItem from "./movieItem";
 import { connect } from "react-redux";
 import { getMovies } from "./modules/action";
-
+import "slick-carousel/slick/slick.css";
+import "slick-carousel/slick/slick-theme.css";
+import Slider from "react-slick";
 class MovieList extends Component {
   componentDidMount() {
     this.props.getMovies();
@@ -19,12 +21,31 @@ class MovieList extends Component {
       // TODO: <Loading />
       return <p>Loading...!!!</p>;
     }
+    var settings = {
+      dots: false,
+      infinite: true,
+      speed: 500,
+      slidesToShow: 4,
+      slidesToScroll: 4,
+      arrows: true,
+      row: 2,
+      // autoplay: true,
+      // autoplaySpeed: 2000,
+    };
     return (
       <div className="container py-5">
         <div className="row">
           {movieList.slice(0, 8).map((item, index) => {
             return <MovieItem key={index} movie={item} />;
           })}
+          {/* <Slider className="" {...settings}>
+          <div className="row">
+            {" "}
+            {movieList.slice(0, 8).map((item, index) => {
+              return <MovieItem key={index} movie={item} />;
+            })}
+          </div>
+        </Slider> */}
         </div>
       </div>
     );
