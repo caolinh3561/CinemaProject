@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import MovieSchedule from "./movieSchedule";
 import MovieList from "./movieList";
 import NewsComponent from "./news";
+import MagazineComponent from "./magazine";
 class HomePage extends Component {
   render() {
     return (
@@ -11,6 +12,7 @@ class HomePage extends Component {
         </h1>
         <MovieList />
         <MovieSchedule />
+        <MagazineComponent />
         <NewsComponent />
       </>
     );
