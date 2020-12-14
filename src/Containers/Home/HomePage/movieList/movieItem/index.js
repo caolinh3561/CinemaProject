@@ -75,7 +75,7 @@ class MovieItem extends Component {
                     this.props.history.push(`/movie/${this.props.movie.maPhim}`)
                   }
                 >
-                  Chi Tiết
+                  Đặt Vé
                 </button>
               </div>
             </div>

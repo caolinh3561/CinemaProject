@@ -28,9 +28,10 @@ export default function CheckOut() {
     };
     setDatVe(datVeClone);
     dispatch(actGetTicketRoom(scheduleId));
-    // setTimeout(()=>{
-
-    // },300000)
+    // setTimeout(() => {
+    //   alert("TIME UP!!!");
+    //   window.location.reload();
+    // }, 10000);
   }, []);
   // lấy danh sách ghế
   useEffect(() => {
