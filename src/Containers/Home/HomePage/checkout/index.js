@@ -28,6 +28,9 @@ export default function CheckOut() {
     };
     setDatVe(datVeClone);
     dispatch(actGetTicketRoom(scheduleId));
+    // setTimeout(()=>{
+
+    // },300000)
   }, []);
   // lấy danh sách ghế
   useEffect(() => {
@@ -327,6 +330,8 @@ export default function CheckOut() {
 
   const renderSeats = () => {
     if (ticketRoom && ticketRoom.danhSachGhe) {
+      console.log(ticketRoom);
+
       return state.map((item) => {
         if (item.daDat === true) {
           return (
@@ -436,7 +441,7 @@ export default function CheckOut() {
           <h1 className="text-center" style={{ color: "#f79400" }}>
             {renderGiaVe()}
           </h1>
-          <hr />
+
           <h5>{tenPhim}</h5>
           <p>{tenCumRap}</p>
           <p>
@@ -476,24 +481,53 @@ export default function CheckOut() {
     );
   };
 
+  const renderThongTinRap = () => {
+    if (ticketRoom && ticketRoom.thongTinPhim) {
+      return (
+        <div className="infor__left row">
+          <img
+            src={ticketRoom.thongTinPhim.hinhAnh}
+            style={{ height: 80, marginRight: 15 }}
+            alt="logo"
+          />
+          <div className="infor__theater">
+            <h6>{ticketRoom.thongTinPhim.tenCumRap}</h6>
+            <p>
+              {ticketRoom.thongTinPhim.gioChieu}
+              {" - "}
+              {ticketRoom.thongTinPhim.tenRap}
+            </p>
+          </div>
+        </div>
+      );
+    } else return null;
+  };
+
   return (
     <div
       className="row"
       style={{
         // backgroundImage: "url('assets/img/background/carousel_1.jpg')",
         width: "100%",
-        height: "600px",
+        // height: "400px",
         margin: 0,
       }}
     >
       <div className="col-lg-9" style={{ padding: 0 }}>
-        <nav style={{ backgroundColor: "orange", height: "90px" }}>
+        <nav
+          className="checkout__header"
+          style={{ height: "90px" }} //backgroundColor: "orange",
+        >
           This is Header!
         </nav>
-        <div className="theater__infor" style={{ height: "90px" }}></div>
+        <div className="wapper">
+          <div className="theater__infor" style={{ height: "90px" }}>
+            {renderThongTinRap()}
+          </div>
+        </div>
         <div
           className="seats__booking"
-          style={{ height: "100%", backgroundColor: "brown" }}
+          style={{ paddingBottom: 30 }} //, backgroundColor: "brown"
         >
           <img
             className="screen__img"
@@ -566,7 +600,7 @@ export default function CheckOut() {
           position: "fixed",
           top: 0,
           right: 0,
-          height: 580,
+          height: "100vh",
           // backgroundColor: "gray",
           padding: 0,
         }}

@@ -15,14 +15,29 @@ import { Swiper, SwiperSlide } from "swiper/react";
 import "swiper/swiper.scss";
 import MovieTrailerModal from "../movieTrailerModal/movieTrailerModal";
 import "./index.scss";
+import "react-modal-video/scss/modal-video.scss";
+import ModalVideo from "react-modal-video";
 
 SwiperCore.use([Navigation, Pagination, Scrollbar, A11y, Autoplay]);
 
 class CarouselComponent extends Component {
-  // handlePlayTrailer = (e) => {
-  //   console.log(e.target.title);
-  //   this.props.actGetMovieTrailerSource(e.target.title);
-  // };
+  constructor() {
+    super();
+    this.state = {
+      isOpen: false,
+      videoId: "",
+    };
+    this.openModal = this.openModal.bind(this);
+  }
+
+  openModal() {
+    this.setState({ isOpen: true });
+  }
+
+  handlePlayTrailer = (e) => {
+    this.setState({ isOpen: true, videoId: e.target.accessKey });
+    // this.props.actGetMovieTrailerSource(e.target.title);
+  };
 
   render() {
     return (
@@ -42,12 +57,13 @@ class CarouselComponent extends Component {
               style={{ backgroundImage: "url(./img/carousel_1.jpg)" }}
             >
               <button
-                data-toggle="modal"
-                data-target="#movieTrailerModal"
                 className="play__trailer"
-                data-src="https://www.youtube.com/embed/9SA7FaKxZVI"
+                onClick={(e) => {
+                  this.handlePlayTrailer(e);
+                }}
               >
                 <i
+                  accessKey="9SA7FaKxZVI"
                   className="material-icons__play material-icons"
                   title="trailer"
                 >
@@ -62,12 +78,15 @@ class CarouselComponent extends Component {
               style={{ backgroundImage: "url(./img/carousel_2.jpg)" }}
             >
               <button
-                data-toggle="modal"
-                data-target="#movieTrailerModal"
                 className="play__trailer"
-                data-src="https://www.youtube.com/embed/L3pk_TBkihU"
+                onClick={(e) => {
+                  this.handlePlayTrailer(e);
+                }}
               >
-                <i className="material-icons__play material-icons">
+                <i
+                  accessKey="L3pk_TBkihU"
+                  className="material-icons__play material-icons"
+                >
                   play_arrow
                 </i>
               </button>
@@ -79,19 +98,31 @@ class CarouselComponent extends Component {
               style={{ backgroundImage: "url(./img/carousel_3.jpg)" }}
             >
               <button
-                data-toggle="modal"
-                data-target="#movieTrailerModal"
                 className="play__trailer"
-                data-src="https://www.youtube.com/embed/IpKmt4MpctM"
+                onClick={(e) => {
+                  this.handlePlayTrailer(e);
+                }}
               >
-                <i className="material-icons__play material-icons">
+                <i
+                  accessKey="IpKmt4MpctM"
+                  className="material-icons__play material-icons"
+                >
                   play_arrow
                 </i>
               </button>
             </div>
           </SwiperSlide>
         </Swiper>
-        <MovieTrailerModal />
+
+        <ModalVideo
+          youtube={{
+            autoplay: "true",
+          }}
+          channel="youtube"
+          isOpen={this.state.isOpen}
+          videoId={this.state.videoId}
+          onClose={() => this.setState({ isOpen: false })}
+        />
       </>
     );
   }

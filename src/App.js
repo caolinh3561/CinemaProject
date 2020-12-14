@@ -7,6 +7,7 @@ import Admin from "./Containers/Admin";
 import LoginPage from "./Containers/Admin/login";
 import CheckOut from "Containers/Home/HomePage/checkout";
 import MovieDetail from "Containers/Home/HomePage/MovieDetail";
+import UserLogin from "Containers/Home/HomePage/login";
 function App() {
   const showLayoutHomePage = (routes) => {
     if (routes && routes.length > 0) {
@@ -42,6 +43,7 @@ function App() {
         {showLayoutHomePage(routesHomePage)}
         {showLayoutAdminPage(routesAdminPage)}
 
+        <Route path="/login" component={UserLogin} />
         <Route path="/admin/login" component={LoginPage} />
         <Route path="/movie/:id" component={MovieDetail} />
         <Route path="/checkout/:scheduleId" component={CheckOut} />
