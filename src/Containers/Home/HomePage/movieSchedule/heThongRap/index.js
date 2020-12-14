@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import { actGetMovieSchedule } from "./modules/action";
+import "./index.scss";
 
 class HeThongRapComponent extends Component {
   componentDidMount = () => {
@@ -10,13 +11,17 @@ class HeThongRapComponent extends Component {
     this.props.maHTR(item);
   };
   renderHTRC = () => {
-    let { data } = this.props;
+    let { data, maHeThongRap } = this.props;
+
     if (data && data.length > 0) {
       return data.map((item, index) => {
         return (
           <li
             className="list-group-item"
-            style={{ padding: 0 }}
+            style={{
+              padding: 20,
+              opacity: item.maHeThongRap === maHeThongRap ? 1 : 0.5,
+            }}
             key={index}
             onClick={() => {
               this.handleClick(item);
@@ -42,6 +47,7 @@ const mapStateToProps = (state) => {
     loading: state.heThongRapReducer.loading,
     data: state.heThongRapReducer.data,
     err: state.heThongRapReducer.err,
+    maHeThongRap: state.hTCRReducer.maHTR,
   };
 };
 

@@ -9,6 +9,7 @@ import userReducer from "./../Containers/Admin/users/modules/reducer";
 import movieListWithPaginationReducer from "./../Containers/Admin/movies/modules/reducer";
 import scheduleMovieReducer from "./../Containers/Admin/movies/components/scheduleModal/modules/reducer";
 import ticketRoomReducer from "./../Containers/Home/HomePage/checkout/modules/reducer";
+import trailerMovieReducer from "./../Containers/Home/Components/movieTrailerModal/modules/reducer";
 const rootReducer = combineReducers({
   moviesReducer,
   heThongRapReducer,
@@ -20,6 +21,7 @@ const rootReducer = combineReducers({
   movieListWithPaginationReducer,
   scheduleMovieReducer,
   ticketRoomReducer,
+  trailerMovieReducer,
 });
 
 export default rootReducer;

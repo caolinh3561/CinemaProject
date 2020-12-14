@@ -37,3 +37,26 @@ const actGetTicketRoomFail = (err) => {
     payload: err,
   };
 };
+
+export const actBookingTickets = (ticketInfor) => {
+  const accessToken = JSON.parse(localStorage.getItem("userMember"))
+    .accessToken;
+  return (dispatch) => {
+    Axios({
+      url: "https://movie0706.cybersoft.edu.vn/api/QuanLyDatVe/DatVe",
+      data: ticketInfor,
+      method: "POST",
+      headers: {
+        Authorization: `Bearer ${accessToken}`,
+      },
+    })
+      .then((res) => {
+        alert("Đặt vé thành công!");
+        console.log(res.data);
+      })
+      .catch((err) => {
+        alert("Đặt vé thất bại! mời thử lại.");
+        console.log(err.message);
+      });
+  };
+};

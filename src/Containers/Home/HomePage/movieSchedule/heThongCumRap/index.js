@@ -4,23 +4,54 @@ import HTCRItem from "./cumRapItem";
 import { actGetHTCR } from "./modules/action";
 class HeThongCumRapComponent extends Component {
   componentDidMount = () => {
-    // let { maHTR } = this.props;
-    // console.log(maHTR);
-    // if (maHTR && maHTR !== null) {
-    //   this.props.actGetHTCR(maHTR);
-    // } else {
-    //   this.props.actGetHTCR("BHDStar");
-    // }
     this.props.actGetHTCR(this.props.maHTR);
   };
+  componentDidUpdate(prevProps) {
+    if (this.props.maHTR !== prevProps.maHTR) {
+      let maCR;
+      switch (this.props.maHTR) {
+        case "BHDStar":
+          maCR = "bhd-star-cineplex-3-2";
+          break;
+        case "CGV":
+          maCR = "cgv-aeon-binh-tan";
+          break;
+        case "CineStar":
+          maCR = "cns-hai-ba-trung";
+          break;
+        case "Galaxy":
+          maCR = "glx-huynh-tan-phat";
+          break;
+        case "LotteCinima":
+          maCR = "lotte-cantavil";
+          break;
+        case "MegaGS":
+          maCR = "megags-cao-thang";
+
+          break;
+        default:
+          maCR = "";
+          break;
+      }
+      this.props.actGetMaCumRap(maCR);
+    }
+  }
 
   getMaCumRap = (item) => {
     this.props.actGetMaCumRap(item);
   };
 
   handleRenderItem = () => {
-    return this.props.HTCRList.map((item, index) => {
-      return <HTCRItem key={index} item={item} maCumRap={this.getMaCumRap} />;
+    const { maCR, HTCRList } = this.props;
+    return HTCRList.map((item, index) => {
+      return (
+        <HTCRItem
+          key={index}
+          item={item}
+          maCR={maCR}
+          maCumRap={this.getMaCumRap}
+        />
+      );
     });
   };
   render() {
@@ -41,6 +72,7 @@ const mapStateToProps = (state) => {
   return {
     HTCRList: state.hTCRReducer.heThongCumRap,
     maHTR: state.hTCRReducer.maHTR,
+    maCR: state.lichChieuPhimReducer.maCumRap,
   };
 };
 

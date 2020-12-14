@@ -2,25 +2,26 @@ import React, { Component } from "react";
 import { Link } from "react-router-dom";
 import "./index.scss";
 class HeaderComponent extends Component {
-  componentDidMount() {
-    window.addEventListener("scroll", this.onScroll, false);
-  }
-  componentWillUnmount() {
-    window.removeEventListener("scroll", this.onScroll, false);
-  }
-  onScroll = () => {
-    window.onscroll = function () {
-      var header = document.getElementsByClassName("header__content")[0];
-      if (!header) return;
-      if (window.pageYOffset > 400) {
-        header.classList.add("header__change");
-      } else {
-        if (header.classList.contains("header__change")) {
-          header.classList.remove("header__change");
-        }
-      }
-    };
-  };
+  // componentDidMount() {
+  //   window.addEventListener("scroll", this.onScroll, false);
+  // }
+  // componentWillUnmount() {
+  //   window.removeEventListener("scroll", this.onScroll, false);
+  // }
+  // onScroll = () => {
+  //   window.onscroll = function () {
+  //   var header = document.getElementsByClassName("header__content")[0];
+  //   if (!header) return;
+  //   if (window.pageYOffset > 400) {
+  //     console.log("Chayj khong?");
+  //     header.classList.add("header__change");
+  //   } else {
+  //     if (header.classList.contains("header__change")) {
+  //       header.classList.remove("header__change");
+  //     }
+  //   }
+  //   };
+  // };
   render() {
     return (
       <div className="header__content">

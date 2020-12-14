@@ -1,8 +1,6 @@
-import CheckOut from "Containers/Home/HomePage/checkout";
 import MovieManagement from "../Containers/Admin/movies";
 import UserManagement from "../Containers/Admin/users";
 import HomePage from "../Containers/Home/HomePage";
-import MovieDetail from "../Containers/Home/HomePage/MovieDetail";
 // import MovieDetailComponent from "../Containers/Home/MovieDetail";
 
 const routesHomePage = [
