@@ -6,7 +6,7 @@ class MovieItem extends Component {
     // console.log("kiem trailer", this.props.movie);
     return (
       <div
-        className="col-md-3 col-sm-6 my-4 movieItem clear"
+        className="col-md-3 col-sm-6 movieItem clear"
         onClick={() =>
           this.props.history.push(`/movie/${this.props.movie.maPhim}`)
         }

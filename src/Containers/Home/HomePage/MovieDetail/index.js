@@ -11,12 +11,16 @@ class MovieDetailComponent extends Component {
     let { movieDetail } = this.props;
     if (movieDetail && movieDetail !== null) {
       return (
-        <>
+        <div className="row">
           <div className="col-sm-6">
-            <img src={this.props.movieDetail.hinhAnh} alt="" />
+            <img
+              className="img-fluid"
+              src={this.props.movieDetail.hinhAnh}
+              alt=""
+            />
           </div>
-          <div className="col-sm-6"></div>
-        </>
+          <div className="col-sm-6"> dsajkhdsajkhasdkj</div>
+        </div>
       );
     }
   };
