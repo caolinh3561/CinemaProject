@@ -1,13 +1,14 @@
 import { Button } from "@material-ui/core";
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { useParams } from "react-router-dom";
+import { useHistory, useParams } from "react-router-dom";
 import "./index.scss";
 import { actBookingTickets, actGetTicketRoom } from "./modules/actions";
 
 export default function CheckOut() {
   const ticketRoom = useSelector((state) => state.ticketRoomReducer.ticketRoom);
   const dispatch = useDispatch();
+  const history = useHistory();
   const { scheduleId } = useParams();
   const [warning, setWarning] = useState(true);
   const [state, setstate] = useState([]);
@@ -20,11 +21,17 @@ export default function CheckOut() {
 
   // lấy thông tin phòng chiếu và thông tin người đặt vé
   useEffect(() => {
-    const username = JSON.parse(localStorage.getItem("userMember")).taiKhoan;
+    const user = JSON.parse(localStorage.getItem("userMember"));
+    if (!user) {
+      alert("Login first Plz!");
+      history.push("/login");
+      return;
+    }
+    const { taiKhoan } = user;
     const datVeClone = {
       ...datVe,
       maLichChieu: scheduleId,
-      taiKhoanNguoiDung: username,
+      taiKhoanNguoiDung: taiKhoan,
     };
     setDatVe(datVeClone);
     dispatch(actGetTicketRoom(scheduleId));
@@ -339,7 +346,7 @@ export default function CheckOut() {
             <Button
               key={item.stt}
               disabled
-              style={{ backgroundColor: "dimgray" }}
+              style={{ backgroundColor: "rgb(223 223 223 / 26%)" }}
             >
               X
             </Button>
@@ -370,7 +377,9 @@ export default function CheckOut() {
               key={item.stt}
               style={{
                 color: "#582819",
-                backgroundColor: item.dangChon ? "rgb(77 232 26)" : "darkgray",
+                backgroundColor: item.dangChon
+                  ? "rgb(77 232 26)"
+                  : "rgb(73 104 124)",
               }}
             >
               {item.dangChon ? item.tenGhe.slice(-2) : ""}
@@ -482,6 +491,17 @@ export default function CheckOut() {
     );
   };
 
+  const renderUserInfor = () => {
+    if (!localStorage.getItem("userMember")) return;
+    const user = JSON.parse(localStorage.getItem("userMember")).taiKhoan;
+    return (
+      <h6>
+        <i className="material-icons">account_circle</i>
+        {user}
+      </h6>
+    );
+  };
+
   const renderThongTinRap = () => {
     if (ticketRoom && ticketRoom.thongTinPhim) {
       return (
@@ -519,7 +539,15 @@ export default function CheckOut() {
           className="checkout__header"
           style={{ height: "90px" }} //backgroundColor: "orange",
         >
-          This is Header!
+          <ul>
+            <li className="li-item active">
+              <span className="step">01</span> Chọn ghế & thanh toán
+            </li>
+            <li className="li-item">
+              <span className="step">02</span> Kết quả đặt vé
+            </li>
+          </ul>
+          {renderUserInfor()}
         </nav>
         <div className="wapper">
           <div className="theater__infor" style={{ height: "90px" }}>
@@ -575,7 +603,7 @@ export default function CheckOut() {
             <div className="lane2"></div>
           </div>
           <div className="expland__seats">
-            <Button style={{ backgroundColor: "darkgray" }}>
+            <Button style={{ backgroundColor: "rgb(73 104 124)" }}>
               {/* <StopSharpIcon fontSize="large" /> */}
             </Button>
             <small>Ghế thường</small>
@@ -583,11 +611,14 @@ export default function CheckOut() {
               {/* <StopSharpIcon style={{ color: green[500] }} fontSize="large" /> */}
             </Button>
             <small>Ghế Vip</small>
-            <Button style={{ backgroundColor: "#00c000" }}>
+            <Button style={{ backgroundColor: "rgb(77, 232, 26)" }}>
               {/* <StopSharpIcon fontSize="large" /> */}
             </Button>
             <small>Ghế đang chọn</small>
-            <Button disabled style={{ backgroundColor: "dimgray" }}>
+            <Button
+              disabled
+              style={{ backgroundColor: "rgb(223 223 223 / 26%)" }}
+            >
               X
             </Button>
             <small>Ghế đã được đặt</small>
