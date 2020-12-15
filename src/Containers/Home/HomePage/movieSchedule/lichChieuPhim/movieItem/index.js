@@ -11,7 +11,7 @@ class MovieItem extends Component {
       this.props.history.push(`/checkout/${item.maLichChieu}`);
     } else {
       alert("Login first please!");
-      this.props.history.push(`/login}`);
+      this.props.history.push("/login");
     }
   };
 
