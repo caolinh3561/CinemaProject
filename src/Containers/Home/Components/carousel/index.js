@@ -41,7 +41,7 @@ class CarouselComponent extends Component {
 
   render() {
     return (
-      <>
+      <div className="carouselMain">
         <Swiper
           className="carouselMovie"
           spaceBetween={30}
@@ -123,7 +123,7 @@ class CarouselComponent extends Component {
           videoId={this.state.videoId}
           onClose={() => this.setState({ isOpen: false })}
         />
-      </>
+      </div>
     );
   }
 }
