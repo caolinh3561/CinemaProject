@@ -1,13 +1,14 @@
 import { Button } from "@material-ui/core";
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { useParams } from "react-router-dom";
+import { useHistory, useParams } from "react-router-dom";
 import "./index.scss";
 import { actBookingTickets, actGetTicketRoom } from "./modules/actions";
 
 export default function CheckOut() {
   const ticketRoom = useSelector((state) => state.ticketRoomReducer.ticketRoom);
   const dispatch = useDispatch();
+  const history = useHistory();
   const { scheduleId } = useParams();
   const [warning, setWarning] = useState(true);
   const [state, setstate] = useState([]);
@@ -20,14 +21,24 @@ export default function CheckOut() {
 
   // lấy thông tin phòng chiếu và thông tin người đặt vé
   useEffect(() => {
-    const username = JSON.parse(localStorage.getItem("userMember")).taiKhoan;
+    const user = JSON.parse(localStorage.getItem("userMember"));
+    if (!user) {
+      alert("Login first Plz!");
+      history.push("/login");
+      return;
+    }
+    const { taiKhoan } = user;
     const datVeClone = {
       ...datVe,
       maLichChieu: scheduleId,
-      taiKhoanNguoiDung: username,
+      taiKhoanNguoiDung: taiKhoan,
     };
     setDatVe(datVeClone);
     dispatch(actGetTicketRoom(scheduleId));
+    // setTimeout(() => {
+    //   alert("TIME UP!!!");
+    //   window.location.reload();
+    // }, 10000);
   }, []);
   // lấy danh sách ghế
   useEffect(() => {
@@ -327,13 +338,15 @@ export default function CheckOut() {
 
   const renderSeats = () => {
     if (ticketRoom && ticketRoom.danhSachGhe) {
+      console.log(ticketRoom);
+
       return state.map((item) => {
         if (item.daDat === true) {
           return (
             <Button
               key={item.stt}
               disabled
-              style={{ backgroundColor: "dimgray" }}
+              style={{ backgroundColor: "rgb(223 223 223 / 26%)" }}
             >
               X
             </Button>
@@ -364,7 +377,9 @@ export default function CheckOut() {
               key={item.stt}
               style={{
                 color: "#582819",
-                backgroundColor: item.dangChon ? "rgb(77 232 26)" : "darkgray",
+                backgroundColor: item.dangChon
+                  ? "rgb(77 232 26)"
+                  : "rgb(73 104 124)",
               }}
             >
               {item.dangChon ? item.tenGhe.slice(-2) : ""}
@@ -436,7 +451,7 @@ export default function CheckOut() {
           <h1 className="text-center" style={{ color: "#f79400" }}>
             {renderGiaVe()}
           </h1>
-          <hr />
+
           <h5>{tenPhim}</h5>
           <p>{tenCumRap}</p>
           <p>
@@ -476,24 +491,72 @@ export default function CheckOut() {
     );
   };
 
+  const renderUserInfor = () => {
+    if (!localStorage.getItem("userMember")) return;
+    const user = JSON.parse(localStorage.getItem("userMember")).taiKhoan;
+    return (
+      <h6>
+        <i className="material-icons">account_circle</i>
+        {user}
+      </h6>
+    );
+  };
+
+  const renderThongTinRap = () => {
+    if (ticketRoom && ticketRoom.thongTinPhim) {
+      return (
+        <div className="infor__left row">
+          <img
+            src={ticketRoom.thongTinPhim.hinhAnh}
+            style={{ height: 80, marginRight: 15 }}
+            alt="logo"
+          />
+          <div className="infor__theater">
+            <h6>{ticketRoom.thongTinPhim.tenCumRap}</h6>
+            <p>
+              {ticketRoom.thongTinPhim.gioChieu}
+              {" - "}
+              {ticketRoom.thongTinPhim.tenRap}
+            </p>
+          </div>
+        </div>
+      );
+    } else return null;
+  };
+
   return (
     <div
       className="row"
       style={{
         // backgroundImage: "url('assets/img/background/carousel_1.jpg')",
         width: "100%",
-        height: "600px",
+        // height: "400px",
         margin: 0,
       }}
     >
       <div className="col-lg-9" style={{ padding: 0 }}>
-        <nav style={{ backgroundColor: "orange", height: "90px" }}>
-          This is Header!
+        <nav
+          className="checkout__header"
+          style={{ height: "90px" }} //backgroundColor: "orange",
+        >
+          <ul>
+            <li className="li-item active">
+              <span className="step">01</span> Chọn ghế & thanh toán
+            </li>
+            <li className="li-item">
+              <span className="step">02</span> Kết quả đặt vé
+            </li>
+          </ul>
+          {renderUserInfor()}
         </nav>
-        <div className="theater__infor" style={{ height: "90px" }}></div>
+        <div className="wapper">
+          <div className="theater__infor" style={{ height: "90px" }}>
+            {renderThongTinRap()}
+          </div>
+        </div>
         <div
           className="seats__booking"
-          style={{ height: "100%", backgroundColor: "brown" }}
+          style={{ paddingBottom: 30 }} //, backgroundColor: "brown"
         >
           <img
             className="screen__img"
@@ -540,7 +603,7 @@ export default function CheckOut() {
             <div className="lane2"></div>
           </div>
           <div className="expland__seats">
-            <Button style={{ backgroundColor: "darkgray" }}>
+            <Button style={{ backgroundColor: "rgb(73 104 124)" }}>
               {/* <StopSharpIcon fontSize="large" /> */}
             </Button>
             <small>Ghế thường</small>
@@ -548,11 +611,14 @@ export default function CheckOut() {
               {/* <StopSharpIcon style={{ color: green[500] }} fontSize="large" /> */}
             </Button>
             <small>Ghế Vip</small>
-            <Button style={{ backgroundColor: "#00c000" }}>
+            <Button style={{ backgroundColor: "rgb(77, 232, 26)" }}>
               {/* <StopSharpIcon fontSize="large" /> */}
             </Button>
             <small>Ghế đang chọn</small>
-            <Button disabled style={{ backgroundColor: "dimgray" }}>
+            <Button
+              disabled
+              style={{ backgroundColor: "rgb(223 223 223 / 26%)" }}
+            >
               X
             </Button>
             <small>Ghế đã được đặt</small>
@@ -566,7 +632,7 @@ export default function CheckOut() {
           position: "fixed",
           top: 0,
           right: 0,
-          height: 580,
+          height: "100vh",
           // backgroundColor: "gray",
           padding: 0,
         }}

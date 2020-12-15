@@ -9,6 +9,9 @@ class MovieItem extends Component {
     const user = JSON.parse(localStorage.getItem("userMember"));
     if (user) {
       this.props.history.push(`/checkout/${item.maLichChieu}`);
+    } else {
+      alert("Login first please!");
+      this.props.history.push("/login");
     }
   };
 

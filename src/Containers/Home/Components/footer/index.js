@@ -1,6 +1,7 @@
 import React from "react";
 import "./index.scss";
 export default function FooterComponent() {
+  const img = "/img/icons-footer/";
   return (
     <footer>
       <div className="container">
@@ -23,109 +24,64 @@ export default function FooterComponent() {
             <div className="row">
               <div className="col-sm-12 col-xs-12 lineFooter">
                 <img
-                  src="/img/iconsfooter/cgv.png"
+                  src={`${img}cgv.png`}
                   height={30}
                   width={30}
                   alt=""
                   style={{ backgroundColor: "white", borderRadius: "100%" }}
                 />
 
+                <img src={`${img}bhd.png`} height={30} width={30} alt="" />
                 <img
-                  src="/img/iconsfooter/bhd.png"
+                  src={`${img}galaxycine.png`}
                   height={30}
                   width={30}
                   alt=""
                 />
-                <img
-                  src="/img/iconsfooter/galaxycine.png"
-                  height={30}
-                  width={30}
-                  alt=""
-                />
-                <img
-                  src="/img/iconsfooter/cinestar.png"
-                  height={30}
-                  width={30}
-                  alt=""
-                />
-                <img
-                  src="/img/iconsfooter/lotte.png"
-                  height={30}
-                  width={30}
-                  alt=""
-                />
+                <img src={`${img}cinestar.png`} height={30} width={30} alt="" />
+                <img src={`${img}lotte.png`} height={30} width={30} alt="" />
               </div>
               <div className="col-sm-12 col-xs-12 lineFooter">
                 <img
-                  src="/img/iconsfooter/megags.png"
+                  src={`${img}megags.png`}
                   height={30}
                   width={30}
                   alt=""
                   style={{ backgroundColor: "white", borderRadius: "100%" }}
                 />
 
+                <img src={`${img}bt.jpg`} height={30} width={30} alt="" />
                 <img
-                  src="/img/iconsfooter/bt.jpg"
+                  src={`${img}dongdacinema.png`}
                   height={30}
                   width={30}
                   alt=""
                 />
-                <img
-                  src="/img/iconsfooter/dongdacinema.png"
-                  height={30}
-                  width={30}
-                  alt=""
-                />
-                <img
-                  src="/img/iconsfooter/touch.png"
-                  height={30}
-                  width={30}
-                  alt=""
-                />
-                <img
-                  src="/img/iconsfooter/cnx.jpg"
-                  height={30}
-                  width={30}
-                  alt=""
-                />
+                <img src={`${img}TOUCH.png`} height={30} width={30} alt="" />
+                <img src={`${img}cnx.jpg`} height={30} width={30} alt="" />
               </div>
               <div className="col-sm-12 col-xs-12 lineFooter">
                 <img
-                  src="/img/iconsfooter/starlight.png"
+                  src={`${img}STARLIGHT.png`}
                   height={30}
                   width={30}
                   alt=""
                   style={{ backgroundColor: "white", borderRadius: "100%" }}
                 />
 
+                <img src={`${img}dcine.png`} height={30} width={30} alt="" />
                 <img
-                  src="/img/iconsfooter/dcine.png"
+                  src={`${img}zalopay_icon.png`}
                   height={30}
                   width={30}
                   alt=""
                 />
-                <img
-                  src="/img/iconsfooter/zalopay_icon.png"
-                  height={30}
-                  width={30}
-                  alt=""
-                />
-                <img
-                  src="/img/iconsfooter/payoo.jpg"
-                  height={30}
-                  width={30}
-                  alt=""
-                />
-                <img
-                  src="/img/iconsfooter/vcb.png"
-                  height={30}
-                  width={30}
-                  alt=""
-                />
+                <img src={`${img}payoo.jpg`} height={30} width={30} alt="" />
+                <img src={`${img}VCB.png`} height={30} width={30} alt="" />
               </div>
               <div className="col-sm-12 col-xs-12 lineFooter">
                 <img
-                  src="/img/iconsfooter/agribank.png"
+                  src={`${img}AGRIBANK.png`}
                   height={30}
                   width={30}
                   alt=""
@@ -133,29 +89,14 @@ export default function FooterComponent() {
                 />
 
                 <img
-                  src="/img/iconsfooter/viettinbank.png"
+                  src={`${img}VIETTINBANK.png`}
                   height={30}
                   width={30}
                   alt=""
                 />
-                <img
-                  src="/img/iconsfooter/ivb.png"
-                  height={30}
-                  width={30}
-                  alt=""
-                />
-                <img
-                  src="/img/iconsfooter/123go.png"
-                  height={30}
-                  width={30}
-                  alt=""
-                />
-                <img
-                  src="/img/iconsfooter/laban.png"
-                  height={30}
-                  width={30}
-                  alt=""
-                />
+                <img src={`${img}IVB.png`} height={30} width={30} alt="" />
+                <img src={`${img}123go.png`} height={30} width={30} alt="" />
+                <img src={`${img}laban.png`} height={30} width={30} alt="" />
               </div>
             </div>
           </div>
@@ -165,13 +106,13 @@ export default function FooterComponent() {
                 {" "}
                 <p className="title__footer">MOBILE APP</p>
                 <img
-                  src="/img/iconsfooter/apple-logo.png"
+                  src={`${img}apple-logo.png`}
                   height={30}
                   width={30}
                   alt=""
                 />
                 <img
-                  src="/img/iconsfooter/android-logo.png"
+                  src={`${img}android-logo.png`}
                   height={30}
                   width={30}
                   alt=""
@@ -181,13 +122,13 @@ export default function FooterComponent() {
                 {" "}
                 <p className="title__footer">SOCIAL</p>
                 <img
-                  src="/img/iconsfooter/facebook-logo.png"
+                  src={`${img}facebook-logo.png`}
                   height={30}
                   width={30}
                   alt=""
                 />
                 <img
-                  src="/img/iconsfooter/zalo-logo.png"
+                  src={`${img}zalo-logo.png`}
                   height={30}
                   width={30}
                   alt=""
@@ -199,7 +140,7 @@ export default function FooterComponent() {
         <hr className="hrFooter" />
         <div className="row footer2">
           <div className="col-xs-12 col-sm-1 zionLogo">
-            <img src="/img/iconsfooter/zion-logo.jpg" alt="" />
+            <img src={`${img}zion-logo.jpg`} alt="" />
           </div>
           <div className="col-xs-12 col-sm-9 infoFooter">
             <span>TIX – SẢN PHẨM CỦA CÔNG TY CỔ PHẦN ZION</span>
@@ -228,7 +169,7 @@ export default function FooterComponent() {
             </span>
           </div>
           <div className="col-xs-12 col-sm-2 zionLogo2">
-            <img src="/img/iconsfooter/daThongBaoBoCongThuong.png" alt="" />
+            <img src={`${img}daThongBaoBoCongThuong.png`} alt="" />
           </div>
         </div>
       </div>

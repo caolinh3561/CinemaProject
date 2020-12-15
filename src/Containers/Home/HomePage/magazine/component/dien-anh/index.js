@@ -18,7 +18,7 @@ export default function DienAnhComponent() {
             <p className="p__title">
               “Bóc tem” tổ hợp giải trí mới toanh của giới Hà Thành
             </p>
-            <p class="p__content">
+            <p className="p__content">
               Vào đúng ngày Nhà giáo Việt Nam 20/11, khu vui chơi sống ảo
               độc-lạ-chill nhất từ trước đến giờ sẽ chính thức khai trương tại
               360 Giải Phóng!{" "}
@@ -43,7 +43,7 @@ export default function DienAnhComponent() {
             <p className="p__title">
               Tiệc Trăng Máu chính thức cán mốc 100 tỷ chỉ sau 2 tuần công chiếu
             </p>
-            <p class="p__content">
+            <p className="p__content">
               Sau 2 tuần ra mắt, Tiệc Trăng Máu chính thức gia nhập câu lạc bộ
               phim điện ảnh đạt 100 tỷ đồng doanh thu phòng vé. Dàn ngôi sao
               “bạc tỷ” của phim cũng lần đầu tiên hội tụ đầy đủ trong một khung
@@ -71,7 +71,7 @@ export default function DienAnhComponent() {
             <p className="p__title">
               NGÔ THANH VÂN CHÍNH THỨC KHỞI ĐỘNG CUỘC THI THIẾT KẾ...
             </p>
-            <p class="p__content">
+            <p className="p__content">
               Chiều tối ngày 30-10-2020, Ngô Thanh Vân và Studio68 đã chính thức
               phát động cuộc thi thiết kế trang phục cho siêu anh hùng VINAMAN
               với tổng giá trị giải thưởng lên đến 60 triệu đồng.
@@ -96,7 +96,7 @@ export default function DienAnhComponent() {
             <p className="p__title">
               [ANTEBELLUM] - 4 lý do không thể bỏ lỡ siêu phẩm kinh dị...
             </p>
-            <p class="p__content">
+            <p className="p__content">
               Không đi theo lối mòn máu me, hù dọa mà đầu tư khai thác những
               mảng tối của xã hội trên nền một câu chuyện kinh dị, có sự tham
               gia của nhà sản xuất đã làm nên thành công của loạt tác phẩm ấn
