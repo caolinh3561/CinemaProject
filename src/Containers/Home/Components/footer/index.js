@@ -57,12 +57,12 @@ export default function FooterComponent() {
                   width={30}
                   alt=""
                 />
-                <img src={`${img}touch.png`} height={30} width={30} alt="" />
+                <img src={`${img}TOUCH.png`} height={30} width={30} alt="" />
                 <img src={`${img}cnx.jpg`} height={30} width={30} alt="" />
               </div>
               <div className="col-sm-12 col-xs-12 lineFooter">
                 <img
-                  src={`${img}starlight.png`}
+                  src={`${img}STARLIGHT.png`}
                   height={30}
                   width={30}
                   alt=""
@@ -77,11 +77,11 @@ export default function FooterComponent() {
                   alt=""
                 />
                 <img src={`${img}payoo.jpg`} height={30} width={30} alt="" />
-                <img src={`${img}vcb.png`} height={30} width={30} alt="" />
+                <img src={`${img}VCB.png`} height={30} width={30} alt="" />
               </div>
               <div className="col-sm-12 col-xs-12 lineFooter">
                 <img
-                  src={`${img}agribank.png`}
+                  src={`${img}AGRIBANK.png`}
                   height={30}
                   width={30}
                   alt=""
@@ -89,12 +89,12 @@ export default function FooterComponent() {
                 />
 
                 <img
-                  src={`${img}viettinbank.png`}
+                  src={`${img}VIETTINBANK.png`}
                   height={30}
                   width={30}
                   alt=""
                 />
-                <img src={`${img}ivb.png`} height={30} width={30} alt="" />
+                <img src={`${img}IVB.png`} height={30} width={30} alt="" />
                 <img src={`${img}123go.png`} height={30} width={30} alt="" />
                 <img src={`${img}laban.png`} height={30} width={30} alt="" />
               </div>
