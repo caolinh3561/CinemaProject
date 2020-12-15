@@ -26,7 +26,7 @@ class CarouselComponent extends Component {
 
   render() {
     return (
-      <>
+      <div className="carouselMain">
         <Swiper
           className="carouselMovie"
           spaceBetween={30}
@@ -92,7 +92,7 @@ class CarouselComponent extends Component {
           </SwiperSlide>
         </Swiper>
         <MovieTrailerModal />
-      </>
+      </div>
     );
   }
 }

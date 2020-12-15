@@ -7,7 +7,14 @@ class HomePage extends Component {
   render() {
     return (
       <>
-        <h1 className="my-4 text-center" style={{ color: "#f79400" }}>
+        <h1
+          id="idPhimDangChieu"
+          className="text-center"
+          style={{
+            color: "#fa5238",
+            paddingTop: "100px",
+          }}
+        >
           Phim đang chiếu
         </h1>
         <MovieList />

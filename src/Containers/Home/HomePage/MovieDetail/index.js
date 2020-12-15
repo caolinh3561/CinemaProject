@@ -11,7 +11,7 @@ class MovieDetailComponent extends Component {
     let { movieDetail } = this.props;
     if (movieDetail && movieDetail !== null) {
       return (
-        <div className="row">
+        <>
           <div className="col-sm-6">
             <img
               className="img-fluid"
@@ -20,7 +20,7 @@ class MovieDetailComponent extends Component {
             />
           </div>
           <div className="col-sm-6"> dsajkhdsajkhasdkj</div>
-        </div>
+        </>
       );
     }
   };
