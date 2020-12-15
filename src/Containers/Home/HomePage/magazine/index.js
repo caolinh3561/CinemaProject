@@ -33,7 +33,7 @@ export default function MagazineComponent(props) {
     }
   };
   return (
-    <div className="magazineTitle mainMaxWidth">
+    <div className="magazineTitle mainMaxWidth" id="idTinTuc">
       <div className="row">
         <div className="col-12 text-center wrapTitleMagazine">
           <button

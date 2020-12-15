@@ -4,6 +4,7 @@ import HeThongCumRapComponent from "./heThongCumRap";
 import { actGetHTCR } from "./heThongCumRap/modules/action";
 import { connect } from "react-redux";
 import LichChieuPhimComponent from "./lichChieuPhim";
+import "./index.scss";
 class MovieSchedule extends Component {
   maRapDangChon = "";
   sendProps = (item) => {
@@ -24,7 +25,8 @@ class MovieSchedule extends Component {
   // };
   render() {
     return (
-      <div className="my-5" style={{ width: "80%", margin: "0 auto" }}>
+      <div className="" style={{ width: "80%", margin: "0 auto" }}>
+        <div id="idCumRap" className="idCumRap"></div>
         <div className="row">
           <div className="heThongRap__content">
             <HeThongRapComponent maHTR={this.sendProps} />

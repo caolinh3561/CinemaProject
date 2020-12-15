@@ -15,7 +15,7 @@ export default function News() {
     autoplaySpeed: 2000,
   };
   return (
-    <section className="news">
+    <section className="news" id="idUngDung">
       <div className="wrapper">
         <div className="mainMaxWidth">
           <div className="row">
