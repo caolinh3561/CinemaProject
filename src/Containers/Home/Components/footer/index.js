@@ -1,7 +1,7 @@
 import React from "react";
 import "./index.scss";
 export default function FooterComponent() {
-  const img = "/img/iconsfooter/";
+  const img = "img/iconsfooter/";
   return (
     <footer>
       <div className="container">
