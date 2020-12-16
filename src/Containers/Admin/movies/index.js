@@ -10,7 +10,7 @@ import {
 import MovieItem from "./components/movieItem/movieItem";
 import MovieModal from "./components/movieModal/MovieModal";
 import ScheduleModal from "./components/scheduleModal/scheduleModal";
-import Axios from "axios";
+
 function MovieManagement(props) {
   const responseData = useSelector(
     (state) => state.movieListWithPaginationReducer.movieList
