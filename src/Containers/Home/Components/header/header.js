@@ -1,14 +1,15 @@
 import React, { Component } from "react";
-import { Link } from "react-router-dom";
+import { Link, NavLink } from "react-router-dom";
+import Login from "./../../HomePage/login";
 import "./index.scss";
 class HeaderComponent extends Component {
   render() {
     return (
       <header>
-        <Link to="#" className="logo">
+        <a href="#carouselId" className="logo">
           <img src="img/tix-logo.png" alt="" />
-        </Link>
-        <nav class="header__menu">
+        </a>
+        <nav className="header__menu">
           <ul className="mb-0">
             <li>
               <a href="#idPhimDangChieu" to="/">
@@ -27,11 +28,11 @@ class HeaderComponent extends Component {
             </li>
           </ul>
         </nav>
-        <a href="#" class="signin">
-          <i class="fa fa-user-circle"></i>
+        <Link to="/login" href="#" className="signin">
+          <i className="fa fa-user-circle"></i>
           <img src="/img/avatar-login.png" />
           <span>Đăng nhập</span>
-        </a>
+        </Link>
       </header>
     );
   }

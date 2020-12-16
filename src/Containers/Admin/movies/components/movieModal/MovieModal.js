@@ -7,7 +7,7 @@ import {
 } from "@material-ui/core";
 import dayjs from "dayjs";
 import { Field, Form, Formik } from "formik";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import * as Yup from "yup";
 import { actPostNewMovie, actUpdateMovie } from "./../../modules/actions";
@@ -22,10 +22,51 @@ function MovieModal(props) {
   );
   const [picture, setpicture] = useState(null);
 
-  function handleImageChange(e, setFieldValue) {
-    console.log(e.target.files);
-    if (!e.target.files[0]) return;
+  // useEffect(() => {
+  // if (movieNeedUpdate.hinhAnh) {
+  //   let headers = new Headers();
 
+  //   headers.append("Content-Type", "application/json");
+  //   headers.append("Accept", "application/json");
+  //   headers.append(
+  //     "Authorization",
+  //     "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJodHRwOi8vc2NoZW1hcy54bWxzb2FwLm9yZy93cy8yMDA1LzA1L2lkZW50aXR5L2NsYWltcy9uYW1lIjoiaXByb2tmYzU2MSIsImh0dHA6Ly9zY2hlbWFzLm1pY3Jvc29mdC5jb20vd3MvMjAwOC8wNi9pZGVudGl0eS9jbGFpbXMvcm9sZSI6IlF1YW5UcmkiLCJuYmYiOjE2MDgwMzUyNjgsImV4cCI6MTYwODAzODg2OH0.B2NGBu8nDcVU6FjQ5GtN72FzurcBd9Wk2_RgJKYHvog"
+  //   );
+  //   headers.append("Origin", "http://localhost:3000");
+  //   fetch(movieNeedUpdate.hinhAnh, {
+  //     // mode: "no-cors",
+  //     mode: "cors",
+  //     credentials: "include",
+
+  //     method: "GET",
+  //     headers: headers,
+
+  //     // "Content-Type": "image/jpeg",
+  //     // "Access-Control-Allow-Origin": "*",
+  //     // "Access-Control-Allow-Credentials": "true",
+  //     // headers: {
+  //     //   Authorization:
+  //     //     "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJodHRwOi8vc2NoZW1hcy54bWxzb2FwLm9yZy93cy8yMDA1LzA1L2lkZW50aXR5L2NsYWltcy9uYW1lIjoiaXByb2tmYzU2MSIsImh0dHA6Ly9zY2hlbWFzLm1pY3Jvc29mdC5jb20vd3MvMjAwOC8wNi9pZGVudGl0eS9jbGFpbXMvcm9sZSI6IlF1YW5UcmkiLCJuYmYiOjE2MDgwMzUyNjgsImV4cCI6MTYwODAzODg2OH0.B2NGBu8nDcVU6FjQ5GtN72FzurcBd9Wk2_RgJKYHvog",
+  //     // },
+  //   })
+  //     .then((res) => res.blob())
+  //     .catch((err) => {
+  //       console.log(err);
+  //     });
+  // .then((blob) => {
+  //   console.log(blob);
+  //   const file = new File([blob], "hinh-anh.jpg", { type: "image/jpg" });
+  //   console.log(file, file.name);
+  //   setpicture(file);
+  // }).catch((err)=>{console.log(err);});
+  //   }
+
+  //   return () => {};
+  // }, [movieNeedUpdate]);
+
+  function handleImageChange(e, setFieldValue) {
+    if (!e.target.files[0]) return;
+    console.log(e.target.files[0]);
     setpicture(e.target.files[0]);
     setFieldValue("hinhAnh", e.target.files[0].name, false);
 
@@ -35,6 +76,7 @@ function MovieModal(props) {
   //tenPhim,moTa,trailer,hinhAnh,ngayKhoiChieu|maPhim,danhGia,maNhom,biDanh
   function createNewMovie(values) {
     var frm = new FormData();
+    console.log(picture, picture.name);
     frm.append("hinhAnh", picture, picture.name);
     frm.append("tenPhim", values.tenPhim);
     frm.append("moTa", values.moTa);
@@ -71,7 +113,7 @@ function MovieModal(props) {
     const validationSchema = Yup.object().shape({
       tenPhim: Yup.string()
         .required("K được bỏ trống trường này!")
-        .min(6, "Tài khoản phải có 6 ký tự trở lên!"),
+        .min(3, "Tên phim phải có 3 ký tự trở lên!"),
       moTa: Yup.string().required("K được bỏ trống trường này!"),
       ngayKhoiChieu: Yup.string().required("K được bỏ trống trường này!"),
       trailer: Yup.string().required("K được bỏ trống trường này!"),
@@ -174,6 +216,7 @@ function MovieModal(props) {
                   handleImageChange(e, setFieldValue);
                 }}
               />
+
               <br />
               {touched.hinhAnh && (
                 <small className="text-danger">{errors.hinhAnh}</small>
