@@ -8,6 +8,7 @@ import FooterComponent from "Containers/Home/Components/footer";
 import "./index.scss";
 import dayjs from "dayjs";
 import CircularDeterminate from "./circle-component";
+import ShowingComponent from "./showing-component";
 class MovieDetailComponent extends Component {
   componentDidMount() {
     this.props.actGetMovieDetail(this.props.match.params.id);
@@ -16,13 +17,8 @@ class MovieDetailComponent extends Component {
     return Math.round(Math.random() * (10 - 1) + 1);
   }
   renderStarReview() {
-    // console.log("7/2", 7 / 2);
-    // console.log("7%2", 7 % 2);
-    // console.log("8/2", 8 / 2);
-    // console.log("8%2", 8 % 2);
     let { movieDetail } = this.props;
     let amountStar = movieDetail.danhGia;
-    // let amountStar = -1;
     let arr = [];
     if (amountStar && amountStar === 1) {
       return <img src="/img/star1.2.png" alt="" />;
@@ -83,6 +79,10 @@ class MovieDetailComponent extends Component {
                 {this.randomNumber()} người đánh giá
               </div>
             </div>
+          </div>
+
+          <div className="contentMain">
+            <ShowingComponent />
           </div>
         </div>
       );
