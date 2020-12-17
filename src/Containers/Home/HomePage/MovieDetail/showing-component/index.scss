@@ -8,11 +8,10 @@
         .showing__content {
             padding-top: 20px;
             margin-top: 10px;
-            text-align: center;
+            // text-align: center;
         }
     }
 }
-
 .btnTitleMovie {
     text-align: center;
     // padding-top: 20px;
@@ -29,7 +28,7 @@
         align-items: center;
         border: none;
         background-color: transparent;
-        transition: all 0.5s;
+        transition: all 0.2s;
         color: white;
     }
     .btnActive {

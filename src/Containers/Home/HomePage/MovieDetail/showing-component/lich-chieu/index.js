@@ -1,5 +1,10 @@
 import React from "react";
 import "./index.scss";
+import ShowingMovieComponent from "./showing-schedule";
 export default function LichChieuComponent() {
-  return <div>Lịch chiếu works!</div>;
+  return (
+    <div className="mainMaxWidth2">
+      <ShowingMovieComponent />
+    </div>
+  );
 }
