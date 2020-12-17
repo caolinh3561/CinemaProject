@@ -11,7 +11,7 @@ export const actGetMovieDetail = (id) => {
       url: `https://movie0706.cybersoft.edu.vn/api/QuanLyPhim/LayThongTinPhim?MaPhim=${id}`,
     })
       .then((res) => {
-        console.log(res.data);
+        // console.log(res.data);
         dispatch(actGetMovieDetailSuccess(res.data));
       })
       .catch((err) => {
