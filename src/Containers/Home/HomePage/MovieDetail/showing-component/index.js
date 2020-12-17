@@ -1,9 +1,11 @@
 import React, { useState } from "react";
-import ThongTinComponent from "./danh-gia";
+import ThongTinComponent from "./thong-tin";
+import DanhGiaComponent from "./danh-gia";
 import "./index.scss";
 import LichChieuComponent from "./lich-chieu";
-import DanhGiaComponent from "./thong-tin";
-export default function ShowingComponent() {
+export default function ShowingComponent(props) {
+  // console.log(props, "props nè - showingComponent");
+  let movie = props.movieDetail;
   const setShowing = (e) => {
     setState({
       showing: e,
@@ -13,11 +15,11 @@ export default function ShowingComponent() {
   const renderShowing = () => {
     switch (state.showing) {
       case "lichChieu":
-        return <LichChieuComponent />;
+        return <LichChieuComponent movie={movie} />;
       case "thongTin":
-        return <ThongTinComponent />;
+        return <ThongTinComponent movie={movie} />;
       default:
-        return <DanhGiaComponent />;
+        return <DanhGiaComponent movie={movie} />;
     }
   };
   return (
