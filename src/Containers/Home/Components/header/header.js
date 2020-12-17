@@ -1,6 +1,5 @@
 import React, { Component } from "react";
-import { Link, NavLink } from "react-router-dom";
-import Login from "./../../HomePage/login";
+import { Link } from "react-router-dom";
 import "./index.scss";
 class HeaderComponent extends Component {
   render() {
@@ -30,7 +29,7 @@ class HeaderComponent extends Component {
         </nav>
         <Link to="/login" href="#" className="signin">
           <i className="fa fa-user-circle"></i>
-          <img src="/img/avatar-login.png" />
+          <img src="/img/avatar-login.png" alt="" />
           <span>Đăng nhập</span>
         </Link>
       </header>

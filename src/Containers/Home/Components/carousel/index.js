@@ -33,8 +33,8 @@ class CarouselComponent extends Component {
     this.setState({ isOpen: true });
   }
 
-  handlePlayTrailer = (e) => {
-    this.setState({ isOpen: true, videoId: e.target.accessKey });
+  handlePlayTrailer = (value) => {
+    this.setState({ isOpen: true, videoId: value });
     // this.props.actGetMovieTrailerSource(e.target.title);
   };
 
@@ -58,11 +58,10 @@ class CarouselComponent extends Component {
               <button
                 className="play__trailer"
                 onClick={(e) => {
-                  this.handlePlayTrailer(e);
+                  this.handlePlayTrailer("9SA7FaKxZVI");
                 }}
               >
                 <i
-                  accessKey="9SA7FaKxZVI"
                   className="material-icons__play material-icons"
                   title="trailer"
                 >
@@ -79,13 +78,10 @@ class CarouselComponent extends Component {
               <button
                 className="play__trailer"
                 onClick={(e) => {
-                  this.handlePlayTrailer(e);
+                  this.handlePlayTrailer("L3pk_TBkihU");
                 }}
               >
-                <i
-                  accessKey="L3pk_TBkihU"
-                  className="material-icons__play material-icons"
-                >
+                <i className="material-icons__play material-icons">
                   play_arrow
                 </i>
               </button>
@@ -99,13 +95,10 @@ class CarouselComponent extends Component {
               <button
                 className="play__trailer"
                 onClick={(e) => {
-                  this.handlePlayTrailer(e);
+                  this.handlePlayTrailer("IpKmt4MpctM");
                 }}
               >
-                <i
-                  accessKey="IpKmt4MpctM"
-                  className="material-icons__play material-icons"
-                >
+                <i className="material-icons__play material-icons">
                   play_arrow
                 </i>
               </button>

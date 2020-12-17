@@ -32,12 +32,16 @@ class MovieList extends Component {
     //   autoplay: true,
     //   autoplaySpeed: 2000,
     // };
+
     return (
       <div className="container py-5">
         <div className="row">
-          {movieList.slice(0, 8).map((item, index) => {
-            return <MovieItem key={index} movie={item} />;
-          })}
+          {movieList
+            .reverse()
+            .slice(0, 8)
+            .map((item, index) => {
+              return <MovieItem key={index} movie={item} />;
+            })}
           {/* <Slider className="" {...settings}>
           <div className="row">
             {" "}
