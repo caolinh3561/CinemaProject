@@ -27,10 +27,7 @@ class MovieItem extends Component {
       if (dayjs(item.ngayChieuGioChieu).format("DD/MM/YYYY") === date)
         return (
           <Button
-            disabled={
-              time >
-              dayjs(item.ngayChieuGioChieu).add("15", "minute").format("HH:mm")
-            }
+            disabled={time > dayjs(item.ngayChieuGioChieu).format("HH:mm")}
             key={item.maLichChieu}
             className="btn__datVe"
             onClick={() => {

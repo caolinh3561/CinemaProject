@@ -16,6 +16,7 @@ import "swiper/swiper.scss";
 import "./index.scss";
 import "react-modal-video/scss/modal-video.scss";
 import ModalVideo from "react-modal-video";
+import SelectMovie from "../selectMovie";
 
 SwiperCore.use([Navigation, Pagination, Scrollbar, A11y, Autoplay]);
 
@@ -105,6 +106,9 @@ class CarouselComponent extends Component {
             </div>
           </SwiperSlide>
         </Swiper>
+        <div className="selectMovieDiv">
+          <SelectMovie />
+        </div>
 
         <ModalVideo
           youtube={{

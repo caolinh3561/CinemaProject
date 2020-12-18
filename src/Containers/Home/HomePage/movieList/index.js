@@ -37,6 +37,7 @@ class MovieList extends Component {
       <div className="container py-5">
         <div className="row">
           {movieList
+            .slice()
             .reverse()
             .slice(0, 8)
             .map((item, index) => {
