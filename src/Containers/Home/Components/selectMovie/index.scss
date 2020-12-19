@@ -18,14 +18,11 @@
 
   .selectFilm {
     .css-26l3qy-menu {
-      width: 450px;
+      width: max-content;
       max-width: 550px;
-      // height: 200px;
-      // overflow-y: auto;
-      // overflow-x: hidden;
-      // &:focus {
-      //   outline: none !important;
-      // }
+    }
+    .css-1wa3eu0-placeholder {
+      color: black;
     }
   }
   .css-1fhf3k1-control {
@@ -59,13 +56,13 @@
     }
   }
 
-  .selectTheater {
-    // font-size: 14px !important;
-    .css-26l3qy-menu {
-      width: max-content;
-      max-width: 350px;
-    }
+  // font-size: 14px !important;
+  .css-26l3qy-menu {
+    width: max-content;
+    min-width: 150px;
+    max-width: 400px;
   }
+
   .btn-datVe {
     background: linear-gradient(to left, #fb4226, #ce3017 100%);
     margin: 0 15px;

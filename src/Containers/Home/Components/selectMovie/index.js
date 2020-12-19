@@ -15,8 +15,11 @@ class SelectMovie extends Component {
     this.state = {
       maPhim: "",
       maRap: "",
+      selectRapOpen: false,
       ngayXem: "",
+      selectNgayXemOpen: false,
       suatChieu: "",
+      selectSuatChieuOpen: false,
       scheduleMovieInfor: null,
       scheduleMovie: null,
     };
@@ -36,6 +39,7 @@ class SelectMovie extends Component {
             maRap: "",
             ngayXem: "",
             suatChieu: "",
+            selectRapOpen: true,
             scheduleMovieInfor: res.data,
           });
         })
@@ -56,6 +60,7 @@ class SelectMovie extends Component {
       this.setState({ suatChieu: "" });
     }
   }
+
   handleMovieChange = (item) => {
     this.setState({ maPhim: item });
     // console.log(item.value);
@@ -80,6 +85,15 @@ class SelectMovie extends Component {
     // console.log(movieNameList);
     return movieNameList;
   };
+
+  handleTheaterOpen = () => {
+    this.setState({ selectRapOpen: true });
+  };
+
+  handleTheaterClose = () => {
+    this.setState({ selectRapOpen: false });
+  };
+
   handleTheaterChange = (item) => {
     if (item.value !== null) {
       this.setState({ maRap: item });
@@ -88,7 +102,11 @@ class SelectMovie extends Component {
       const giDay = scheduleMovieInfor.heThongRapChieu
         .find((x) => x.maHeThongRap === item.maHTR)
         .cumRapChieu.find((x) => x.maCumRap === item.value);
-      this.setState({ scheduleMovie: giDay });
+      this.setState({
+        scheduleMovie: giDay,
+        selectRapOpen: false,
+        selectNgayXemOpen: true,
+      });
     }
   };
   renderTheaterList = () => {
@@ -110,9 +128,17 @@ class SelectMovie extends Component {
     return movieTheaterList;
   };
 
+  handleTimeOpen = () => {
+    this.setState({ selectNgayXemOpen: true });
+  };
+
+  handleTimeClose = () => {
+    this.setState({ selectNgayXemOpen: false });
+  };
+
   handleTimeChange = (time) => {
     if (time.value === null) return;
-    this.setState({ ngayXem: time });
+    this.setState({ ngayXem: time, selectSuatChieuOpen: true });
   };
 
   renderTimeList = () => {
@@ -141,6 +167,13 @@ class SelectMovie extends Component {
     }
     return timeList;
   };
+  handleScheduleMovieOpen = () => {
+    this.setState({ selectSuatChieuOpen: true });
+  };
+
+  handleScheduleMovieClose = () => {
+    this.setState({ selectSuatChieuOpen: false });
+  };
 
   handleScheduleMovieChange = (item) => {
     if (item.value === null) return;
@@ -160,6 +193,9 @@ class SelectMovie extends Component {
             dayjs(item.ngayChieuGioChieu).diff(now) > 0
           );
         }
+      );
+      scheduleMovieValid.sort((a, b) =>
+        dayjs(a.ngayChieuGioChieu).diff(dayjs(b.ngayChieuGioChieu))
       );
       scheduleMovieValid.forEach((item) => {
         scheduleMovieList.push({
@@ -212,6 +248,9 @@ class SelectMovie extends Component {
             isSearchable={maPhim !== "" ? true : false}
             // isDisabled={!maPhim}
             placeholder="Chọn Rạp..."
+            menuIsOpen={this.state.selectRapOpen}
+            onMenuClose={this.handleTheaterClose}
+            onMenuOpen={this.handleTheaterOpen}
             // components={{ MenuList }}
             value={maRap}
             onChange={this.handleTheaterChange}
@@ -222,6 +261,9 @@ class SelectMovie extends Component {
           <Select
             isSearchable={false}
             // isDisabled={!maPhim}
+            menuIsOpen={this.state.selectNgayXemOpen}
+            onMenuClose={this.handleTimeClose}
+            onMenuOpen={this.handleTimeOpen}
             placeholder="Ngày Xem..."
             // components={{ MenuList }}
             value={ngayXem}
@@ -236,6 +278,9 @@ class SelectMovie extends Component {
           <Select
             isSearchable={false}
             // isDisabled={!maPhim}
+            menuIsOpen={this.state.selectSuatChieuOpen}
+            onMenuClose={this.handleScheduleMovieClose}
+            onMenuOpen={this.handleScheduleMovieOpen}
             placeholder="Suất Chiếu..."
             // components={{ MenuList }}
             value={suatChieu}
