@@ -3,6 +3,7 @@
     // background: linear-gradient(to top, rgb(5, 15, 19), transparent 200%);
     .movie__detail {
         position: relative;
+        background: #0a2029;
         .movie__background {
             filter: blur(10px);
             width: calc(100% + 5px);
