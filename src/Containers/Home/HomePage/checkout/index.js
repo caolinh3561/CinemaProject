@@ -1,4 +1,5 @@
 import { Button } from "@material-ui/core";
+import LoadingComponent from "Containers/Home/Components/loading";
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useHistory, useParams } from "react-router-dom";
@@ -7,6 +8,7 @@ import { actBookingTickets, actGetTicketRoom } from "./modules/actions";
 
 export default function CheckOut() {
   const ticketRoom = useSelector((state) => state.ticketRoomReducer.ticketRoom);
+  const loading = useSelector((state) => state.ticketRoomReducer.loading);
   const dispatch = useDispatch();
   const history = useHistory();
   const { scheduleId } = useParams();
@@ -523,6 +525,8 @@ export default function CheckOut() {
       );
     } else return null;
   };
+
+  if (loading) return <LoadingComponent />;
 
   return (
     <div

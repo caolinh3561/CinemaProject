@@ -38,5 +38,12 @@
         width: 100%;
       }
     }
+    .logo__item {
+      margin-right: 7px;
+      border-radius: 7px;
+      &:hover {
+        border: 2 solid rgb(103, 103, 255);
+      }
+    }
   }
 }

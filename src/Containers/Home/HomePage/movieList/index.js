@@ -4,6 +4,7 @@ import { connect } from "react-redux";
 import { getMovies } from "./modules/action";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
+import LoadingComponent from "Containers/Home/Components/loading";
 // import Slider from "react-slick";
 class MovieList extends Component {
   componentDidMount() {
@@ -19,7 +20,7 @@ class MovieList extends Component {
 
     if (loading) {
       // TODO: <Loading />
-      return <p>Loading...!!!</p>;
+      return <LoadingComponent />;
     }
     // var settings = {
     //   dots: false,

@@ -23,42 +23,42 @@ function MovieModal(props) {
   const [picture, setpicture] = useState(null);
 
   // useEffect(() => {
-  // if (movieNeedUpdate.hinhAnh) {
-  //   let headers = new Headers();
+  //   if (movieNeedUpdate.hinhAnh) {
+  //     let headers = new Headers();
 
-  //   headers.append("Content-Type", "application/json");
-  //   headers.append("Accept", "application/json");
-  //   headers.append(
-  //     "Authorization",
-  //     "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJodHRwOi8vc2NoZW1hcy54bWxzb2FwLm9yZy93cy8yMDA1LzA1L2lkZW50aXR5L2NsYWltcy9uYW1lIjoiaXByb2tmYzU2MSIsImh0dHA6Ly9zY2hlbWFzLm1pY3Jvc29mdC5jb20vd3MvMjAwOC8wNi9pZGVudGl0eS9jbGFpbXMvcm9sZSI6IlF1YW5UcmkiLCJuYmYiOjE2MDgwMzUyNjgsImV4cCI6MTYwODAzODg2OH0.B2NGBu8nDcVU6FjQ5GtN72FzurcBd9Wk2_RgJKYHvog"
-  //   );
-  //   headers.append("Origin", "http://localhost:3000");
-  //   fetch(movieNeedUpdate.hinhAnh, {
-  //     // mode: "no-cors",
-  //     mode: "cors",
-  //     credentials: "include",
+  //     headers.append("Content-Type", "application/json");
+  //     headers.append("Accept", "application/json");
+  //     headers.append(
+  //       "Authorization",
+  //       "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJodHRwOi8vc2NoZW1hcy54bWxzb2FwLm9yZy93cy8yMDA1LzA1L2lkZW50aXR5L2NsYWltcy9uYW1lIjoiaXByb2tmYzU2MSIsImh0dHA6Ly9zY2hlbWFzLm1pY3Jvc29mdC5jb20vd3MvMjAwOC8wNi9pZGVudGl0eS9jbGFpbXMvcm9sZSI6IlF1YW5UcmkiLCJuYmYiOjE2MDgwMzUyNjgsImV4cCI6MTYwODAzODg2OH0.B2NGBu8nDcVU6FjQ5GtN72FzurcBd9Wk2_RgJKYHvog"
+  //     );
+  //     headers.append("Origin", "http://localhost:3000");
+  //     fetch(movieNeedUpdate.hinhAnh, {
+  //       // mode: "no-cors",
+  //       mode: "cors",
+  //       credentials: "include",
 
-  //     method: "GET",
-  //     headers: headers,
+  //       method: "GET",
+  //       headers: headers,
 
-  //     // "Content-Type": "image/jpeg",
-  //     // "Access-Control-Allow-Origin": "*",
-  //     // "Access-Control-Allow-Credentials": "true",
-  //     // headers: {
-  //     //   Authorization:
-  //     //     "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJodHRwOi8vc2NoZW1hcy54bWxzb2FwLm9yZy93cy8yMDA1LzA1L2lkZW50aXR5L2NsYWltcy9uYW1lIjoiaXByb2tmYzU2MSIsImh0dHA6Ly9zY2hlbWFzLm1pY3Jvc29mdC5jb20vd3MvMjAwOC8wNi9pZGVudGl0eS9jbGFpbXMvcm9sZSI6IlF1YW5UcmkiLCJuYmYiOjE2MDgwMzUyNjgsImV4cCI6MTYwODAzODg2OH0.B2NGBu8nDcVU6FjQ5GtN72FzurcBd9Wk2_RgJKYHvog",
-  //     // },
-  //   })
-  //     .then((res) => res.blob())
-  //     .catch((err) => {
-  //       console.log(err);
-  //     });
-  // .then((blob) => {
-  //   console.log(blob);
-  //   const file = new File([blob], "hinh-anh.jpg", { type: "image/jpg" });
-  //   console.log(file, file.name);
-  //   setpicture(file);
-  // }).catch((err)=>{console.log(err);});
+  //       // "Content-Type": "image/jpeg",
+  //       // "Access-Control-Allow-Origin": "*",
+  //       // "Access-Control-Allow-Credentials": "true",
+  //       // headers: {
+  //       //   Authorization:
+  //       //     "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJodHRwOi8vc2NoZW1hcy54bWxzb2FwLm9yZy93cy8yMDA1LzA1L2lkZW50aXR5L2NsYWltcy9uYW1lIjoiaXByb2tmYzU2MSIsImh0dHA6Ly9zY2hlbWFzLm1pY3Jvc29mdC5jb20vd3MvMjAwOC8wNi9pZGVudGl0eS9jbGFpbXMvcm9sZSI6IlF1YW5UcmkiLCJuYmYiOjE2MDgwMzUyNjgsImV4cCI6MTYwODAzODg2OH0.B2NGBu8nDcVU6FjQ5GtN72FzurcBd9Wk2_RgJKYHvog",
+  //       // },
+  //     })
+  //       .then((res) => res.blob())
+  //       .catch((err) => {
+  //         console.log(err);
+  //       });
+  //     // .then((blob) => {
+  //     //   console.log(blob);
+  //     //   const file = new File([blob], "hinh-anh.jpg", { type: "image/jpg" });
+  //     //   console.log(file, file.name);
+  //     //   setpicture(file);
+  //     // }).catch((err)=>{console.log(err);});
   //   }
 
   //   return () => {};

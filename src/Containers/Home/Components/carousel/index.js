@@ -48,9 +48,44 @@ class CarouselComponent extends Component {
           slidesPerView={1}
           navigation
           allowTouchMove={false}
-          autoplay={{ delay: 30000 }}
+          autoplay={{ delay: 15000 }}
           loop
         >
+          <SwiperSlide>
+            <div
+              className="swiper-slide"
+              style={{ backgroundImage: "url(./img/carousel_4.jpg)" }}
+            >
+              <button
+                className="play__trailer"
+                onClick={() => {
+                  this.handlePlayTrailer("0qaStyeKpLo");
+                }}
+              >
+                <i className="material-icons__play material-icons">
+                  play_arrow
+                </i>
+              </button>
+            </div>
+          </SwiperSlide>
+          <SwiperSlide>
+            <div
+              className="swiper-slide"
+              style={{ backgroundImage: "url(./img/carousel_5.jpg)" }}
+            >
+              <button
+                className="play__trailer"
+                onClick={() => {
+                  this.handlePlayTrailer("Vk-gqL3c5qU");
+                }}
+              >
+                <i className="material-icons__play material-icons">
+                  play_arrow
+                </i>
+              </button>
+            </div>
+          </SwiperSlide>
+
           <SwiperSlide>
             <div
               className="swiper-slide"
@@ -58,7 +93,7 @@ class CarouselComponent extends Component {
             >
               <button
                 className="play__trailer"
-                onClick={(e) => {
+                onClick={() => {
                   this.handlePlayTrailer("9SA7FaKxZVI");
                 }}
               >
@@ -78,7 +113,7 @@ class CarouselComponent extends Component {
             >
               <button
                 className="play__trailer"
-                onClick={(e) => {
+                onClick={() => {
                   this.handlePlayTrailer("L3pk_TBkihU");
                 }}
               >
@@ -95,7 +130,7 @@ class CarouselComponent extends Component {
             >
               <button
                 className="play__trailer"
-                onClick={(e) => {
+                onClick={() => {
                   this.handlePlayTrailer("IpKmt4MpctM");
                 }}
               >

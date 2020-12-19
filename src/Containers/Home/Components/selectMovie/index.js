@@ -222,8 +222,11 @@ class SelectMovie extends Component {
   handleOrder = () => {
     const user = JSON.parse(localStorage.getItem("userMember"));
     if (!user) {
+      this.props.history.push({
+        pathname: "/login",
+        state: { scheduleId: `${this.state.suatChieu.value}` },
+      });
       alert("Vui lòng đăng nhập trước khi đặt vé!");
-      this.props.history.push("/login");
     } else {
       this.props.history.push(`/checkout/${this.state.suatChieu.value}`);
     }

@@ -11,6 +11,7 @@ html {
 }
 html {
   overflow-y: scroll !important;
+  overflow-x: hidden;
 }
 .mainMaxWidth {
   max-width: 940px;
