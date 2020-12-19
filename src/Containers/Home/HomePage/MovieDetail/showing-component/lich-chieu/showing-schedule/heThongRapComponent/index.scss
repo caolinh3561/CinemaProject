@@ -1,0 +1,10 @@
+.list-group-item {
+    transition: all 0.2s !important;
+    // border-radius: 5px;
+}
+.list-group-item:hover {
+    .imgHover {
+        transition: all 0.2s;
+        opacity: 1 !important;
+    }
+}

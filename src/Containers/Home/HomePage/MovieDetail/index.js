@@ -16,6 +16,7 @@ class MovieDetailComponent extends Component {
     this.state = {
       isOpen: false,
       videoId: "",
+      showing: "lichChieu",
     };
     this.openModal = this.openModal.bind(this);
   }
@@ -36,9 +37,13 @@ class MovieDetailComponent extends Component {
   componentDidMount() {
     this.props.actGetMovieDetail(this.props.match.params.id);
   }
+
+  //hàm ramdom từ 1-10 => dùng để random số người đánh giá
   randomNumber() {
     return Math.round(Math.random() * (10 - 1) + 1);
   }
+
+  //hàm render Star theo điểm vote
   renderStarReview() {
     let { movieDetail } = this.props;
     let amountStar = movieDetail.danhGia;
@@ -112,7 +117,12 @@ class MovieDetailComponent extends Component {
             </div>
           </div>
 
-          <div className="contentMain">
+          <div
+            className="contentMain"
+            style={{
+              height: `${this.state.showing === "lichChieu" ? "548px" : ""}`,
+            }}
+          >
             <ShowingComponent movieDetail={movieDetail} />
           </div>
           <ModalVideo
