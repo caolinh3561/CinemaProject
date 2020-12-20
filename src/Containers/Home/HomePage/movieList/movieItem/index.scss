@@ -72,9 +72,39 @@
     }
   }
 }
-.movieItem:hover {
-  // cursor: pointer;
+// .movieItem:hover {
+//   // cursor: pointer;
+//   .showMovieItem {
+//     .hideMovieItem {
+//       visibility: visible;
+//       opacity: 1;
+//       background: linear-gradient(to top, #000, transparent 100%);
+//       // top: 0;
+//       border-radius: 4px !important ;
+//       button:hover {
+//         opacity: 0.7;
+//       }
+//     }
+//   }
+//   .hideHover {
+//     .infoMovieItem {
+//       visibility: hidden;
+//       opacity: 0;
+//     }
+//     .btnItemMovie {
+//       visibility: visible;
+//       opacity: 1;
+//       button {
+//         visibility: visible;
+//         opacity: 1;
+//       }
+//     }
+//   }
+// }
+
+.card:hover {
   .showMovieItem {
+    cursor: pointer;
     .hideMovieItem {
       visibility: visible;
       opacity: 1;

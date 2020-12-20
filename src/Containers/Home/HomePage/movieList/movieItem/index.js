@@ -33,14 +33,26 @@ class MovieItem extends Component {
     this.setState({ videoId: videoId, isOpen: true });
   };
 
+  handleClickDetailMovie = (e) => {
+    console.log("Click!", e.target.className);
+    if (e.target.className === "hideMovieItem") {
+      this.props.history.push(`/movie/${this.props.movie.maPhim}`);
+    }
+  };
+
   render() {
     return (
       <>
         <div className="col-md-3 col-sm-6 my-4 movieItem clear">
           <div className="card">
-            <div className="showMovieItem">
+            <div
+              className="showMovieItem"
+              onClick={(e) => {
+                this.handleClickDetailMovie(e);
+              }}
+            >
               <img
-                className="card-img-top "
+                className="card-img-top"
                 src={this.props.movie.hinhAnh}
                 alt={this.props.movie.tenPhim}
                 style={{ height: "100%", width: "100%" }}
