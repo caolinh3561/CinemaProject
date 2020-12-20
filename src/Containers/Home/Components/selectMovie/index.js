@@ -40,6 +40,8 @@ class SelectMovie extends Component {
             ngayXem: "",
             suatChieu: "",
             selectRapOpen: true,
+            selectNgayXemOpen: false,
+            selectSuatChieuOpen: false,
             scheduleMovieInfor: res.data,
           });
         })
@@ -51,7 +53,7 @@ class SelectMovie extends Component {
       this.state.maRap.value &&
       this.state.maRap.value !== prevState.maRap.value
     ) {
-      this.setState({ ngayXem: "", suatChieu: "" });
+      this.setState({ ngayXem: "", suatChieu: "", selectSuatChieuOpen: false });
     }
     if (
       this.state.ngayXem.value &&
