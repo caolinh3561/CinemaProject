@@ -6,11 +6,17 @@
   background-position: center;
   background-size: cover;
   background-repeat: no-repeat;
-  .login__content {
+  .signup__content.signUp__show {
+    transform: translate(-50%, -50%) scale(1);
+    opacity: 1;
+  }
+  .signup__content {
+    transition: all 1s ease-in-out;
+    opacity: 0;
     position: absolute;
     top: 50%;
     left: 50%;
-    transform: translate(-50%, -50%);
+    transform: translate(-1000px, -50%) scale(0.1);
     min-width: 300px;
     max-width: 360px;
     padding: 30px;
@@ -22,28 +28,53 @@
       rgba(8, 22, 48, 0.7)
     );
     box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.45);
-    .logo {
-      width: 240px;
+  }
+  .login__content {
+    transition: all 1s ease-in-out;
+    opacity: 1;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%) scale(1);
+    min-width: 300px;
+    max-width: 360px;
+    padding: 30px;
+    border-radius: 5px;
+    text-align: center;
+    background-image: linear-gradient(
+      to bottom,
+      rgba(20, 50, 93, 0.9),
+      rgba(8, 22, 48, 0.7)
+    );
+    box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.45);
+  }
+  .logo {
+    width: 240px;
+  }
+  .form__content {
+    margin: 20px 0;
+    label {
+      display: block;
+      text-align: left;
+      color: white;
     }
-    .form__content {
-      margin: 20px 0;
-      label {
-        display: block;
-        text-align: left;
-        color: white;
-      }
-      .btn-submit {
-        margin-top: 15px;
-        background-color: #fb4226;
-        width: 100%;
-      }
+    .btn-submit {
+      margin-top: 15px;
+      background-color: #fb4226;
+      width: 100%;
     }
-    .logo__item {
-      margin-right: 7px;
-      border-radius: 7px;
-      &:hover {
-        border: 2 solid rgb(103, 103, 255);
-      }
+  }
+  .logo__item {
+    margin-right: 7px;
+    border-radius: 7px;
+    &:hover {
+      border: 2 solid rgb(103, 103, 255);
     }
+  }
+
+  .login__content.signUp__mode {
+    transform: translate(500px, -50%) scale(0.1);
+    opacity: 0;
+    // transform: translateX(1000px);
   }
 }

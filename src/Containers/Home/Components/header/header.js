@@ -2,6 +2,11 @@ import React, { Component } from "react";
 import { Link } from "react-router-dom";
 import "./index.scss";
 class HeaderComponent extends Component {
+  renderUserInfor = () => {
+    const user = JSON.parse(localStorage.getItem("userMember")).hoTen;
+    if (user) return <span> {user}</span>;
+    else return <span>Đăng nhập</span>;
+  };
   render() {
     return (
       <header>
@@ -30,7 +35,7 @@ class HeaderComponent extends Component {
         <Link to="/login" href="#" className="signin">
           <i className="fa fa-user-circle"></i>
           <img src="/img/avatar-login.png" alt="" />
-          <span>Đăng nhập</span>
+          <span>{this.renderUserInfor()}</span>
         </Link>
       </header>
     );

@@ -6,8 +6,16 @@ import logoZL from "assets/img/loginImg/zalo_.jpg";
 import Axios from "axios";
 import React, { Component } from "react";
 import { Link, withRouter } from "react-router-dom";
-import { Button, FormFeedback, FormGroup, Input, Label } from "reactstrap";
+import {
+  Button,
+  FormFeedback,
+  FormGroup,
+  Input,
+  Label,
+  Form,
+} from "reactstrap";
 import "./index.scss";
+import { TextField } from "@material-ui/core";
 
 class UserLogin extends Component {
   constructor(props) {
@@ -52,10 +60,94 @@ class UserLogin extends Component {
     let { name, value } = e.target;
     this.setState({ [name]: value });
   };
+  handleAddClassClick = () => {
+    var loginForm = document.getElementById("loginForm");
+    var signupForm = document.getElementById("signUpForm");
+    loginForm.classList.add("signUp__mode");
+    signupForm.classList.add("signUp__show");
+  };
+  handleRemoveClassClick = () => {
+    var loginForm = document.getElementById("loginForm");
+    var signupForm = document.getElementById("signUpForm");
+    loginForm.classList.remove("signUp__mode");
+    signupForm.classList.remove("signUp__show");
+  };
+  renderSocialLogo = () => {
+    return (
+      <>
+        <Link to="#">
+          <img
+            className="logo__item"
+            src={logoFB}
+            style={{ width: "40px", height: "40px" }}
+            alt=""
+          />
+        </Link>
+
+        <Link to="#">
+          <img
+            className="logo__item"
+            src={logoGG}
+            style={{ width: "40px", height: "40px" }}
+            alt=""
+          />
+        </Link>
+        <Link to="#">
+          <img
+            className="logo__item"
+            src={logoZL}
+            style={{ width: "40px", height: "40px" }}
+            alt=""
+          />
+        </Link>
+        <Link to="#">
+          <img
+            className="logo__item"
+            src={logoTW}
+            style={{ width: "40px", height: "40px" }}
+            alt=""
+          />
+        </Link>
+      </>
+    );
+  };
+
+  handleSignUp = () => {};
+
   render() {
     return (
       <div className="userLogin">
-        <div className="login__content">
+        <div className="signup__content" id="signUpForm">
+          <Link to="/">
+            <img className="logo" src={logo} alt="logo" />
+          </Link>
+          <div className="form__content">
+            <Button
+              className="btn-submit"
+              onClick={() => {
+                this.handleSignUp();
+              }}
+            >
+              Đăng Ký
+            </Button>
+          </div>
+          <p className="text-white m-0">
+            bạn đã có tài khoản?{" "}
+            <Link
+              onClick={() => {
+                this.handleRemoveClassClick();
+              }}
+              to="#"
+              className="a-link"
+            >
+              Đăng nhập ngay!
+            </Link>
+          </p>
+          <p className="text-white ">Hoặc đăng nhập với</p>
+          <div className="social__logo">{this.renderSocialLogo()}</div>
+        </div>
+
+        <div className="login__content" id="loginForm">
           <Link to="/">
             <img className="logo" src={logo} alt="logo" />
           </Link>
@@ -63,7 +155,7 @@ class UserLogin extends Component {
             <FormGroup>
               <Label for="taiKhoan">Tài Khoản</Label>
               <Input
-                placeholder="Tài Khoản"
+                // placeholder="Tài Khoản"
                 type="text"
                 name="taiKhoan"
                 id="taiKhoan"
@@ -92,46 +184,18 @@ class UserLogin extends Component {
           </div>
           <p className="text-white m-0">
             bạn chưa có tài khoản?{" "}
-            <Link to="#" className="a-link">
+            <Link
+              onClick={() => {
+                this.handleAddClassClick();
+              }}
+              to="#"
+              className="a-link"
+            >
               Đăng ký ngay!
             </Link>
           </p>
           <p className="text-white ">Hoặc đăng nhập với</p>
-          <div className="social__logo">
-            <Link to="#">
-              <img
-                className="logo__item"
-                src={logoFB}
-                style={{ width: "40px", height: "40px" }}
-                alt=""
-              />
-            </Link>
-
-            <Link to="#">
-              <img
-                className="logo__item"
-                src={logoGG}
-                style={{ width: "40px", height: "40px" }}
-                alt=""
-              />
-            </Link>
-            <Link to="#">
-              <img
-                className="logo__item"
-                src={logoZL}
-                style={{ width: "40px", height: "40px" }}
-                alt=""
-              />
-            </Link>
-            <Link to="#">
-              <img
-                className="logo__item"
-                src={logoTW}
-                style={{ width: "40px", height: "40px" }}
-                alt=""
-              />
-            </Link>
-          </div>
+          <div className="social__logo">{this.renderSocialLogo()}</div>
         </div>
       </div>
     );
