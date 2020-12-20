@@ -4,8 +4,22 @@ import "./index.scss";
 class HeaderComponent extends Component {
   renderUserInfor = () => {
     const user = JSON.parse(localStorage.getItem("userMember")).hoTen;
-    if (user) return <span> {user}</span>;
-    else return <span>Đăng nhập</span>;
+    if (user)
+      return (
+        <Link to="#" href="#" className="signin logged">
+          <i className="fa fa-user-circle"></i>
+          <img src="/img/avatar-login.png" alt="" />
+          <span> {user}</span>
+        </Link>
+      );
+    else
+      return (
+        <Link to="/login" href="#" className="signin">
+          <i className="fa fa-user-circle"></i>
+          <img src="/img/avatar-login.png" alt="" />
+          <span>Đăng nhập</span>
+        </Link>
+      );
   };
   render() {
     return (
@@ -32,11 +46,7 @@ class HeaderComponent extends Component {
             </li>
           </ul>
         </nav>
-        <Link to="/login" href="#" className="signin">
-          <i className="fa fa-user-circle"></i>
-          <img src="/img/avatar-login.png" alt="" />
-          <span>{this.renderUserInfor()}</span>
-        </Link>
+        {this.renderUserInfor()}
       </header>
     );
   }
