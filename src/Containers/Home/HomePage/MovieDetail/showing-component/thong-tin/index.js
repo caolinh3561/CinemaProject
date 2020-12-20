@@ -5,7 +5,7 @@ export default function ThongTinComponent(props) {
   // console.log(props, "props ben thongtincopnt");
   let movie = props.movie;
   return (
-    <div className="mainMaxWidth2">
+    <div className="mainMaxWidth2" style={{ transition: "all 0.2s" }}>
       <div className="row">
         <div className="col-sm-6 col-xs-12 danhGia__reft">
           <div>

@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
 import "./index.scss";
 import { useDispatch, useSelector } from "react-redux";
 import { actGetMovieSchedule } from "./modules/action";
@@ -8,7 +8,7 @@ export default function HeThongRapComponent(props) {
   let hTR = useSelector((state) => state.showingHeThongRapReducer.data);
   useEffect(() => {
     dispatch(actGetMovieSchedule());
-  }, []);
+  });
   let maHTR = useSelector((state) => state.showingHeThongRapReducer.maHTR);
   // let [state, setState] = useState({ maHTR: "BHDStar" });
   const setMaHTR = (e) => {
@@ -21,9 +21,6 @@ export default function HeThongRapComponent(props) {
         return (
           <li
             className="list-group-item"
-            style={{
-              padding: 20,
-            }}
             key={index}
             onClick={() => {
               setMaHTR(item.maHeThongRap);
@@ -36,7 +33,7 @@ export default function HeThongRapComponent(props) {
               style={{
                 width: "50px",
                 height: "50px",
-                opacity: item.maHeThongRap === maHTR ? 1 : 0.5,
+                opacity: item.maHeThongRap === maHTR ? 1 : 0.3,
               }}
             />
           </li>

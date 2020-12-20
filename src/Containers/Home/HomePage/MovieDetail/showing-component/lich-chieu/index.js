@@ -4,7 +4,7 @@ import ShowingMovieComponent from "./showing-schedule";
 export default function LichChieuComponent(props) {
   let movie = props.movie;
   return (
-    <div className="mainMaxWidth2">
+    <div className="mainMaxWidth2" style={{ transition: "all 0.2s" }}>
       <ShowingMovieComponent movie={movie} />
     </div>
   );

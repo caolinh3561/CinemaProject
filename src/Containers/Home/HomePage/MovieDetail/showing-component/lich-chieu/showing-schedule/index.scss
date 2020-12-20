@@ -1,31 +1,57 @@
-.showingHTR__content {
-    width: 17%;
-    min-height: 160px;
-    max-height: 400px;
-    overflow-y: auto;
-    ul {
-        // background-color: white;
-        margin-bottom: 0;
-        transition: all 0.2s;
+.showing__main {
+    .showingHTR__content {
+        width: 17%;
+        min-height: 160px;
+        max-height: 400px;
+        overflow-y: auto;
+        ul {
+            // background-color: white;
+            margin-bottom: 0;
+            transition: all 0.2s;
+            border-bottom-left-radius: 5px;
+            border-top-left-radius: 5px;
+        }
     }
-}
+    .showingCumRap__content {
+        width: 70%;
+        min-height: 160px;
+        max-height: 400px;
+        overflow-y: auto;
+        background-color: #fff;
+        border-bottom-right-radius: 5px;
+        border-top-right-radius: 5px;
+        ul {
+            // background-color: white;
+            margin-bottom: 0;
+            transition: all 0.2s;
+        }
+    }
 
-.showingHTR__content::-webkit-scrollbar-track,
-.listMovie2__content::-webkit-scrollbar-track {
-    box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.1);
-    background-color: #0a2029;
-    border-radius: 5px;
-}
+    .showingHTR__content::-webkit-scrollbar-track,
+    .showingCumRap__content::-webkit-scrollbar-track {
+        box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.1);
+        background-color: #e8e3e3;
+        border-radius: 5px;
+    }
 
-.showingHTR__content::-webkit-scrollbar,
-.listMovie2__content::-webkit-scrollbar {
-    width: 5px;
-    background-color: #0a2029;
-}
+    .showingHTR__content::-webkit-scrollbar,
+    .showingCumRap__content::-webkit-scrollbar {
+        width: 5px;
+        background-color: #0a2029;
+        border-radius: 5px;
+    }
 
-.showingHTR__content::-webkit-scrollbar-thumb,
-.listMovie2__content::-webkit-scrollbar-thumb {
-    border-radius: 5px;
-    background-color: #0a2029;
-    background-image: -webkit-gradient(linear, 40% 0%, 75% 84%, from(#4d9c41), to(#19911d), color-stop(0.6, #54de5d));
+    .showingHTR__content::-webkit-scrollbar-thumb,
+    .showingCumRap__content::-webkit-scrollbar-thumb {
+        border-radius: 5px;
+        background-color: #0a2029;
+        background-image: -webkit-gradient(
+            linear,
+            40% 0%,
+            75% 84%,
+            from(#4d9c41),
+            to(#19911d),
+            color-stop(0.6, #54de5d)
+        );
+    }
 }

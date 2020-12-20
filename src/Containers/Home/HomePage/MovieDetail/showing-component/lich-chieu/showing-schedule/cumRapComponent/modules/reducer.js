@@ -7,7 +7,7 @@ let initialState = {
   maHTR: "BHDStar",
 };
 
-const hTCRReducer = (state = initialState, action) => {
+const showingHTCRReducer = (state = initialState, action) => {
   switch (action.type) {
     case "GET_MA_HTR":
       state.maHTR = action.payload;
@@ -28,4 +28,4 @@ const hTCRReducer = (state = initialState, action) => {
   }
 };
 
-export default hTCRReducer;
+export default showingHTCRReducer;

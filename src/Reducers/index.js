@@ -11,6 +11,7 @@ import scheduleMovieReducer from "./../Containers/Admin/movies/components/schedu
 import ticketRoomReducer from "./../Containers/Home/HomePage/checkout/modules/reducer";
 import trailerMovieReducer from "./../Containers/Home/Components/movieTrailerModal/modules/reducer";
 import showingHeThongRapReducer from "../Containers/Home/HomePage/MovieDetail/showing-component/lich-chieu/showing-schedule/heThongRapComponent/modules/reducer";
+import showingHTCRReducer from "../Containers/Home/HomePage/MovieDetail/showing-component/lich-chieu/showing-schedule/cumRapComponent/modules/reducer";
 const rootReducer = combineReducers({
   moviesReducer,
   heThongRapReducer,
@@ -24,6 +25,7 @@ const rootReducer = combineReducers({
   ticketRoomReducer,
   trailerMovieReducer,
   showingHeThongRapReducer,
+  showingHTCRReducer,
 });
 
 export default rootReducer;
