@@ -5,11 +5,11 @@ import CumRapComponent from "./cumRapComponent";
 export default function ShowingMovieComponent(props) {
   let movie = props.movie;
   return (
-    <div className="d-flex">
+    <div className="d-flex showing__main">
       <div className="showingHTR__content">
         <HeThongRapComponent />
       </div>
-      <div>
+      <div className="showingCumRap__content">
         <CumRapComponent movie={movie} />
       </div>
     </div>

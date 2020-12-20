@@ -2,10 +2,12 @@
     padding-top: 1rem;
     height: 100%;
     z-index: 9999999999999;
+
     .showing__background {
         color: white;
         // z-index: 99999999;
         .showing__content {
+            transition: all 0.2s;
             padding-top: 20px;
             margin-top: 10px;
             // text-align: center;

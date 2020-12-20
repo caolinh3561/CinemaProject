@@ -2,7 +2,10 @@ import React from "react";
 import "./index.scss";
 export default function DanhGiaComponent() {
   return (
-    <div className="mainMaxWidth2 reviewMain">
+    <div
+      className="mainMaxWidth2 reviewMain"
+      style={{ transition: "all 0.2s" }}
+    >
       <div className="row detailReview">
         <div className="col-sm-12 col-xs-12 review__content">
           <div className="input-group">
