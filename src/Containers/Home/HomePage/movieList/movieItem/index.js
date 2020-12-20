@@ -34,7 +34,6 @@ class MovieItem extends Component {
   };
 
   handleClickDetailMovie = (e) => {
-    console.log("Click!", e.target.className);
     if (e.target.className === "hideMovieItem") {
       this.props.history.push(`/movie/${this.props.movie.maPhim}`);
     }

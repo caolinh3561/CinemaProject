@@ -3,15 +3,31 @@ import React, { Component } from "react";
 import dayjs from "dayjs";
 import "./index.scss";
 import { withRouter } from "react-router-dom";
+import Swal from "sweetalert2/dist/sweetalert2.js";
+import "sweetalert2/src/sweetalert2.scss";
 
 class MovieItem extends Component {
   handleOnClick = (item) => {
     const user = JSON.parse(localStorage.getItem("userMember"));
     if (user) {
-      this.props.history.push(`/checkout/${item.maLichChieu}`);
+      this.props.history.push({
+        pathname: `/checkout/${item.maLichChieu}`,
+        time: `${item.ngayChieuGioChieu}`,
+      });
     } else {
-      alert("Login first please!");
-      this.props.history.push("/login");
+      Swal.fire({
+        title: "Bạn chưa đăng nhập!",
+        text: "Hãy đăng nhập trước khi đặt vé.",
+      });
+      setTimeout(() => {
+        this.props.history.push({
+          pathname: "/login",
+          state: {
+            scheduleId: `${item.maLichChieu}`,
+            time: `${item.ngayChieuGioChieu}`,
+          },
+        });
+      }, 500);
     }
   };
 

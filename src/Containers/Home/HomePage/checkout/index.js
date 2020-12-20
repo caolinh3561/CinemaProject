@@ -1,5 +1,8 @@
 import { Button } from "@material-ui/core";
 import LoadingComponent from "Containers/Home/Components/loading";
+
+import Swal from "sweetalert2/dist/sweetalert2.js";
+import "sweetalert2/src/sweetalert2.scss";
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useHistory, useParams } from "react-router-dom";
@@ -7,6 +10,7 @@ import "./index.scss";
 import { actBookingTickets, actGetTicketRoom } from "./modules/actions";
 
 export default function CheckOut() {
+  const [timeString, settimeString] = useState("");
   const ticketRoom = useSelector((state) => state.ticketRoomReducer.ticketRoom);
   const loading = useSelector((state) => state.ticketRoomReducer.loading);
   const dispatch = useDispatch();
@@ -25,7 +29,10 @@ export default function CheckOut() {
   useEffect(() => {
     const user = JSON.parse(localStorage.getItem("userMember"));
     if (!user) {
-      alert("Login first Plz!");
+      Swal.fire({
+        title: "Bạn chưa đăng nhập!",
+        text: "Hãy đăng nhập trước khi đặt vé.",
+      });
       history.push("/login");
       return;
     }
@@ -41,9 +48,32 @@ export default function CheckOut() {
     //   alert("TIME UP!!!");
     //   window.location.reload();
     // }, 10000);
+    let timeCountDown = 300;
+    const intervalCountDown = setInterval(() => {
+      handleCountDown(timeCountDown);
+      timeCountDown -= 1;
+      if (timeCountDown < 0) {
+        setTimeout(() => {
+          clearInterval(intervalCountDown);
+          Swal.fire({
+            allowOutsideClick: false,
+            title: "Hết thời gian giữ ghế",
+            text: "Vui lòng đặt vé trong vòng 5 phút!",
+            confirmButtonText: `Ok!`,
+          }).then((res) => {
+            if (res.isConfirmed) window.location.reload();
+          });
+        }, 300);
+      }
+    }, 1000);
+
+    return () => {
+      clearInterval(intervalCountDown);
+    };
   }, []);
   // lấy danh sách ghế
   useEffect(() => {
+    console.log(ticketRoom);
     if (ticketRoom && ticketRoom.danhSachGhe) {
       let DSG = [...ticketRoom.danhSachGhe];
       DSG = DSG.map((item) => {
@@ -215,6 +245,15 @@ export default function CheckOut() {
     }
   }, [listGheDangChon]);
 
+  const handleCountDown = (time) => {
+    if (time < 0) return;
+    let min = Math.floor(time / 60);
+    let second = Math.floor(time % 60);
+    min = `0${min}`.slice(-2);
+    second = `0${second}`.slice(-2);
+    settimeString(`${min}:${second}`);
+  };
+
   const isValidCheckoutStep1 = (item) => {
     // return false -> cho phép đặt vé
     // check ghế trống đầu tiên của 2 dãy phụ
@@ -228,7 +267,11 @@ export default function CheckOut() {
       )
         return false;
       else {
-        alert("Bạn không thể bỏ trống ghế đầu tiên của dãy!");
+        Swal.fire({
+          icon: "error",
+          title: "Oops...",
+          text: "Bạn không thể bỏ trống ghế đầu tiên!",
+        });
         // setWarning(true);
         return true;
       }
@@ -242,14 +285,22 @@ export default function CheckOut() {
       )
         return false;
       else {
-        alert("Bạn không thể bỏ trống ghế đầu tiên của dãy!");
+        Swal.fire({
+          icon: "error",
+          title: "Oops...",
+          text: "Bạn không thể bỏ trống ghế đầu tiên!",
+        });
         // setWarning(true);
         return true;
       }
     } else if (item.stt % 16 === 6 && state[+item.stt - 2].dangChon === false) {
       for (let i = +item.stt; i <= +item.stt + 5; i++) {
         if (state[i].dangChon === false) {
-          alert("Bạn không thể bỏ trống ghế đầu tiên của dãy!");
+          Swal.fire({
+            icon: "error",
+            title: "Oops...",
+            text: "Bạn không thể bỏ trống ghế đầu tiên!",
+          });
           return true;
         }
       }
@@ -257,7 +308,11 @@ export default function CheckOut() {
     } else if (item.stt % 16 === 11 && state[+item.stt].dangChon === false) {
       for (let i = +item.stt - 7; i <= +item.stt - 2; i++) {
         if (state[i].dangChon === false) {
-          alert("Bạn không thể bỏ trống ghế đầu tiên của dãy!");
+          Swal.fire({
+            icon: "error",
+            title: "Oops...",
+            text: "Bạn không thể bỏ trống ghế đầu tiên!",
+          });
           return true;
         }
       }
@@ -268,7 +323,12 @@ export default function CheckOut() {
     //check listGhe/ tìm ghế trống ở giữa
     if (listGheDangChon.length < 1) return true;
     if (listGheDangChon.length > 10) {
-      alert("Bạn không thể đặt trên 10 ghế cùng lúc!");
+      Swal.fire({
+        icon: "error",
+        title: "Oops...",
+        text: "Bạn không thể đặt trên 10 ghế cùng lúc!",
+      });
+
       return true;
     }
     let isCheck = false;
@@ -294,18 +354,14 @@ export default function CheckOut() {
             listGheDangChon[i + 1].tenGhe.charAt(0) &&
           state[+listGheDangChon[i].stt].dangChon === false
         ) {
-          alert("Bạn không thể để trống 1 ghế ở giữa!");
+          Swal.fire({
+            icon: "error",
+            title: "Oops...",
+            text: "Bạn không thể để trống 1 ghế ở giữa!",
+          });
+
           return true;
         }
-        // if (
-        //   (state[+listGheDangChon[i].stt].dangChon === false &&
-        //     state[+listGheDangChon[i].stt + 1].dangChon === true) ||
-        //   (state[+listGheDangChon[i].stt - 2].dangChon === false &&
-        //     state[+listGheDangChon[i].stt - 3].dangChon === true)
-        // ) {
-        //   alert("Bạn không thể để trống 1 ghế ở giữa!");
-        //   return true;
-        // }
       }
     }
 
@@ -340,8 +396,6 @@ export default function CheckOut() {
 
   const renderSeats = () => {
     if (ticketRoom && ticketRoom.danhSachGhe) {
-      console.log(ticketRoom);
-
       return state.map((item) => {
         if (item.daDat === true) {
           return (
@@ -460,12 +514,11 @@ export default function CheckOut() {
             {ngayChieu} - {gioChieu} - {tenRap}
           </p>
           <hr />
-          {listGheDangChon.length !== 0 && (
-            <div className="listGheDangChon__render">
-              Ghế: {renderDSGhe()}
-              <hr />
-            </div>
-          )}
+
+          <div className="listGheDangChon__render" style={{ color: "#f79400" }}>
+            Ghế: {renderDSGhe()}
+            <hr />
+          </div>
 
           <form>
             <label className="d-block">Email:</label>
@@ -556,6 +609,10 @@ export default function CheckOut() {
         <div className="wapper">
           <div className="theater__infor" style={{ height: "90px" }}>
             {renderThongTinRap()}
+            <div className="text-center">
+              <small>Thời gian giữ ghế</small>
+              <p style={{ fontSize: "30px", color: "#F79400" }}>{timeString}</p>
+            </div>
           </div>
         </div>
         <div

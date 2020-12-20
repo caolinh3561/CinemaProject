@@ -3,13 +3,13 @@ import { Link } from "react-router-dom";
 import "./index.scss";
 class HeaderComponent extends Component {
   renderUserInfor = () => {
-    const user = JSON.parse(localStorage.getItem("userMember")).hoTen;
+    const user = JSON.parse(localStorage.getItem("userMember"));
     if (user)
       return (
         <Link to="#" href="#" className="signin logged">
           <i className="fa fa-user-circle"></i>
           <img src="/img/avatar-login.png" alt="" />
-          <span> {user}</span>
+          <span> {user.hoTen}</span>
         </Link>
       );
     else

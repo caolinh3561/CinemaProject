@@ -7,6 +7,8 @@ import { withRouter } from "react-router-dom";
 import Select from "react-select";
 import { compose } from "redux";
 import "./index.scss";
+import Swal from "sweetalert2/dist/sweetalert2.js";
+import "sweetalert2/src/sweetalert2.scss";
 // import MenuList from "./CustomMenuList/menuList";
 
 class SelectMovie extends Component {
@@ -224,13 +226,24 @@ class SelectMovie extends Component {
   handleOrder = () => {
     const user = JSON.parse(localStorage.getItem("userMember"));
     if (!user) {
-      this.props.history.push({
-        pathname: "/login",
-        state: { scheduleId: `${this.state.suatChieu.value}` },
+      Swal.fire({
+        title: "Bạn chưa đăng nhập!",
+        text: "Hãy đăng nhập trước khi đặt vé.",
       });
-      alert("Vui lòng đăng nhập trước khi đặt vé!");
+      setTimeout(() => {
+        this.props.history.push({
+          pathname: "/login",
+          state: {
+            scheduleId: `${this.state.suatChieu.value}`,
+            time: `${this.state.suatChieu.label}`,
+          },
+        });
+      }, 500);
     } else {
-      this.props.history.push(`/checkout/${this.state.suatChieu.value}`);
+      this.props.history.push({
+        pathname: `/checkout/${this.state.suatChieu.value}`,
+        time: `${this.state.suatChieu.label}`,
+      });
     }
   };
 
