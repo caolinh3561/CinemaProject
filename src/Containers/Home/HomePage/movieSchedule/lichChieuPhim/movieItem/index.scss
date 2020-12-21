@@ -12,6 +12,9 @@
 }
 
 .listSuatChieuPhim {
+  display: flex;
+    row-gap: 15px;
+    flex-wrap: wrap;
   .btn__datVe {
     outline: none;
     background-color: rgba(216, 216, 216, 0.568);
