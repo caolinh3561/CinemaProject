@@ -23,7 +23,7 @@ export default function ShowingComponent(props) {
     }
   };
   return (
-    <div className="showing">
+    <div id="showing__main" className="showing">
       <div className="showing__background">
         <div className="btnTitleMovie">
           <button

@@ -1,0 +1,10 @@
+.btn__datVe {
+    outline: none !important;
+    background-color: rgba(216, 216, 216, 0.568) !important;
+    margin-right: 15px !important;
+    margin-bottom: 10px !important;
+    transition: all 0.2s !important;
+    &:hover {
+        color: #f79400;
+    }
+}

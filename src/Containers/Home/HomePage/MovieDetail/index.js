@@ -103,10 +103,12 @@ class MovieDetailComponent extends Component {
                   {dayjs(`${movieDetail.ngayKhoiChieu}`).format("DD.MM.YYYY")}
                 </span>
               </div>
-              <div>
+              <div className="mb-3">
                 <span className="nameMovie">{movieDetail.tenPhim}</span>
               </div>
-              <button className="btnMovieDetail">Mua vé</button>
+              <a className="btnMovieDetail" href="#showing__main" to="/">
+                Mua vé
+              </a>
             </div>
             <div className="col-sm-2 reviewScore">
               <CircularDeterminate movie={this.props.movieDetail} />

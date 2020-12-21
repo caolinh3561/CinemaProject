@@ -3,12 +3,15 @@ import "./index.scss";
 import { useDispatch, useSelector } from "react-redux";
 import { actGetMovieSchedule } from "./modules/action";
 export default function HeThongRapComponent(props) {
-  // let { movie } = props.movie;
+  let movie = props.movie;
   const dispatch = useDispatch();
   let hTR = useSelector((state) => state.showingHeThongRapReducer.data);
   useEffect(() => {
     dispatch(actGetMovieSchedule());
   });
+  useEffect(() => {
+    dispatch(actGetMovieSchedule());
+  }, [movie]);
   let maHTR = useSelector((state) => state.showingHeThongRapReducer.maHTR);
   // let [state, setState] = useState({ maHTR: "BHDStar" });
   const setMaHTR = (e) => {
