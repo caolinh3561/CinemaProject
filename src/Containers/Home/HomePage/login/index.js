@@ -1,21 +1,13 @@
-import logo from "assets/img/loginImg/logoWithSlogan.png";
 import logoFB from "assets/img/loginImg/fb_icon_2013.svg.png";
 import logoGG from "assets/img/loginImg/gg_icon.png";
+import logo from "assets/img/loginImg/logoWithSlogan.png";
 import logoTW from "assets/img/loginImg/tw_icon.png";
 import logoZL from "assets/img/loginImg/zalo_.jpg";
 import Axios from "axios";
 import React, { Component } from "react";
 import { Link, withRouter } from "react-router-dom";
-import {
-  Button,
-  FormFeedback,
-  FormGroup,
-  Input,
-  Label,
-  Form,
-} from "reactstrap";
+import { Button, FormFeedback, FormGroup, Input, Label } from "reactstrap";
 import "./index.scss";
-import { TextField } from "@material-ui/core";
 
 class UserLogin extends Component {
   constructor(props) {

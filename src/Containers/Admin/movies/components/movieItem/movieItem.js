@@ -4,6 +4,8 @@ import { Button, Icon } from "@material-ui/core";
 import BuildIcon from "@material-ui/icons/Build";
 import DeleteIcon from "@material-ui/icons/Delete";
 import { red } from "@material-ui/core/colors";
+import Swal from "sweetalert2/dist/sweetalert2.js";
+import "sweetalert2/src/sweetalert2.scss";
 MovieItem.propTypes = {
   movieList: PropTypes.array,
 };
@@ -78,7 +80,17 @@ function MovieItem(props) {
                 size="small"
                 style={{ outline: "none", minWidth: "32px" }}
                 onClick={() => {
-                  handleDelete(item.maPhim);
+                  Swal.fire({
+                    allowOutsideClick: false,
+                    title: "Vui lòng xác nhận",
+                    text: `Bạn chắc chắn muốn xóa phim ${item.tenPhim}?`,
+                    denyButtonText: `Xóa`,
+                    showDenyButton: true,
+                    showConfirmButton: false,
+                    showCancelButton: true,
+                  }).then((res) => {
+                    if (res.isDenied) handleDelete(item.maPhim);
+                  });
                 }}
               >
                 <DeleteIcon fontSize="small" style={{ color: red[500] }} />

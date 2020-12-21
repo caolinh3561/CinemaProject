@@ -16,9 +16,7 @@ export default function AddUserModal(props) {
 
   function renderModal() {
     const validationSchema = Yup.object().shape({
-      taiKhoan: Yup.string()
-        .required("Không được bỏ trống trường này!")
-        .min(5, "Tài khoản phải có 6 ký tự trở lên!"),
+      taiKhoan: Yup.string().required("Không được bỏ trống trường này!"),
       matKhau: Yup.string().required("Không được bỏ trống trường này!"),
       email: Yup.string()
         .required("Không được bỏ trống trường này!")

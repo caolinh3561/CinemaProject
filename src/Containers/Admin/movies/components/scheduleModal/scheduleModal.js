@@ -8,6 +8,8 @@ import {
   Select,
   Typography,
 } from "@material-ui/core";
+
+import * as Yup from "yup";
 import { Field, Form, Formik } from "formik";
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
@@ -95,9 +97,22 @@ export default function ScheduleModal(props) {
   };
 
   const renderBodyForm = () => {
+    const validationSchema = Yup.object().shape({
+      heThongRap: Yup.string().required("K được bỏ trống trường này!"),
+      cumRap: Yup.string().required("K được bỏ trống trường này!"),
+      maRap: Yup.string().required("K được bỏ trống trường này!"),
+      ngayChieuGioChieu: Yup.string().required("K được bỏ trống trường này!"),
+      giaVe: Yup.number("giá vé phải là số")
+        .positive("giá vé phải là số dương")
+        .integer("giá vé phải là số nguyên dương")
+        .min(75000, "giá vé phải từ 75.000 -> 200.000")
+        .max(200000, "giá vé phải từ 75.000 -> 200.000")
+        .required("K được bỏ trống trường này!"),
+    });
     return (
       <Formik
         initialValues={initialValues}
+        validationSchema={validationSchema}
         onSubmit={(values, actions) => {
           setTimeout(() => {
             handleSubmit(values);

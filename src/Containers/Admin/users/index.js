@@ -6,13 +6,15 @@ import DeleteIcon from "@material-ui/icons/Delete";
 import Pagination from "@material-ui/lab/Pagination";
 import React, { useEffect, useRef, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
+import Swal from "sweetalert2/dist/sweetalert2.js";
+import "sweetalert2/src/sweetalert2.scss";
 import AddUserModal from "./components/modal/addUserModal";
 import "./index.scss";
 import {
   actAddNewUser,
   actDeleteUser,
-  actFindUserbyUserName,
   actGetAllUser,
+  actPushUserNeedUpdate,
   actUpdateUser,
 } from "./modules/action";
 
@@ -23,9 +25,9 @@ function UserManagement(props) {
     (state) => state.userReducer.userNeedUpdate
   );
   let user;
-  if (UserNeedUpdate) {
-    user = UserNeedUpdate[0];
-  }
+  // if (UserNeedUpdate) {
+  //   user = UserNeedUpdate[0];
+  // }
   const dispatch = useDispatch();
   const [page, setPage] = React.useState(1);
   const [keyWord, setKeyWord] = useState("");
@@ -57,11 +59,9 @@ function UserManagement(props) {
   };
 
   const handlePageChange = (event, value) => {
-    console.log(value);
     setPage(value);
   };
   useEffect(() => {
-    console.log(keyWord);
     dispatch(actGetAllUser(keyWord, page, 8));
   }, [dispatch, page, keyWord]);
 
@@ -70,12 +70,24 @@ function UserManagement(props) {
   };
 
   function handleDelete(taiKhoan) {
-    dispatch(actDeleteUser(taiKhoan));
+    Swal.fire({
+      allowOutsideClick: false,
+      title: "Vui lòng xác nhận",
+      text: `Bạn chắc chắn muốn xóa tài khoản ${taiKhoan} ?`,
+      denyButtonText: `Xóa`,
+      showDenyButton: true,
+      showConfirmButton: false,
+      showCancelButton: true,
+      cancelButtonText: "Không xóa",
+    }).then((res) => {
+      if (res.isDenied) dispatch(actDeleteUser(taiKhoan));
+    });
   }
 
-  function getUserNeedToUpdate(taiKhoan) {
+  function getUserNeedToUpdate(user) {
+    console.log(UserNeedUpdate);
     setUpdatingUser(true);
-    dispatch(actFindUserbyUserName(taiKhoan));
+    dispatch(actPushUserNeedUpdate(user));
   }
 
   const handleUpdate = (user) => {
@@ -101,7 +113,7 @@ function UserManagement(props) {
                 size="small"
                 style={{ outline: "none" }}
                 onClick={() => {
-                  getUserNeedToUpdate(item.taiKhoan);
+                  getUserNeedToUpdate(item);
                 }}
                 data-toggle="modal"
                 data-target="#userModal"
@@ -173,7 +185,7 @@ function UserManagement(props) {
       />
 
       <AddUserModal
-        initialState={updatingUser && UserNeedUpdate ? user : initialState}
+        initialState={updatingUser ? UserNeedUpdate : initialState}
         updatingUser={updatingUser}
         handleSubmit={createNewUser}
         handleUpdate={handleUpdate}

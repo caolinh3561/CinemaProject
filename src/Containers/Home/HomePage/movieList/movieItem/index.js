@@ -1,6 +1,8 @@
 import React, { Component } from "react";
 import ModalVideo from "react-modal-video";
 import "react-modal-video/scss/modal-video.scss";
+import Swal from "sweetalert2/dist/sweetalert2.js";
+import "sweetalert2/src/sweetalert2.scss";
 import { connect } from "react-redux";
 import { withRouter } from "react-router-dom";
 import { compose } from "redux";
@@ -27,7 +29,11 @@ class MovieItem extends Component {
     if (match && match[7].length === 11) {
       var videoId = match[7];
     } else {
-      alert("Phim không có trailer!");
+      Swal.fire({
+        icon: "error",
+        title: "Oops...",
+        text: "Phim này hiện chưa có trailer...",
+      });
       return;
     }
     this.setState({ videoId: videoId, isOpen: true });

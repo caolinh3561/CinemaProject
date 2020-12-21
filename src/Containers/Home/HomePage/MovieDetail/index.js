@@ -21,7 +21,8 @@ class MovieDetailComponent extends Component {
     this.openModal = this.openModal.bind(this);
   }
   handlePlayTrailer = (url) => {
-    var regExp = /^.*((youtu.be\/)|(v\/)|(\/u\/\w\/)|(embed\/)|(watch\?))\??v?=?([^#\&\?]*).*/;
+    var regExp =
+      "/^.*((youtu.be/)|(v/)|(/u/w/)|(embed/)|(watch?))??v?=?([^#&?]*).*/";
     var match = url.match(regExp);
     if (match && match[7].length === 11) {
       var videoId = match[7];

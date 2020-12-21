@@ -17,6 +17,7 @@ import "./index.scss";
 import "react-modal-video/scss/modal-video.scss";
 import ModalVideo from "react-modal-video";
 import SelectMovie from "../selectMovie";
+import { withRouter } from "react-router-dom";
 
 SwiperCore.use([Navigation, Pagination, Scrollbar, A11y, Autoplay]);
 
@@ -39,6 +40,12 @@ class CarouselComponent extends Component {
     // this.props.actGetMovieTrailerSource(e.target.title);
   };
 
+  handlePushToMovieDetail = (e, movieId) => {
+    if (e.target.className === "swiper-slide") {
+      this.props.history.push(`/movie/${movieId}`);
+    }
+  };
+
   render() {
     return (
       <div className="carouselMain" id="carouselId">
@@ -53,6 +60,9 @@ class CarouselComponent extends Component {
         >
           <SwiperSlide>
             <div
+              onClick={(e) => {
+                this.handlePushToMovieDetail(e, 5031);
+              }}
               className="swiper-slide"
               style={{ backgroundImage: "url(./img/carousel_4.jpg)" }}
             >
@@ -70,6 +80,9 @@ class CarouselComponent extends Component {
           </SwiperSlide>
           <SwiperSlide>
             <div
+              onClick={(e) => {
+                this.handlePushToMovieDetail(e, 5029);
+              }}
               className="swiper-slide"
               style={{ backgroundImage: "url(./img/carousel_5.jpg)" }}
             >
@@ -88,6 +101,9 @@ class CarouselComponent extends Component {
 
           <SwiperSlide>
             <div
+              onClick={(e) => {
+                this.handlePushToMovieDetail(e, 4987);
+              }}
               className="swiper-slide"
               style={{ backgroundImage: "url(./img/carousel_1.jpg)" }}
             >
@@ -108,6 +124,9 @@ class CarouselComponent extends Component {
           </SwiperSlide>
           <SwiperSlide>
             <div
+              onClick={(e) => {
+                this.handlePushToMovieDetail(e, 4893);
+              }}
               className="swiper-slide"
               style={{ backgroundImage: "url(./img/carousel_2.jpg)" }}
             >
@@ -125,6 +144,9 @@ class CarouselComponent extends Component {
           </SwiperSlide>
           <SwiperSlide>
             <div
+              onClick={(e) => {
+                this.handlePushToMovieDetail(e, 4668);
+              }}
               className="swiper-slide"
               style={{ backgroundImage: "url(./img/carousel_3.jpg)" }}
             >
@@ -159,4 +181,4 @@ class CarouselComponent extends Component {
   }
 }
 
-export default CarouselComponent;
+export default withRouter(CarouselComponent);

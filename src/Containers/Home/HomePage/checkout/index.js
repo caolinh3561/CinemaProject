@@ -73,7 +73,6 @@ export default function CheckOut() {
   }, []);
   // lấy danh sách ghế
   useEffect(() => {
-    console.log(ticketRoom);
     if (ticketRoom && ticketRoom.danhSachGhe) {
       let DSG = [...ticketRoom.danhSachGhe];
       DSG = DSG.map((item) => {

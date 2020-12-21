@@ -5,6 +5,8 @@ import {
   GET_ALL_HTR_FAIL,
   GET_ALL_HTCR,
 } from "./constants";
+import Swal from "sweetalert2/dist/sweetalert2.js";
+import "sweetalert2/src/sweetalert2.scss";
 
 export const actGetHTR = () => {
   return (dispatch) => {
@@ -49,9 +51,7 @@ export const actGetHTCR = (maHTR) => {
       .then((res) => {
         dispatch(actGetHTCRSuccess(res.data));
       })
-      .catch((err) => {
-        console.log(err.message);
-      });
+      .catch((err) => {});
   };
 };
 const actGetHTCRSuccess = (data) => {
@@ -74,8 +74,18 @@ export const actPostNewSchedule = (newSchedule) => {
       },
     })
       .then((res) => {
-        alert("Thêm Lịch Chiếu Thành Công!");
+        Swal.fire({
+          icon: "success",
+          title: "Thêm lịch chiếu thành công!",
+          showConfirmButton: true,
+        }).then((res) => {});
       })
-      .catch((err) => {});
+      .catch((err) => {
+        Swal.fire({
+          icon: "error",
+          title: "Thêm lịch chiếu thất bại!",
+          text: `${err.message}`,
+        });
+      });
   };
 };

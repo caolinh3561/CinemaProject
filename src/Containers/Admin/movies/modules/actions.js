@@ -5,6 +5,8 @@ import {
   GET_MOVIE_REQUEST,
   SEND_MOVIE_UPDATING_SUCCESS,
 } from "./constants";
+import Swal from "sweetalert2/dist/sweetalert2.js";
+import "sweetalert2/src/sweetalert2.scss";
 
 export const actSendMovieUpdating = (data) => {
   return (dispatch) => {
@@ -26,11 +28,9 @@ export const actGetMovieWithPagination = (page) => {
       url: `https://movie0706.cybersoft.edu.vn/api/QuanLyPhim/LayDanhSachPhimPhanTrang?maNhom=GP01&soTrang=${page}&soPhanTuTrenTrang=5`,
     })
       .then((res) => {
-        // console.log(res);
         dispatch(actGetMovieWithPaginationSuccess(res.data));
       })
       .catch((err) => {
-        console.log(err);
         dispatch(actGetMovieWithPaginationFail(err.message));
       });
   };
@@ -70,13 +70,19 @@ export const actPostNewMovie = (movie) => {
     })
       .then((res) => {
         // dispatch(actPostNewMovieSuccess(res.data));
-        console.log(res);
-        alert("POST MOVIE SUCCESSED!");
+        Swal.fire({
+          icon: "success",
+          title: "Thêm phim mới thành công!",
+          timer: 1500,
+        });
       })
       .catch((err) => {
         // dispatch(actPostNewMovieFail(err.message));
-        console.log(err);
-        alert("POST MOVIE FAILED! ", err.message);
+        Swal.fire({
+          icon: "error",
+          title: "Thêm phim mới thất bại!",
+          text: `${err.message}`,
+        });
       });
   };
 };
@@ -94,12 +100,22 @@ export const actUpdateMovie = (movie) => {
       },
     })
       .then((res) => {
-        console.log(res);
-        alert("UPDATE MOVIE SUCCESS!");
+        Swal.fire({
+          icon: "success",
+          title: "Cập nhật phim thành công!",
+          timer: 5000,
+        });
+        setTimeout(() => {
+          window.location.reload();
+        }, 1000);
       })
       .catch((err) => {
-        console.log(err.message);
-        alert("UPDATE MOVIE FAIL! ", err.message);
+        Swal.fire({
+          icon: "error",
+          title: "Cập nhật phim thất bại!",
+          text: `${err.message}`,
+          timer: 5000,
+        });
       });
   };
 };
@@ -116,12 +132,22 @@ export const actUpdateMovieWithoutImage = (movie) => {
       },
     })
       .then((res) => {
-        console.log(res);
-        alert("UPDATE MOVIE SUCCESS!");
+        Swal.fire({
+          icon: "success",
+          title: "Cập nhật phim thành công!",
+          timer: 5000,
+        });
+        setTimeout(() => {
+          window.location.reload();
+        }, 1000);
       })
       .catch((err) => {
-        console.log(err);
-        alert("UPDATE MOVIE FAIL! ", err.message);
+        Swal.fire({
+          icon: "error",
+          title: "Cập nhật phim thất bại!",
+          text: `${err.message}`,
+          timer: 5000,
+        });
       });
   };
 };
@@ -140,31 +166,23 @@ export const actDeleteMovie = (movieID) => {
     })
       .then((res) => {
         // dispatch(actPostNewMovieSuccess(res.data));
-        alert("DELETE MOVIE SUCCESS!");
-        console.log(res);
+        Swal.fire({
+          icon: "success",
+          title: "Xóa phim thành công!",
+          timer: 5000,
+        });
+        setTimeout(() => {
+          window.location.reload();
+        }, 1000);
       })
       .catch((err) => {
         // dispatch(actPostNewMovieFail(err.message));
-        console.log(err);
-        alert("DELETE MOVIE FAIL! Phim đã xếp lịch chiếu không thể xóa");
+        Swal.fire({
+          icon: "error",
+          title: "Xóa phim thất bại!",
+          text: "Phim đã có lịch chiếu, không thể xóa!",
+          timer: 5000,
+        });
       });
   };
 };
-
-// const actPostNewMovieRequest = () => {
-//   return {
-//     type: POST_MOVIE_REQUEST,
-//   };
-// };
-// const actPostNewMovieSuccess = (data) => {
-//   return {
-//     type: POST_MOVIE_SUCCESS,
-//     payload: data,
-//   };
-// };
-// const actPostNewMovieFail = (err) => {
-//   return {
-//     type: POST_MOVIE_FAIL,
-//     payload: err,
-//   };
-// };

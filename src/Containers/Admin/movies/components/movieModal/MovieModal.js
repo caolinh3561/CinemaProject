@@ -7,7 +7,7 @@ import {
 } from "@material-ui/core";
 import dayjs from "dayjs";
 import { Field, Form, Formik } from "formik";
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import * as Yup from "yup";
 import { actPostNewMovie, actUpdateMovie } from "./../../modules/actions";

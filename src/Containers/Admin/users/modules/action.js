@@ -1,4 +1,6 @@
 import Axios from "axios";
+import Swal from "sweetalert2/dist/sweetalert2.js";
+import "sweetalert2/src/sweetalert2.scss";
 import {
   GET_USER_FAIL,
   GET_USER_REQUEST,
@@ -62,12 +64,19 @@ export const actAddNewUser = (user) => {
     })
       .then((res) => {
         dispatch(actAddNewUserSuccess(res.data));
-        if (!alert("Thêm Người Dùng Mới Thành Công!!!")) {
+        Swal.fire({
+          title: "Thêm Người Dùng Mới Thành Công!",
+          icon: "success",
+        }).then((res) => {
           window.location.reload();
-        }
+        });
       })
       .catch((err) => {
-        alert("Create New User Failed!!!", err.message);
+        Swal.fire({
+          title: "Thêm Người Dùng Mới thất bại!",
+          icon: "error",
+          text: `${err.message}`,
+        });
         dispatch(actAddNewUserFail(err.message));
       });
   };
@@ -103,30 +112,31 @@ export const actDeleteUser = (taiKhoan) => {
       },
     })
       .then((res) => {
-        if (!alert(`Xóa Người Dùng ${taiKhoan} Thành Công!`)) {
+        Swal.fire({
+          title: `Xóa tài khoản ${taiKhoan} thành công!`,
+          icon: "success",
+        }).then((res) => {
           window.location.reload();
-        }
+        });
       })
       .catch((err) => {
-        alert("Người dùng này đã đặt vé nên không thể xóa!");
+        Swal.fire({
+          title: "Xóa tài khoản thất bại!",
+          text: `tài khoản ${taiKhoan} đã đặt vé, không thể xóa!`,
+          icon: "info",
+        }).then((res) => {
+          window.location.reload();
+        });
       });
   };
 };
 
-export const actFindUserbyUserName = (taiKhoan) => {
-  return (dispatch) => {
-    Axios({
-      url: `https://movie0706.cybersoft.edu.vn/api/QuanLyNguoiDung/TimKiemNguoiDung?MaNhom=GP01&tuKhoa=${taiKhoan}`,
-    })
-      .then((res) => {
-        dispatch(actPushUserNeedUpdate(res.data));
-      })
-      .catch((err) => {
-        console.log(err.message, "FAILED TO GET USER INFORMATION");
-      });
-  };
-};
-const actPushUserNeedUpdate = (data) => {
+// export const actFindUserbyUserName = (user) => {
+//   return (dispatch) => {
+//     dispatch(actPushUserNeedUpdate(user));
+//   };
+// };
+export const actPushUserNeedUpdate = (data) => {
   return {
     type: USER_NEED_UPDATE,
     payload: data,
@@ -146,13 +156,21 @@ export const actUpdateUser = (user) => {
       },
     })
       .then((res) => {
-        //if(!alert('Alert For your User!')){window.location.reload();}
-        if (!alert("Cập nhật người dùng thành công!")) {
+        Swal.fire({
+          title: "Cập nhật tài khoản Thành Công!",
+          icon: "success",
+        }).then((res) => {
           window.location.reload();
-        }
+        });
       })
       .catch((err) => {
-        alert("Cập nhật người dùng thất bại!", err.message);
+        Swal.fire({
+          title: "Cập nhật tài khoản thất bại!",
+          text: `${err.message}`,
+          icon: "error",
+        }).then((res) => {
+          window.location.reload();
+        });
       });
   };
 };
