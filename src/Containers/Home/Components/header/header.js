@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
+import tixLogo from "assets/img/tix-logo.png";
 import "./index.scss";
 class HeaderComponent extends Component {
   renderUserInfor = () => {
@@ -21,28 +22,68 @@ class HeaderComponent extends Component {
         </Link>
       );
   };
+  handleLinkClick = (elementId) => {
+    setTimeout(() => {
+      var ele = document.getElementById(elementId);
+      ele.scrollIntoView();
+    }, 300);
+  };
   render() {
     return (
       <header>
-        <a href="#carouselId" className="logo">
-          <img src="img/tix-logo.png" alt="" />
-        </a>
+        <Link
+          onClick={() => {
+            this.handleLinkClick("carouselId");
+          }}
+          to={{ pathname: "/" }}
+          className="logo"
+        >
+          <img src={tixLogo} alt="" />
+        </Link>
         <nav className="header__menu">
           <ul className="mb-0">
             <li>
-              <a href="#idPhimDangChieu" to="/">
+              {/* <a href="#idPhimDangChieu" to="/">
                 Lịch chiếu
-              </a>
-              {/* <Link to="#idPhimDangChieu">Lịch chiếu</Link> */}
+              </a> */}
+              <Link
+                onClick={() => {
+                  this.handleLinkClick("idPhimDangChieu");
+                }}
+                to={{ pathname: "/" }}
+              >
+                Lịch chiếu
+              </Link>
             </li>
             <li>
-              <a href="#idCumRap">Cụm rạp</a>
+              <Link
+                onClick={() => {
+                  this.handleLinkClick("idCumRap");
+                }}
+                to={{ pathname: "/" }}
+              >
+                Cụm rạp
+              </Link>
             </li>
             <li>
-              <a href="#idTinTuc">Tin tức</a>
+              <Link
+                onClick={() => {
+                  this.handleLinkClick("idTinTuc");
+                }}
+                to={{ pathname: "/" }}
+              >
+                Tin tức
+              </Link>
             </li>
             <li>
-              <a href="#idUngDung">Ứng dụng</a>
+              <Link
+                onClick={() => {
+                  this.handleLinkClick("idUngDung");
+                }}
+                to={{ pathname: "/" }}
+              >
+                Ứng dụng
+              </Link>
             </li>
           </ul>
         </nav>
