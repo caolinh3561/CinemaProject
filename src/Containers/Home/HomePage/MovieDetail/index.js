@@ -119,13 +119,7 @@ class MovieDetailComponent extends Component {
               </div>
             </div>
           </div>
-
-          <div
-            className="contentMain"
-            style={{
-              height: `${this.state.showing === "lichChieu" ? "548px" : ""}`,
-            }}
-          >
+          <div className="contentMain">
             <ShowingComponent movieDetail={movieDetail} />
           </div>
           <ModalVideo

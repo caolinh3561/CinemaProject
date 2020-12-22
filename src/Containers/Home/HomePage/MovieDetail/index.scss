@@ -26,7 +26,7 @@
         .contentMain {
             z-index: 99999999;
             color: white;
-            // height: 37rem;
+            height: 650px;
             // transform: translate(0, -70px);
             background: rgb(10, 32, 41);
             transition: all 0.2s;
@@ -35,7 +35,7 @@
         }
         .movie__content {
             position: absolute;
-            top: 35%;
+            top: 30%;
             width: 100%;
             left: 50%;
             z-index: 99999;
