@@ -54,6 +54,7 @@ class MovieItem extends Component {
             {dayjs(item.ngayChieuGioChieu).add("2", "hour").format("HH:mm")}
           </Button>
         );
+      return null;
     });
   };
   renderMovie = () => {

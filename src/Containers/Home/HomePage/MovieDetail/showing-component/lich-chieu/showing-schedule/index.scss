@@ -1,11 +1,13 @@
 .showing__main {
+    padding: auto;
     .showingHTR__content {
         width: 17%;
-        min-height: 160px;
-        max-height: 400px;
+        // min-height: 160px;
+        height: 487px;
         overflow-y: auto;
         ul {
             // background-color: white;
+            padding-left: 0;
             margin-bottom: 0;
             transition: all 0.2s;
             border-bottom-left-radius: 5px;
@@ -13,9 +15,9 @@
         }
     }
     .showingCumRap__content {
-        width: 70%;
+        width: 100%;
         min-height: 160px;
-        max-height: 400px;
+        max-height: 487px;
         overflow-y: auto;
         background-color: #fff;
         border-bottom-right-radius: 5px;
@@ -27,14 +29,14 @@
         }
     }
 
-    .showingHTR__content::-webkit-scrollbar-track,
+    // .showingHTR__content::-webkit-scrollbar-track,
     .showingCumRap__content::-webkit-scrollbar-track {
         box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.1);
         background-color: #e8e3e3;
         border-radius: 5px;
     }
 
-    .showingHTR__content::-webkit-scrollbar,
+    // .showingHTR__content::-webkit-scrollbar,
     .showingCumRap__content::-webkit-scrollbar {
         width: 5px;
         background-color: #0a2029;

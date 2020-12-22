@@ -11,7 +11,7 @@ export default function HeThongRapComponent(props) {
   });
   useEffect(() => {
     dispatch(actGetMovieSchedule());
-  }, [movie]);
+  }, [dispatch, movie]);
   let maHTR = useSelector((state) => state.showingHeThongRapReducer.maHTR);
   // let [state, setState] = useState({ maHTR: "BHDStar" });
   const setMaHTR = (e) => {

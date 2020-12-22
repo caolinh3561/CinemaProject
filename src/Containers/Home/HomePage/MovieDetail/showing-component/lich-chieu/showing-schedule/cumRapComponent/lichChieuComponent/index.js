@@ -1,16 +1,18 @@
 import React from "react";
-import dayjs from "dayjs";
 import { Button } from "@material-ui/core";
 import "./index.scss";
 import Swal from "sweetalert2/dist/sweetalert2.js";
 import { useHistory } from "react-router";
 export default function LichChieuComponent(props) {
+  const dayjs = require("dayjs");
+  let nowTime = dayjs().format("HH:mm");
+  let nowDay = dayjs().format("YYYY/MM/DD");
   const history = useHistory();
   const lichChieu = props.movie.lichChieu;
+  const currentDay = props.ngayChieu;
+  const maHTR = props.maHTR;
   const handleOnClick = (item) => {
     const user = JSON.parse(localStorage.getItem("userMember"));
-    console.log(user);
-    console.log("item nè: ", item);
     if (user) {
       history.push({
         pathname: `/checkout/${item.maLichChieu}`,
@@ -33,22 +35,57 @@ export default function LichChieuComponent(props) {
     }
   };
   let renderLichChieu = () => {
-    // let time = dayjs().format("HH:mm");
-    return lichChieu.map((item) => {
-      return (
-        <Button
-          // disabled={time < dayjs(item.ngayChieuGioChieu).format("HH:mm")}
-          key={item.maLichChieu}
-          className="btn__datVe"
-          onClick={() => {
-            handleOnClick(item);
-          }}
-        >
-          {dayjs(item.ngayChieuGioChieu).format("HH:mm")} ~{" "}
-          {dayjs(item.ngayChieuGioChieu).add("2", "hour").format("HH:mm")}
-        </Button>
-      );
-    });
+    let arrayRender = [];
+    if (currentDay === nowDay) {
+      lichChieu.map((item) => {
+        let ngayChieu = dayjs(item.ngayChieuGioChieu).format("DD/MM/YYYY");
+        if (
+          item.thongTinRap.maCumRap === maHTR &&
+          ngayChieu === dayjs(currentDay).format("DD/MM/YYYY")
+        ) {
+          arrayRender.push(
+            <Button
+              disabled={nowTime > dayjs(item.ngayChieuGioChieu).format("HH:mm")}
+              key={item.maLichChieu}
+              className="btn__datVe"
+              onClick={() => {
+                handleOnClick(item);
+              }}
+            >
+              {dayjs(item.ngayChieuGioChieu).format("HH:mm")} ~{" "}
+              {dayjs(item.ngayChieuGioChieu).add("2", "hour").format("HH:mm")}
+            </Button>
+          );
+          return { ...arrayRender };
+        }
+        return { ...arrayRender };
+      });
+      return arrayRender;
+    } else {
+      lichChieu.map((item) => {
+        let ngayChieu = dayjs(item.ngayChieuGioChieu).format("DD/MM/YYYY");
+        if (
+          item.thongTinRap.maCumRap === maHTR &&
+          ngayChieu === dayjs(currentDay).format("DD/MM/YYYY")
+        ) {
+          arrayRender.push(
+            <Button
+              key={item.maLichChieu}
+              className="btn__datVe"
+              onClick={() => {
+                handleOnClick(item);
+              }}
+            >
+              {dayjs(item.ngayChieuGioChieu).format("HH:mm")} ~{" "}
+              {dayjs(item.ngayChieuGioChieu).add("2", "hour").format("HH:mm")}
+            </Button>
+          );
+          return { ...arrayRender };
+        }
+        return { ...arrayRender };
+      });
+      return arrayRender;
+    }
   };
 
   return <div className="renderLichChieu">{renderLichChieu()}</div>;
