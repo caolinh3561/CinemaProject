@@ -11,14 +11,6 @@ export default function CumRapComponent(props) {
   // let heThongCumRap = useSelector(
   //   (state) => state.showingHTCRReducer.heThongCumRap
   // );
-  // let valid = true;
-  // const setIsValid = (e) => {
-  //   setState({
-  //     isValid: e,
-  //   });
-  // };
-  // let [state, setState] = useState({ isValid: true });
-
   let maHTR = useSelector((state) => state.showingHeThongRapReducer.maHTR);
   let ngayChieu = useSelector(
     (state) => state.showingShowDayReducer.currentDay
@@ -53,13 +45,21 @@ export default function CumRapComponent(props) {
         maHeThongRap === maHTR &&
         ngayChieuItem === dayjs(ngayChieu).format("DD/MM/YYYY")
       ) {
-        listRapCoSuatChieu.push(maCumRap);
+        listRapCoSuatChieu.push(lichChieuItem);
       }
     });
   }
   let render = () => {
     if (listRapCoSuatChieu && listRapCoSuatChieu.length > 0) {
       return listRapCoSuatChieu.map((item, index) => {
+        let lastView = true;
+        // console.log("item nè: ", item);
+        // let handleSetLastView = () => {
+        //   lastView = !lastView;
+        //   // console.log("!lastView của: ", item, " là: ", lastView);
+        //   return lastView;
+        // };
+        // console.log("lastView nè: ", lastView);
         return (
           <li
             className="cumRap__item"
@@ -69,24 +69,28 @@ export default function CumRapComponent(props) {
               // opacity: item.maCumRap === maCR ? 1 : 0.5,
             }}
           >
-            <h6
-            // onClick={() => {
-            //   setState();
-            // }}
-            >
-              {item}
-            </h6>
-            <div
-              className="lichChieu"
-              // style={state.isValid?"":""}
-              // style={{
-              //   height: state.isValid ? "100%" : 0,
-              // }}
-            >
+            <img
+              src={`/img/imagesTheater/${item.thongTinRap.maCumRap}.jpg`}
+              alt=""
+              style={{ float: "left", height: "50px" }}
+            />
+            <div className="infoTheater">
+              {" "}
+              <h6
+                id={`title-${maHTR}`}
+                // onClick={() => {
+                //   handleSetLastView();
+                // }}
+              >
+                {item.thongTinRap.tenCumRap}
+              </h6>
+            </div>
+            <div className="lichChieu" id={`lichChieu-${maHTR}`}>
               <LichChieuComponent
                 movie={movie}
-                maHTR={item}
+                maHTR={item.thongTinRap.maCumRap}
                 ngayChieu={ngayChieu}
+                lastView={lastView}
               />
             </div>
           </li>

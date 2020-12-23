@@ -12,11 +12,17 @@
         .lichChieu {
             overflow: hidden;
             transition: all 0.2s;
+            margin-top: 10px;
         }
-        h6 {
-            cursor: pointer;
-            // margin-bottom: 15px;
-            padding-bottom: 30px;
+        .infoTheater {
+            padding-left: 10px;
+            height: 50px;
+            overflow: hidden;
+            h6 {
+                cursor: pointer;
+                // margin-bottom: 15px;
+                padding-bottom: 30px;
+            }
         }
         p {
             line-height: 1.7;
