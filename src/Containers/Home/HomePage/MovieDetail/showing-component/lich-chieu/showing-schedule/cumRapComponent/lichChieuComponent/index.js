@@ -2,6 +2,7 @@ import React from "react";
 import { Button } from "@material-ui/core";
 import "./index.scss";
 import Swal from "sweetalert2/dist/sweetalert2.js";
+import { useEffect } from "react";
 import { useHistory } from "react-router";
 export default function LichChieuComponent(props) {
   const dayjs = require("dayjs");
@@ -11,6 +12,11 @@ export default function LichChieuComponent(props) {
   const lichChieu = props.movie.lichChieu;
   const currentDay = props.ngayChieu;
   const maHTR = props.maHTR;
+  // const lastView = props.lastView;
+  // console.log(" LichChieuComponent-lastView của ", maHTR, " là: ", lastView);
+  // useEffect(() => {
+  //   console.log(maHTR, " -lastView trong useEffect", lastView);
+  // }, [lastView]);
   const handleOnClick = (item) => {
     const user = JSON.parse(localStorage.getItem("userMember"));
     if (user) {
