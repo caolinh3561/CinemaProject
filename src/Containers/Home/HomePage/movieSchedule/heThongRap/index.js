@@ -20,7 +20,7 @@ class HeThongRapComponent extends Component {
             className="list-group-item"
             style={{
               padding: 20,
-              opacity: item.maHeThongRap === maHeThongRap ? 1 : 0.5,
+              opacity: item.maHeThongRap === maHeThongRap ? 1 : 0.4,
             }}
             key={index}
             onClick={() => {

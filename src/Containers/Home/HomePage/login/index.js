@@ -8,6 +8,7 @@ import React, { Component } from "react";
 import { Link, withRouter } from "react-router-dom";
 import { Button, FormFeedback, FormGroup, Input, Label } from "reactstrap";
 import "./index.scss";
+import Signup from "./signup";
 
 class UserLogin extends Component {
   constructor(props) {
@@ -114,14 +115,10 @@ class UserLogin extends Component {
             <img className="logo" src={logo} alt="logo" />
           </Link>
           <div className="form__content">
-            <Button
-              className="btn-submit"
-              onClick={() => {
-                this.handleSignUp();
-              }}
-            >
-              Đăng Ký
-            </Button>
+            <h6 className="text-white text-left">
+              Mời điền thông tin vào form bên dưới
+            </h6>
+            <Signup />
           </div>
           <p className="text-white m-0">
             bạn đã có tài khoản?{" "}
@@ -135,8 +132,8 @@ class UserLogin extends Component {
               Đăng nhập ngay!
             </Link>
           </p>
-          <p className="text-white ">Hoặc đăng nhập với</p>
-          <div className="social__logo">{this.renderSocialLogo()}</div>
+          {/* <p className="text-white ">Hoặc đăng nhập với</p>
+          <div className="social__logo">{this.renderSocialLogo()}</div> */}
         </div>
 
         <div className="login__content" id="loginForm">

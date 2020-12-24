@@ -14,7 +14,7 @@ class HTCRItem extends Component {
         style={{
           height: "91px",
           overflow: "hidden",
-          opacity: item.maCumRap === maCR ? 1 : 0.5,
+          opacity: item.maCumRap === maCR ? 1 : 0.4,
         }}
         onClick={() => {
           this.props.maCumRap(item.maCumRap);

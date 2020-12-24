@@ -39,17 +39,20 @@ class LichChieuPhimComponent extends Component {
       // dayjs(item.ngayChieuGioChieu).format("DD/MM/YYYY") === now
 
       if (lastMovieList[0] && lastMovieList[0] !== null) {
-        let now = dayjs().format("DD/MM/YYYY");
+        let now = dayjs().format();
         let count = 0;
 
         const listMovieItem = lastMovieList[0].map((movie) => {
           let isCheck = false;
 
           for (let i = 0; i < movie.lstLichChieuTheoPhim.length; i++) {
+            console.log(movie.lstLichChieuTheoPhim);
             if (
               dayjs(movie.lstLichChieuTheoPhim[i].ngayChieuGioChieu).format(
                 "DD/MM/YYYY"
-              ) === now
+              ) === dayjs(now).format("DD/MM/YYYY") &&
+              dayjs(movie.lstLichChieuTheoPhim[i].ngayChieuGioChieu).format() >
+                dayjs(now).format()
             ) {
               isCheck = true;
               count++;

@@ -176,16 +176,6 @@ export default function AddUserModal(props) {
             }}
           </Formik>
         </div>
-        {/* <div className="modal-footer">
-          <Button
-            type="submit"
-            variant="contained"
-            className="btn btn-primary"
-            onClick={handleSubmit}
-          >
-            Signup
-          </Button>
-        </div> */}
       </>
     );
   }

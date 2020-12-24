@@ -7,6 +7,13 @@ import Swal from "sweetalert2/dist/sweetalert2.js";
 import "sweetalert2/src/sweetalert2.scss";
 
 class MovieItem extends Component {
+  constructor() {
+    super();
+    this.state = {
+      renderOrNot: true,
+    };
+  }
+
   handleOnClick = (item) => {
     const user = JSON.parse(localStorage.getItem("userMember"));
     if (user) {
