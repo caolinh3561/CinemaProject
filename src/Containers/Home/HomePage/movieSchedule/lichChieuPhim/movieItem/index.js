@@ -40,18 +40,23 @@ class MovieItem extends Component {
       dayjs(a.ngayChieuGioChieu).diff(dayjs(b.ngayChieuGioChieu))
     );
     return lstLichChieuTheoPhimSorted.map((item) => {
-      if (dayjs(item.ngayChieuGioChieu).format("DD/MM/YYYY") === date)
+      if (
+        dayjs(item.ngayChieuGioChieu).format("DD/MM/YYYY") === date &&
+        time < dayjs(item.ngayChieuGioChieu).format("HH:mm")
+      )
         return (
           <Button
-            disabled={time > dayjs(item.ngayChieuGioChieu).format("HH:mm")}
+            // disabled={time > dayjs(item.ngayChieuGioChieu).format("HH:mm")}
             key={item.maLichChieu}
             className="btn__datVe"
             onClick={() => {
               this.handleOnClick(item);
             }}
           >
-            {dayjs(item.ngayChieuGioChieu).format("HH:mm")} ~{" "}
-            {dayjs(item.ngayChieuGioChieu).add("2", "hour").format("HH:mm")}
+            <span>{dayjs(item.ngayChieuGioChieu).format("HH:mm")}</span> ~{" "}
+            <small>
+              {dayjs(item.ngayChieuGioChieu).add("2", "hour").format("HH:mm")}
+            </small>
           </Button>
         );
       return null;

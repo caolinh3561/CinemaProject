@@ -8,6 +8,7 @@ import { Provider } from "react-redux";
 import thunk from "redux-thunk";
 import rootReducer from "./Reducers";
 
+
 const enhance = compose(
   applyMiddleware(thunk),
   window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()

@@ -19,8 +19,17 @@
     outline: none;
     background-color: rgba(216, 216, 216, 0.568);
     margin-right: 15px;
+    font-size: 18px;
+    color: green;
+    small {
+      font-size: 14px;
+      color: gray;
+    }
     &:hover {
-      color: #f79400;
+      small {
+        color: gray;
+      }
+      color: #fb4226;
     }
   }
 }
