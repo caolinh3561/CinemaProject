@@ -26,10 +26,10 @@ export default function CumRapComponent(props) {
   // }, []);
   // lọc những rạp có suất chiếu của phim
   if (movie && movie.lichChieu && movie.lichChieu.length > 0) {
-    let checkAdult = (id) => {
+    let checkAdult = (maCumRap) => {
       //hàm findIndex tìm vị trí
       return listRapCoSuatChieu.findIndex((item) => {
-        return item === id;
+        return item.thongTinRap.maCumRap === maCumRap;
       });
     };
     movie.lichChieu.forEach((lichChieuItem) => {
@@ -51,7 +51,9 @@ export default function CumRapComponent(props) {
   }
   let render = () => {
     if (listRapCoSuatChieu && listRapCoSuatChieu.length > 0) {
+      // console.log("listRap", listRapCoSuatChieu);
       return listRapCoSuatChieu.map((item, index) => {
+        // console.log("item phim", item);
         let lastView = true;
         // console.log("item nè: ", item);
         // let handleSetLastView = () => {
