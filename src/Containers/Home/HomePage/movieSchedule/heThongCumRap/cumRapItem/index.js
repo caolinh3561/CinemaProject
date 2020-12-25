@@ -6,7 +6,7 @@ class HTCRItem extends Component {
   render() {
     // opacity: item.maHeThongRap === maHeThongRap ? 1 : 0.5,
     const { item, maCR } = this.props;
-    console.log(item);
+    // console.log(item);
 
     return (
       <li
@@ -14,13 +14,13 @@ class HTCRItem extends Component {
         style={{
           height: "91px",
           overflow: "hidden",
-          opacity: item.maCumRap === maCR ? 1 : 0.4,
         }}
         onClick={() => {
           this.props.maCumRap(item.maCumRap);
         }}
       >
         <img
+          style={{ opacity: item.maCumRap === maCR ? 1 : 0.4 }}
           src={
             item.maCumRap.includes("glx-nguyen-du")
               ? `/img/imagesTheater/glx-nguyen-du.png`
@@ -29,7 +29,10 @@ class HTCRItem extends Component {
           alt=""
         />
 
-        <div className="content__right">
+        <div
+          className="content__right"
+          style={{ opacity: item.maCumRap === maCR ? 1 : 0.4 }}
+        >
           <h6>{this.props.item.tenCumRap}</h6>
           <p style={{ margin: 0 }}>{this.props.item.diaChi}</p>
         </div>

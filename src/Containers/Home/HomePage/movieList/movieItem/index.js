@@ -76,12 +76,7 @@ class MovieItem extends Component {
 
             <div className="card-body hideHover">
               <div className="infoMovieItem">
-                <h5 className="card-title">
-                  {this.props.movie.tenPhim.length > 0 &&
-                  this.props.movie.tenPhim.length < 18
-                    ? this.props.movie.tenPhim
-                    : this.props.movie.tenPhim.slice(0, 18) + "..."}
-                </h5>
+                <h5 className="card-title">{this.props.movie.tenPhim}</h5>
                 <p className="card-text">
                   Đánh giá: {this.props.movie.danhGia}
                 </p>

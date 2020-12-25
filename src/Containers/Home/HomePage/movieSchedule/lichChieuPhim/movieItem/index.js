@@ -84,6 +84,7 @@ class MovieItem extends Component {
               <h6>{movie.tenPhim}</h6>
             </div>
           </div>
+          <h6 className="typeOfMovie">2D Digital</h6>
           <div className="listSuatChieuPhim">{this.renderSuatchieu()}</div>
         </div>
       </>

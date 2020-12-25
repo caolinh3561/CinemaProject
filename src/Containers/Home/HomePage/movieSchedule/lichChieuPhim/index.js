@@ -46,7 +46,6 @@ class LichChieuPhimComponent extends Component {
           let isCheck = false;
 
           for (let i = 0; i < movie.lstLichChieuTheoPhim.length; i++) {
-            console.log(movie.lstLichChieuTheoPhim);
             if (
               dayjs(movie.lstLichChieuTheoPhim[i].ngayChieuGioChieu).format(
                 "DD/MM/YYYY"

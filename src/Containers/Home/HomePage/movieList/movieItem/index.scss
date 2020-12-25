@@ -2,7 +2,7 @@
   position: relative;
   padding: 0 25px;
   border: 0;
-  margin: 10px 0 !important;
+  margin: 15px 0 !important;
   cursor: default;
   .card {
     border: 0;
@@ -45,6 +45,10 @@
     .infoMovieItem {
       .card-title {
         margin-bottom: 0.25rem;
+        display: -webkit-box;
+        -webkit-box-orient: vertical;
+        -webkit-line-clamp: 2;
+        overflow: hidden;
       }
     }
     .btnItemMovie {

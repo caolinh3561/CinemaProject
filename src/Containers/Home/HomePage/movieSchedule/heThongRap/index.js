@@ -20,7 +20,7 @@ class HeThongRapComponent extends Component {
             className="list-group-item"
             style={{
               padding: 20,
-              opacity: item.maHeThongRap === maHeThongRap ? 1 : 0.4,
+              // opacity: item.maHeThongRap === maHeThongRap ? 1 : 0.4,
             }}
             key={index}
             onClick={() => {
@@ -30,7 +30,11 @@ class HeThongRapComponent extends Component {
             <img
               src={item.logo}
               alt=""
-              style={{ width: "50px", height: "50px" }}
+              style={{
+                width: "50px",
+                height: "50px",
+                opacity: item.maHeThongRap === maHeThongRap ? 1 : 0.4,
+              }}
             />
           </li>
         );
