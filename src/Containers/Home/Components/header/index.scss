@@ -38,23 +38,46 @@ header:hover {
 .header__menu ul li a:hover {
   color: #fb4226;
 }
+
 .signin {
-  color: #999;
-  text-decoration: none;
-  font-size: 18px;
   display: flex;
+  position: relative;
   align-items: center;
-}
-.signin {
+  text-decoration: none;
   color: #9b9b9b;
-  margin: inherit;
-  font-size: 13px;
+  margin: 0;
+  padding: 20px 0;
+  font-size: 14px;
   img {
     height: auto;
     width: 30px;
     border-radius: 25px;
     margin-right: 5px;
   }
+}
+.dropdown-content {
+  display: none;
+  position: absolute;
+  transform: translateY(75%);
+  background-color: #d9d8d8;
+  width: max-content;
+  box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+  list-style-type: none;
+  border-radius: 5px;
+  font-size: 14px;
+  color: black;
+  z-index: 1;
+  padding: 0;
+  .li__item {
+    padding: 5px 10px;
+    border-radius: 5px;
+    &:hover {
+      background-color: rgb(114, 113, 113);
+    }
+  }
+}
+.logged:hover .dropdown-content {
+  display: block;
 }
 .signin:hover {
   color: #9b9b9b;

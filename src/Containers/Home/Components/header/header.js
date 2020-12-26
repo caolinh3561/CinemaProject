@@ -1,8 +1,22 @@
 import React, { Component } from "react";
-import { Link } from "react-router-dom";
+import { Link, withRouter } from "react-router-dom";
 import tixLogo from "assets/img/tix-logo.png";
 import "./index.scss";
 class HeaderComponent extends Component {
+  handleClickTK = () => {
+    if (this.props.location.pathname === "/user") return;
+    this.props.history.push({ pathname: `${this.props.match.path}user` });
+  };
+  // handleClickVeDaDat = () => {
+  //   this.props.history.push({
+  //     pathname: "/user",
+  //   });
+  // };
+  handleClickThoat = () => {
+    // console.log("Logout!");
+    localStorage.removeItem("userMember");
+    window.location.reload();
+  };
   renderUserInfor = () => {
     const user = JSON.parse(localStorage.getItem("userMember"));
     if (user)
@@ -10,7 +24,33 @@ class HeaderComponent extends Component {
         <Link to="#" href="#" className="signin logged">
           <i className="fa fa-user-circle"></i>
           <img src="/img/avatar-login.png" alt="" />
-          <span> {user.hoTen}</span>
+          <span> {user.taiKhoan}</span>
+          <ul className="dropdown-content">
+            <li
+              className="li__item"
+              onClick={() => {
+                this.handleClickTK();
+              }}
+            >
+              Tài khoản
+            </li>
+            {/* <li
+              className="li__item"
+              onClick={() => {
+                this.handleClickVeDaDat();
+              }}
+            >
+              Vé đã đặt
+            </li> */}
+            <li
+              className="li__item"
+              onClick={() => {
+                this.handleClickThoat();
+              }}
+            >
+              Thoát
+            </li>
+          </ul>
         </Link>
       );
     else
@@ -93,4 +133,4 @@ class HeaderComponent extends Component {
   }
 }
 
-export default HeaderComponent;
+export default withRouter(HeaderComponent);

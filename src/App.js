@@ -8,6 +8,7 @@ import LoginPage from "./Containers/Admin/login";
 import CheckOut from "Containers/Home/HomePage/checkout";
 import MovieDetail from "Containers/Home/HomePage/MovieDetail";
 import UserLogin from "Containers/Home/HomePage/login";
+import UserComponent from "Containers/Home/UserPage";
 function App() {
   const showLayoutHomePage = (routes) => {
     if (routes && routes.length > 0) {
@@ -42,7 +43,7 @@ function App() {
       <Switch>
         {showLayoutHomePage(routesHomePage)}
         {showLayoutAdminPage(routesAdminPage)}
-
+        <Route path="/user" component={UserComponent} />
         <Route path="/login" component={UserLogin} />
         <Route path="/admin/login" component={LoginPage} />
         <Route path="/movie/:id" component={MovieDetail} />

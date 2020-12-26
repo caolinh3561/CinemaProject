@@ -38,6 +38,7 @@ export default function Signup() {
   };
 
   function renderSignupForm() {
+    const regex = /\(?([0-9]{3})\)?([ .-]?)([0-9]{3})\2([0-9]{4})/;
     let initialState = {
       taiKhoan: "",
       matKhau: "",
@@ -61,9 +62,10 @@ export default function Signup() {
         .required("Không được bỏ trống!")
         .email("Email không hợp lệ!"),
       hoTen: Yup.string().required("Không được bỏ trống!"),
-      soDt: Yup.number("chỉ được chứa ký tự số!")
-        .required("Không được bỏ trống!")
-        .positive("chỉ được chứa ký tự số!"),
+      soDt: Yup.string().matches(regex, "Số điện thoại không hợp lệ!"),
+      // soDt: Yup.number("", "chỉ được chứa ký tự số!")
+      //   .required("Không được bỏ trống!")
+      //   .positive("chỉ được chứa ký tự số!"),
     });
     return (
       <>
