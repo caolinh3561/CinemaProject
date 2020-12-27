@@ -9,12 +9,20 @@ export default function NgayChieuComponent(props) {
   let currentDay = useSelector(
     (state) => state.showingShowDayReducer.currentDay
   );
+
   useEffect(() => {
     let itemDay = listDayTime[0];
     let action = { type: "update_current_day", e: itemDay };
     dispatch(action);
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [dispatch, movie]);
+
+  const renderDayName = (i, minDate) => {
+    if (i === 0) return "Hôm nay";
+    else if (i === 1) return "Ngày Mai";
+    else return `${dayjs(minDate).add(i, "day").format("DD/MM")}`;
+  };
+
   //hàm update CurrentDay
   const handleUpdateCurrentDay = (e) => {
     let action = { type: "update_current_day", e };
@@ -95,13 +103,14 @@ export default function NgayChieuComponent(props) {
                 );
               }}
             >
-              {dayjs(minDate).add(i, "day").format("DD/MM")}
+              {renderDayName(i, minDate)}
             </button>
           </li>
         );
       }
       // setShowDay({ listShowDayPhimSorted: listRender });
       listDayTime = lstLichChieuTheoPhimSorted;
+      console.log(listRender);
       return listRender;
     } else {
       console.log("false nè");

@@ -79,7 +79,9 @@ class MovieItem extends Component {
           >
             <span>{dayjs(item.ngayChieuGioChieu).format("HH:mm")}</span> ~{" "}
             <small>
-              {dayjs(item.ngayChieuGioChieu).add("2", "hour").format("HH:mm")}
+              {dayjs(item.ngayChieuGioChieu)
+                .add(`${this.state.phut}`, "minute")
+                .format("HH:mm")}
             </small>
           </Button>
         );

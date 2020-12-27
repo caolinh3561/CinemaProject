@@ -42,8 +42,9 @@ export default function LichChieuComponent(props) {
   let renderLichChieu = () => {
     let arrayRender = [];
     if (currentDay === nowDay) {
-      lichChieu.map((item) => {
+      lichChieu.map((item, index) => {
         let ngayChieu = dayjs(item.ngayChieuGioChieu).format("DD/MM/YYYY");
+
         if (
           item.thongTinRap.maCumRap === maHTR &&
           ngayChieu === dayjs(currentDay).format("DD/MM/YYYY")
