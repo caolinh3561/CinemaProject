@@ -93,7 +93,6 @@ class MovieItem extends Component {
 
   renderTypeOfMovie = () => {
     const firstChar = this.props.movie.tenPhim.charCodeAt(0);
-    console.log(firstChar);
     if (firstChar <= 70) return <span className="c13">C13</span>;
     else return <span className="p">P</span>;
   };

@@ -16,7 +16,6 @@ export default function UserComponent() {
   const history = useHistory();
   useEffect(() => {
     const user = JSON.parse(localStorage.getItem("userMember"));
-    console.log(`${user.taiKhoan}`);
     if (user) {
       Axios({
         url:

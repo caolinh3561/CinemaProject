@@ -249,13 +249,13 @@ class SelectMovie extends Component {
 
   render() {
     const { maPhim, maRap, ngayXem, suatChieu } = this.state;
+
     return (
       <div className="select__content">
         <div className="selectFilm" style={{ width: "30%" }}>
           <Select
             isSearchable
             placeholder="Chọn Phim..."
-            // components={{ MenuList }}
             value={maPhim}
             onChange={this.handleMovieChange}
             options={this.renderMovieList()}
@@ -295,12 +295,10 @@ class SelectMovie extends Component {
         >
           <Select
             isSearchable={false}
-            // isDisabled={!maPhim}
             menuIsOpen={this.state.selectSuatChieuOpen}
             onMenuClose={this.handleScheduleMovieClose}
             onMenuOpen={this.handleScheduleMovieOpen}
             placeholder="Suất Chiếu..."
-            // components={{ MenuList }}
             value={suatChieu}
             onChange={this.handleScheduleMovieChange}
             options={this.renderScheduleMovie()}

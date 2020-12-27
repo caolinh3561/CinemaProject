@@ -16,8 +16,13 @@ class HeaderComponent extends Component {
   // };
   handleClickThoat = () => {
     // console.log("Logout!");
-    localStorage.removeItem("userMember");
-    window.location.reload();
+    if (this.props.location.pathname === "/user") {
+      localStorage.removeItem("userMember");
+      this.props.history.push("");
+    } else {
+      localStorage.removeItem("userMember");
+      window.location.reload();
+    }
   };
   renderUserInfor = () => {
     const user = JSON.parse(localStorage.getItem("userMember"));

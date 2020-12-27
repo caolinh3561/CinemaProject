@@ -1,13 +1,18 @@
 .heThongRap__content {
   width: 92px;
-  min-height: 548px;
+  height: 548px;
   .list-group {
-    border: 1px solid #d8d8da !important;
+    border: 1px solid #d8d8da;
     border-top-left-radius: 4px;
     border-bottom-left-radius: 4px;
+    .list-group-item:last-child {
+      // border-bottom-right-radius: 0 !important;
+      border-bottom: none !important;
+      height: 91px;
+    }
     .list-group-item {
       border: none;
-      border-bottom: 1px solid #d8d8da !important;
+      border-bottom: 1px solid #d8d8da;
       margin: 0;
       cursor: pointer;
       // opacity: 0.4;
@@ -28,15 +33,19 @@
   max-height: 548px;
   overflow-y: auto;
   .list-group {
-    border-top: 1px solid #d8d8da !important;
-    border-bottom: 1px solid #d8d8da !important;
+    border-top: 1px solid #d8d8da;
+    border-bottom: 1px solid #d8d8da;
+    .list-group-item:last-child {
+      border-radius: 0;
+      border-bottom: none;
+    }
     .list-group-item {
       display: flex;
       justify-content: left;
       align-items: center;
       text-align: left;
       border: none;
-      border-bottom: 1px solid #d8d8da !important;
+      border-bottom: 1px solid #d8d8da;
       margin: 0;
       cursor: pointer;
 
@@ -71,7 +80,7 @@
   padding: 0 15px;
   width: calc(100% - 35% - 92px);
   min-height: 548px;
-  max-height: 700px;
+  max-height: 548px;
   overflow-x: hidden;
   overflow-y: auto;
   border: 1px solid #d8d8da !important;

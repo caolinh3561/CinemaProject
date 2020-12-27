@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 import dayjs from "dayjs";
 
 export default function InforItem(props) {
-    const [toggle, setToggle] = useState(true);
+    const [toggle, setToggle] = useState(false);
     const {item} = props;
 
     const renderDanhSachGhe = () => {

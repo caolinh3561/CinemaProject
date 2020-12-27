@@ -25,7 +25,10 @@ class MovieSchedule extends Component {
   // };
   render() {
     return (
-      <div className="" style={{ width: "80%", margin: "0 auto" }}>
+      <div
+        className=""
+        style={{ width: "80%", margin: "0 auto", paddingBottom: 75 }}
+      >
         <div id="idCumRap" className="idCumRap"></div>
         <div className="row">
           <div className="heThongRap__content">
