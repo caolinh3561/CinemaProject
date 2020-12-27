@@ -24,6 +24,7 @@ class MovieItem extends Component {
   }
 
   handlePlayTrailer = (url) => {
+    // eslint-disable-next-line
     var regExp = /^.*((youtu.be\/)|(v\/)|(\/u\/\w\/)|(embed\/)|(watch\?))\??v?=?([^#\&\?]*).*/;
     var match = url.match(regExp);
     if (match && match[7].length === 11) {

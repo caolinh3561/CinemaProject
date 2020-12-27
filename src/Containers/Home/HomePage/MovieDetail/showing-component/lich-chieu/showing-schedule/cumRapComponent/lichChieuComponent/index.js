@@ -2,7 +2,6 @@ import React from "react";
 import { Button } from "@material-ui/core";
 import "./index.scss";
 import Swal from "sweetalert2/dist/sweetalert2.js";
-import { useEffect } from "react";
 import { useHistory } from "react-router";
 export default function LichChieuComponent(props) {
   const dayjs = require("dayjs");

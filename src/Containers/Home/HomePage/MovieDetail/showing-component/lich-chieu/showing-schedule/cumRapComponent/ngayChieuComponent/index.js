@@ -13,6 +13,7 @@ export default function NgayChieuComponent(props) {
     let itemDay = listDayTime[0];
     let action = { type: "update_current_day", e: itemDay };
     dispatch(action);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [dispatch, movie]);
   //hàm update CurrentDay
   const handleUpdateCurrentDay = (e) => {

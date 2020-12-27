@@ -40,7 +40,7 @@ export default function UserComponent() {
 
       return;
     }
-    console.log(history);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   const handleSelect = (value) => {

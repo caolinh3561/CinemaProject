@@ -70,11 +70,13 @@ export default function CheckOut() {
     return () => {
       clearInterval(intervalCountDown);
     };
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
   // lấy danh sách ghế
   useEffect(() => {
     if (ticketRoom && ticketRoom.danhSachGhe) {
       let DSG = [...ticketRoom.danhSachGhe];
+      // eslint-disable-next-line
       DSG = DSG.map((item) => {
         if (+item.stt / 16 <= 1 && item.daDat === false) {
           return { ...item, dangChon: false, tenGhe: `A${item.tenGhe}` };
@@ -242,6 +244,7 @@ export default function CheckOut() {
     } else {
       setWarning(false);
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [listGheDangChon]);
 
   const handleCountDown = (time) => {

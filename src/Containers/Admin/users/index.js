@@ -24,10 +24,7 @@ function UserManagement(props) {
   const UserNeedUpdate = useSelector(
     (state) => state.userReducer.userNeedUpdate
   );
-  let user;
-  // if (UserNeedUpdate) {
-  //   user = UserNeedUpdate[0];
-  // }
+
   const dispatch = useDispatch();
   const [page, setPage] = React.useState(1);
   const [keyWord, setKeyWord] = useState("");

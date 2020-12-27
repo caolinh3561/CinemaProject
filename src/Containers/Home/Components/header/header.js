@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import { Link, withRouter } from "react-router-dom";
 import tixLogo from "assets/img/tix-logo.png";
 import "./index.scss";
+
 class HeaderComponent extends Component {
   handleClickTK = () => {
     if (this.props.location.pathname === "/user") return;
