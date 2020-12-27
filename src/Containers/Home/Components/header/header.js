@@ -10,6 +10,7 @@ class HeaderComponent extends Component {
   // handleClickVeDaDat = () => {
   //   this.props.history.push({
   //     pathname: "/user",
+  //     state: "inforTicket",
   //   });
   // };
   handleClickThoat = () => {

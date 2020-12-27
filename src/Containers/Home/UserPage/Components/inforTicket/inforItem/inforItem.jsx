@@ -28,7 +28,7 @@ export default function InforItem(props) {
 
     return (
         <>
-            <li onClick={()=>{handleToggle()}} className="row" key={item.maVe} style={{borderTop:"1px solid gray",padding:"15px 0",cursor:"pointer"}}>
+            <li onClick={()=>{handleToggle()}} className="row" key={item.maVe} style={{borderTop:"1px solid gray",paddingTop:"15px",cursor:"pointer"}}>
             <p className="date col-sm-4">
               {dayjs(item.ngayDat).format("DD/MM/YYYY")} :{" "}
               {dayjs(item.ngayDat).format("HH:mm:ss")}
@@ -38,7 +38,7 @@ export default function InforItem(props) {
             <div className={toggle? "col-sm-12 moreInfor active":"col-sm-12 moreInfor"}>
             {/* <div className="col-sm-12 moreInfor" style={{display: toggle? "block" : "none",transition:"all 0.5s"}}> */}
                 <p className="tenHTR"> Hệ thống rạp: {item.danhSachGhe[0].tenHeThongRap} | {item.danhSachGhe[0].tenCumRap}</p>
-                <div className="danhSachGhe">
+                <div className="danhSachGhe pb-2">
                     Ghế: {renderDanhSachGhe()}
                 </div>
                 

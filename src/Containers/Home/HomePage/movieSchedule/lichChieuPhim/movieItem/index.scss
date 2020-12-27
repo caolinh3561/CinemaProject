@@ -1,35 +1,41 @@
 .movie__item {
   .movie__infor {
     margin-bottom: 15px;
+    cursor: pointer;
     .image__movie {
       margin-right: 15px;
       height: 80px;
       width: 55px;
     }
   }
-  padding: 20px 0;
+  padding-top: 20px;
   border-bottom: 1px solid #ebebec;
 }
 
-.listSuatChieuPhim {
-  display: flex;
-  row-gap: 15px;
-  flex-wrap: wrap;
-  .btn__datVe {
-    outline: none;
-    background-color: rgba(216, 216, 216, 0.568);
-    margin-right: 15px;
-    font-size: 18px;
-    color: green;
-    small {
-      font-size: 14px;
-      color: gray;
-    }
-    &:hover {
+.showOrHideDiv {
+  overflow: hidden;
+  transition: max-height 0.4s;
+  .listSuatChieuPhim {
+    display: flex;
+    gap: 15px;
+    flex-wrap: wrap;
+    padding-bottom: 15px;
+    .btn__datVe {
+      outline: none;
+      background-color: rgba(216, 216, 216, 0.568);
+      margin: 0 !important;
+      font-size: 18px;
+      color: green;
       small {
+        font-size: 14px;
         color: gray;
       }
-      color: #fb4226;
+      &:hover {
+        small {
+          color: gray;
+        }
+        color: #fb4226;
+      }
     }
   }
 }

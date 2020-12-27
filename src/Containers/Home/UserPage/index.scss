@@ -90,11 +90,12 @@
           .moreInfor {
             max-height: 0;
             // visibility: hidden;
-            transition: 0.35s;
+            // transition: 0.35s;
             overflow: hidden;
+            transition: all 0.35s ease-in-out;
           }
           .moreInfor.active {
-            max-height: 100%;
+            max-height: 200px;
             // visibility: visible;
             // overflow: visible;
             // transition: 0.35s;

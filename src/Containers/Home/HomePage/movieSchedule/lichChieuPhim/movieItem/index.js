@@ -10,7 +10,8 @@ class MovieItem extends Component {
   constructor() {
     super();
     this.state = {
-      renderOrNot: true,
+      // renderOrNot: true,
+      showOrHide: true,
     };
   }
 
@@ -38,7 +39,7 @@ class MovieItem extends Component {
     }
   };
 
-  renderSuatchieu = () => {
+  renderListSuatChieu = () => {
     const { movie } = this.props;
     const { lstLichChieuTheoPhim } = movie;
     let date = dayjs().format("DD/MM/YYYY");
@@ -69,12 +70,25 @@ class MovieItem extends Component {
       return null;
     });
   };
+
+  handleToggle = () => {
+    // const showOrHideDiv = document.getElementById("showOrHideDiv");
+    // if (this.state.showOrHide) showOrHideDiv.classList.remove("showing");
+    // else showOrHideDiv.classList.add("showing");
+    this.setState({ showOrHide: !this.state.showOrHide });
+  };
   renderMovie = () => {
     const { movie } = this.props;
+    const { showOrHide } = this.state;
     return (
       <>
         <div key={movie.maPhim} className="movie__item">
-          <div className="movie__infor row">
+          <div
+            onClick={() => {
+              this.handleToggle();
+            }}
+            className="movie__infor row"
+          >
             <img
               className="image__movie"
               src={movie.hinhAnh}
@@ -84,8 +98,15 @@ class MovieItem extends Component {
               <h6>{movie.tenPhim}</h6>
             </div>
           </div>
-          <h6 className="typeOfMovie">2D Digital</h6>
-          <div className="listSuatChieuPhim">{this.renderSuatchieu()}</div>
+          <div
+            className="showOrHideDiv"
+            style={showOrHide ? { maxHeight: "500px" } : { maxHeight: "0" }}
+          >
+            <h6 className="typeOfMovie">2D Digital</h6>
+            <div className="listSuatChieuPhim">
+              {this.renderListSuatChieu()}
+            </div>
+          </div>
         </div>
       </>
     );
