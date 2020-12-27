@@ -12,7 +12,22 @@ class MovieItem extends Component {
     this.state = {
       // renderOrNot: true,
       showOrHide: true,
+      phut: "",
+      mra: "",
+      imdb: "",
     };
+  }
+
+  componentDidMount() {
+    const randomNumber = (min, max) => {
+      let number = Math.random() * (max - min) + min;
+      if (number >= 100) return number.toFixed(0);
+      else return number.toFixed(1);
+    };
+    const phut = randomNumber(100, 120);
+    const mra = randomNumber(6, 10);
+    const imdb = randomNumber(5, 8.5);
+    this.setState({ phut: phut, mra: mra, imdb: imdb });
   }
 
   handleOnClick = (item) => {
@@ -42,6 +57,7 @@ class MovieItem extends Component {
   renderListSuatChieu = () => {
     const { movie } = this.props;
     const { lstLichChieuTheoPhim } = movie;
+
     let date = dayjs().format("DD/MM/YYYY");
     let time = dayjs().format("HH:mm");
     const lstLichChieuTheoPhimSorted = lstLichChieuTheoPhim.sort((a, b) =>
@@ -72,14 +88,20 @@ class MovieItem extends Component {
   };
 
   handleToggle = () => {
-    // const showOrHideDiv = document.getElementById("showOrHideDiv");
-    // if (this.state.showOrHide) showOrHideDiv.classList.remove("showing");
-    // else showOrHideDiv.classList.add("showing");
     this.setState({ showOrHide: !this.state.showOrHide });
   };
+
+  renderTypeOfMovie = () => {
+    const firstChar = this.props.movie.tenPhim.charCodeAt(0);
+    console.log(firstChar);
+    if (firstChar <= 70) return <span className="c13">C13</span>;
+    else return <span className="p">P</span>;
+  };
+
   renderMovie = () => {
     const { movie } = this.props;
-    const { showOrHide } = this.state;
+    const { showOrHide, phut, mra, imdb } = this.state;
+
     return (
       <>
         <div key={movie.maPhim} className="movie__item">
@@ -94,8 +116,17 @@ class MovieItem extends Component {
               src={movie.hinhAnh}
               alt={movie.tenPhim}
             />
-            <div className="information">
-              <h6>{movie.tenPhim}</h6>
+            <div className="information mt-2">
+              <h6>
+                {this.renderTypeOfMovie()}
+                {movie.tenPhim}
+              </h6>
+              <small
+                style={{ fontSize: "90%", color: "#9b9b9b" }}
+                className="movieInfor"
+              >
+                {phut} phút - MRA {mra} - IMDb {imdb}
+              </small>
             </div>
           </div>
           <div

@@ -12,6 +12,24 @@
   border-bottom: 1px solid #ebebec;
 }
 
+.information {
+  span {
+    color: #fff;
+    border-radius: 4px;
+    padding: 0 5px;
+    margin-right: 5px;
+    font-size: 13px;
+    min-width: 33px;
+    text-align: center;
+  }
+  .c13 {
+    background-color: #fb4226;
+  }
+  .p {
+    background-color: #00ac4d;
+  }
+}
+
 .showOrHideDiv {
   overflow: hidden;
   transition: max-height 0.4s;
