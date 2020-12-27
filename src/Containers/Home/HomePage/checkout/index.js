@@ -6,6 +6,7 @@ import "sweetalert2/src/sweetalert2.scss";
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useHistory, useParams } from "react-router-dom";
+import dayjs from "dayjs";
 import "./index.scss";
 import { actBookingTickets, actGetTicketRoom } from "./modules/actions";
 
@@ -36,6 +37,7 @@ export default function CheckOut() {
       history.push("/login");
       return;
     }
+
     const { taiKhoan } = user;
     const datVeClone = {
       ...datVe,
@@ -75,6 +77,22 @@ export default function CheckOut() {
   // lấy danh sách ghế
   useEffect(() => {
     if (ticketRoom && ticketRoom.danhSachGhe) {
+      const { ngayChieu, gioChieu } = ticketRoom.thongTinPhim;
+      const gioChieuChuan = dayjs(`2020/12/28T${gioChieu}`)
+        .add(12, "hour")
+        .format("HH:mm");
+      const date = dayjs().format("DD/MM/YYYY");
+      const time = dayjs().format("HH:mm");
+
+      if (date < ngayChieu || (date === ngayChieu && time < gioChieuChuan)) {
+      } else {
+        history.push("/");
+        Swal.fire({
+          icon: "info",
+          title: "Suất chiếu này đã bắt đầu!",
+          text: "Mời bạn chọn suất chiếu khác!",
+        });
+      }
       let DSG = [...ticketRoom.danhSachGhe];
       // eslint-disable-next-line
       DSG = DSG.map((item) => {
@@ -260,6 +278,17 @@ export default function CheckOut() {
     // return false -> cho phép đặt vé
     // check ghế trống đầu tiên của 2 dãy phụ
     if (
+      +item.stt % 16 === 1 ||
+      +item.stt % 16 === 4 ||
+      +item.stt % 16 === 5 ||
+      +item.stt % 16 === 12 ||
+      +item.stt % 16 === 13 ||
+      +item.stt % 16 === 0
+    )
+      return false;
+    if (state[+item.stt].daDat === true || state[+item.stt - 2].daDat === true)
+      return false;
+    if (
       (item.stt % 16 === 2 || item.stt % 16 === 14) &&
       state[+item.stt - 2].dangChon === false
     ) {
@@ -297,6 +326,7 @@ export default function CheckOut() {
       }
     } else if (item.stt % 16 === 6 && state[+item.stt - 2].dangChon === false) {
       for (let i = +item.stt; i <= +item.stt + 5; i++) {
+        if (state[i].daDat === true) return false;
         if (state[i].dangChon === false) {
           Swal.fire({
             icon: "error",
@@ -308,7 +338,19 @@ export default function CheckOut() {
       }
       return false;
     } else if (item.stt % 16 === 11 && state[+item.stt].dangChon === false) {
-      for (let i = +item.stt - 7; i <= +item.stt - 2; i++) {
+      if (
+        state[item.stt].dangChon === false &&
+        state[item.stt - 2].dangChon === false
+      ) {
+        Swal.fire({
+          icon: "error",
+          title: "Oops...",
+          text: "Bạn không thể bỏ trống ghế đầu tiên!",
+        });
+        return true;
+      }
+      for (let i = +item.stt - 2; i <= +item.stt - 7; i--) {
+        if (state[i].daDat === true) return false;
         if (state[i].dangChon === false) {
           Swal.fire({
             icon: "error",
@@ -319,6 +361,53 @@ export default function CheckOut() {
         }
       }
       return false;
+    } else if (
+      item.stt % 16 >= 7 &&
+      item.stt % 16 <= 10
+      // state[+item.stt].dangChon === false
+    ) {
+      if (
+        state[+item.stt - 2].dangChon === false &&
+        state[+item.stt - 3].dangChon === true
+      ) {
+        // if(state[+item.stt].daDat === true) return false;
+        for (
+          let i = +item.stt - 1;
+          i <= Math.floor(+item.stt / 16) * 16 + 11;
+          i++
+        ) {
+          if (state[i].daDat === true) return false;
+          if (state[i].dangChon === false) {
+            Swal.fire({
+              icon: "error",
+              title: "Oops...",
+              text: "Bạn không thể bỏ trống ghế đầu tiên!",
+            });
+            return true;
+          }
+        }
+      }
+
+      if (
+        state[+item.stt].dangChon === false &&
+        state[+item.stt + 1].dangChon === true
+      ) {
+        for (
+          let i = Math.floor(+item.stt / 16) * 16 + 4;
+          i <= +item.stt - 1;
+          i++
+        ) {
+          if (state[i].daDat === true) return false;
+          if (state[i].dangChon === false) {
+            Swal.fire({
+              icon: "error",
+              title: "Oops...",
+              text: "Bạn không thể bỏ trống ghế đầu tiên!",
+            });
+            return true;
+          }
+        }
+      }
     }
   };
   const isValidCheckoutStep2 = () => {
@@ -364,6 +453,8 @@ export default function CheckOut() {
 
           return true;
         }
+
+        // if ở đây... thiếu 1 if....
       }
     }
 

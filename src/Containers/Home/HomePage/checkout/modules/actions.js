@@ -4,6 +4,8 @@ import {
   GET_TICKET_ROOM_REQUEST,
   GET_TICKET_ROOM_SUCCESS,
 } from "./constants";
+import Swal from "sweetalert2/dist/sweetalert2.js";
+import "sweetalert2/src/sweetalert2.scss";
 
 export const actGetTicketRoom = (scheduleId) => {
   return (dispatch) => {
@@ -12,6 +14,7 @@ export const actGetTicketRoom = (scheduleId) => {
       url: `https://movie0706.cybersoft.edu.vn/api/QuanLyDatVe/LayDanhSachPhongVe?MaLichChieu=${scheduleId}`,
     })
       .then((res) => {
+        // console.log(res.data);
         dispatch(actGetTicketRoomSuccess(res.data));
       })
       .catch((err) => {
@@ -51,11 +54,19 @@ export const actBookingTickets = (ticketInfor) => {
       },
     })
       .then((res) => {
-        alert("Đặt vé thành công!");
+        Swal.fire({
+          icon: "success",
+          title: "Đặt vé thành công!",
+          // text: ".",
+        });
         console.log(res.data);
       })
       .catch((err) => {
-        alert("Đặt vé thất bại! mời thử lại.");
+        Swal.fire({
+          icon: "error",
+          title: "Đặt vé thất bại!",
+          // text: ".",
+        });
         console.log(err.message);
       });
   };
