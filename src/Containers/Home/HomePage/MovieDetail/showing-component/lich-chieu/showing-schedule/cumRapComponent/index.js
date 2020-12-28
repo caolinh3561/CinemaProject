@@ -3,8 +3,8 @@ import dayjs from "dayjs";
 import { useSelector, useDispatch } from "react-redux";
 import { actGetHTCR } from "./modules/action";
 import "./index.scss";
-import LichChieuComponent from "./lichChieuComponent";
 import NgayChieuComponent from "./ngayChieuComponent";
+import CumRapItem from "./cumRapItem/index";
 export default function CumRapComponent(props) {
   let movie = props.movie;
   const dispatch = useDispatch();
@@ -19,12 +19,6 @@ export default function CumRapComponent(props) {
     dispatch(actGetHTCR(maHTR));
   }, [dispatch, maHTR]);
   let listRapCoSuatChieu = [];
-  // useEffect(() => {
-  //   setState({
-  //     isValid: true,
-  //   });
-  // }, []);
-  // lọc những rạp có suất chiếu của phim
   if (movie && movie.lichChieu && movie.lichChieu.length > 0) {
     let checkAdult = (maCumRap) => {
       //hàm findIndex tìm vị trí
@@ -49,54 +43,11 @@ export default function CumRapComponent(props) {
       }
     });
   }
+
   let render = () => {
     if (listRapCoSuatChieu && listRapCoSuatChieu.length > 0) {
-      // console.log("listRap", listRapCoSuatChieu);
       return listRapCoSuatChieu.map((item, index) => {
-        // console.log("item phim", item);
-        let lastView = true;
-        // console.log("item nè: ", item);
-        // let handleSetLastView = () => {
-        //   lastView = !lastView;
-        //   // console.log("!lastView của: ", item, " là: ", lastView);
-        //   return lastView;
-        // };
-        // console.log("lastView nè: ", lastView);
-        return (
-          <li
-            className="cumRap__item"
-            key={index}
-            style={{
-              overflow: "hidden",
-              // opacity: item.maCumRap === maCR ? 1 : 0.5,
-            }}
-          >
-            <img
-              src={`/img/imagesTheater/${item.thongTinRap.maCumRap}.jpg`}
-              alt=""
-              style={{ float: "left", height: "50px" }}
-            />
-            <div className="infoTheater">
-              {" "}
-              <h6
-                id={`title-${maHTR}`}
-                // onClick={() => {
-                //   handleSetLastView();
-                // }}
-              >
-                {item.thongTinRap.tenCumRap}
-              </h6>
-            </div>
-            <div className="lichChieu" id={`lichChieu-${maHTR}`}>
-              <LichChieuComponent
-                movie={movie}
-                maHTR={item.thongTinRap.maCumRap}
-                ngayChieu={ngayChieu}
-                lastView={lastView}
-              />
-            </div>
-          </li>
-        );
+        return <CumRapItem key={index} item={item} movie={movie} />;
       });
     } else {
       return (
