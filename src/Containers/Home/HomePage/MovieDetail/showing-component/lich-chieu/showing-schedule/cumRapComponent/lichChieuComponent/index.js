@@ -11,11 +11,6 @@ export default function LichChieuComponent(props) {
   const lichChieu = props.movie.lichChieu;
   const currentDay = props.ngayChieu;
   const maHTR = props.maHTR;
-  // const lastView = props.lastView;
-  // console.log(" LichChieuComponent-lastView của ", maHTR, " là: ", lastView);
-  // useEffect(() => {
-  //   console.log(maHTR, " -lastView trong useEffect", lastView);
-  // }, [lastView]);
   const handleOnClick = (item) => {
     const user = JSON.parse(localStorage.getItem("userMember"));
     if (user) {
@@ -58,8 +53,23 @@ export default function LichChieuComponent(props) {
                 handleOnClick(item);
               }}
             >
-              {dayjs(item.ngayChieuGioChieu).format("HH:mm")} ~{" "}
-              {dayjs(item.ngayChieuGioChieu).add("2", "hour").format("HH:mm")}
+              <span>
+                <span
+                  className={
+                    nowTime > dayjs(item.ngayChieuGioChieu).format("HH:mm")
+                      ? "timeDisabled"
+                      : "timeStart"
+                  }
+                >
+                  {" "}
+                  {dayjs(item.ngayChieuGioChieu).format("HH:mm")} ~{" "}
+                </span>
+                <small>
+                  {dayjs(item.ngayChieuGioChieu)
+                    .add("2", "hour")
+                    .format("HH:mm")}
+                </small>
+              </span>
             </Button>
           );
           return { ...arrayRender };
@@ -82,8 +92,17 @@ export default function LichChieuComponent(props) {
                 handleOnClick(item);
               }}
             >
-              {dayjs(item.ngayChieuGioChieu).format("HH:mm")} ~{" "}
-              {dayjs(item.ngayChieuGioChieu).add("2", "hour").format("HH:mm")}
+              <span>
+                <span className="timeStart">
+                  {" "}
+                  {dayjs(item.ngayChieuGioChieu).format("HH:mm")} ~{" "}
+                </span>
+                <small>
+                  {dayjs(item.ngayChieuGioChieu)
+                    .add("2", "hour")
+                    .format("HH:mm")}
+                </small>
+              </span>
             </Button>
           );
           return { ...arrayRender };
@@ -94,5 +113,9 @@ export default function LichChieuComponent(props) {
     }
   };
 
-  return <div className="renderLichChieu">{renderLichChieu()}</div>;
+  return (
+    <div className="renderLichChieu" style={{}}>
+      {renderLichChieu()}
+    </div>
+  );
 }
