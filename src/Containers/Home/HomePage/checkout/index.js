@@ -9,6 +9,7 @@ import { useHistory, useParams } from "react-router-dom";
 import dayjs from "dayjs";
 import "./index.scss";
 import { actBookingTickets, actGetTicketRoom } from "./modules/actions";
+import Header from "./components/header";
 
 export default function CheckOut() {
   const [timeString, settimeString] = useState("");
@@ -45,6 +46,7 @@ export default function CheckOut() {
       taiKhoanNguoiDung: taiKhoan,
     };
     setDatVe(datVeClone);
+
     dispatch(actGetTicketRoom(scheduleId));
     // setTimeout(() => {
     //   alert("TIME UP!!!");
@@ -572,6 +574,10 @@ export default function CheckOut() {
 
   const handleOnSubmit = () => {
     let thongTinDatVe = { ...datVe };
+    let ketQuaDatVe = {
+      thongTinPhim: ticketRoom.thongTinPhim,
+      danhSachGhe: listGheDangChon,
+    };
     let danhSachGheDat = [];
     for (let i = 0; i < listGheDangChon.length; i++) {
       let item = {
@@ -582,7 +588,8 @@ export default function CheckOut() {
     }
     thongTinDatVe.danhSachVe = danhSachGheDat;
     // console.log(thongTinDatVe);
-    dispatch(actBookingTickets(thongTinDatVe));
+    dispatch(actBookingTickets(thongTinDatVe, ketQuaDatVe));
+    history.replace("/checkout/result");
   };
 
   const renderThongTinDatVe = () => {
@@ -640,17 +647,6 @@ export default function CheckOut() {
     );
   };
 
-  const renderUserInfor = () => {
-    if (!localStorage.getItem("userMember")) return;
-    const user = JSON.parse(localStorage.getItem("userMember")).taiKhoan;
-    return (
-      <h6>
-        <i className="material-icons">account_circle</i>
-        {user}
-      </h6>
-    );
-  };
-
   const renderThongTinRap = () => {
     if (ticketRoom && ticketRoom.thongTinPhim) {
       return (
@@ -686,20 +682,7 @@ export default function CheckOut() {
       }}
     >
       <div className="col-lg-9" style={{ padding: 0 }}>
-        <nav
-          className="checkout__header"
-          style={{ height: "90px" }} //backgroundColor: "orange",
-        >
-          <ul>
-            <li className="li-item active">
-              <span className="step">01</span> Chọn ghế & thanh toán
-            </li>
-            <li className="li-item">
-              <span className="step">02</span> Kết quả đặt vé
-            </li>
-          </ul>
-          {renderUserInfor()}
-        </nav>
+        <Header step={1} />
         <div className="wapper">
           <div className="theater__infor" style={{ height: "90px" }}>
             {renderThongTinRap()}

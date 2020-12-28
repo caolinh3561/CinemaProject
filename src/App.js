@@ -9,6 +9,7 @@ import CheckOut from "Containers/Home/HomePage/checkout";
 import MovieDetail from "Containers/Home/HomePage/MovieDetail";
 import UserLogin from "Containers/Home/HomePage/login";
 import UserComponent from "Containers/Home/UserPage";
+import Result from "Containers/Home/HomePage/checkout/result/result";
 function App() {
   const showLayoutHomePage = (routes) => {
     if (routes && routes.length > 0) {
@@ -47,7 +48,9 @@ function App() {
         <Route path="/login" component={UserLogin} />
         <Route path="/admin/login" component={LoginPage} />
         <Route path="/movie/:id" component={MovieDetail} />
-        <Route path="/checkout/:scheduleId" component={CheckOut} />
+        <Route path="/checkout/result" exact component={Result} />
+        <Route path="/checkout/:scheduleId" exact component={CheckOut} />
+
         <Route path="" />
       </Switch>
     </BrowserRouter>

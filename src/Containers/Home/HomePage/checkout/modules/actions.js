@@ -1,11 +1,12 @@
 import Axios from "axios";
+import Swal from "sweetalert2/dist/sweetalert2.js";
+import "sweetalert2/src/sweetalert2.scss";
 import {
+  ACT_BOOKING_TICKET_SUCCESS,
   GET_TICKET_ROOM_FAIL,
   GET_TICKET_ROOM_REQUEST,
   GET_TICKET_ROOM_SUCCESS,
 } from "./constants";
-import Swal from "sweetalert2/dist/sweetalert2.js";
-import "sweetalert2/src/sweetalert2.scss";
 
 export const actGetTicketRoom = (scheduleId) => {
   return (dispatch) => {
@@ -41,7 +42,7 @@ const actGetTicketRoomFail = (err) => {
   };
 };
 
-export const actBookingTickets = (ticketInfor) => {
+export const actBookingTickets = (ticketInfor, ketQuaDatVe) => {
   const accessToken = JSON.parse(localStorage.getItem("userMember"))
     .accessToken;
   return (dispatch) => {
@@ -54,12 +55,12 @@ export const actBookingTickets = (ticketInfor) => {
       },
     })
       .then((res) => {
+        dispatch(actBookingTicketSuccess(ketQuaDatVe));
         Swal.fire({
           icon: "success",
           title: "Đặt vé thành công!",
           // text: ".",
         });
-        console.log(res.data);
       })
       .catch((err) => {
         Swal.fire({
@@ -69,5 +70,12 @@ export const actBookingTickets = (ticketInfor) => {
         });
         console.log(err.message);
       });
+  };
+};
+
+const actBookingTicketSuccess = (data) => {
+  return {
+    type: ACT_BOOKING_TICKET_SUCCESS,
+    payload: data,
   };
 };
