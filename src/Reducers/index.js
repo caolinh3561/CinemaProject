@@ -13,6 +13,7 @@ import trailerMovieReducer from "./../Containers/Home/Components/movieTrailerMod
 import showingHeThongRapReducer from "../Containers/Home/HomePage/MovieDetail/showing-component/lich-chieu/showing-schedule/heThongRapComponent/modules/reducer";
 import showingHTCRReducer from "../Containers/Home/HomePage/MovieDetail/showing-component/lich-chieu/showing-schedule/cumRapComponent/modules/reducer";
 import showingShowDayReducer from "../Containers/Home/HomePage/MovieDetail/showing-component/lich-chieu/showing-schedule/cumRapComponent/ngayChieuComponent/modules/reducer";
+import userInforReducer from "./../Containers/Home/UserPage/Components/modules/reducer";
 const rootReducer = combineReducers({
   moviesReducer,
   heThongRapReducer,
@@ -28,6 +29,7 @@ const rootReducer = combineReducers({
   showingHeThongRapReducer,
   showingHTCRReducer,
   showingShowDayReducer,
+  userInforReducer,
 });
 
 export default rootReducer;

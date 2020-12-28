@@ -8,12 +8,13 @@ class HeaderComponent extends Component {
     if (this.props.location.pathname === "/user") return;
     this.props.history.push({ pathname: `${this.props.match.path}user` });
   };
-  // handleClickVeDaDat = () => {
-  //   this.props.history.push({
-  //     pathname: "/user",
-  //     state: "inforTicket",
-  //   });
-  // };
+  handleClickVeDaDat = () => {
+    this.props.history.push({
+      pathname: "/user",
+      hash: "yo",
+      state: { state: "inforTicket" },
+    });
+  };
   handleClickThoat = () => {
     // console.log("Logout!");
     if (this.props.location.pathname === "/user") {
@@ -28,7 +29,7 @@ class HeaderComponent extends Component {
     const user = JSON.parse(localStorage.getItem("userMember"));
     if (user)
       return (
-        <Link to="#" href="#" className="signin logged">
+        <div to="#" href="#" className="signin logged">
           <i className="fa fa-user-circle"></i>
           <img src="/img/avatar-login.png" alt="" />
           <span> {user.taiKhoan}</span>
@@ -41,14 +42,17 @@ class HeaderComponent extends Component {
             >
               Tài khoản
             </li>
-            {/* <li
+
+            <Link
               className="li__item"
-              onClick={() => {
-                this.handleClickVeDaDat();
+              to={{
+                pathname: "/user",
+                state: { selected: "inforTicket" },
               }}
             >
               Vé đã đặt
-            </li> */}
+            </Link>
+
             <li
               className="li__item"
               onClick={() => {
@@ -58,7 +62,7 @@ class HeaderComponent extends Component {
               Thoát
             </li>
           </ul>
-        </Link>
+        </div>
       );
     else
       return (

@@ -3,7 +3,6 @@ import React from "react";
 import InforItem from "./inforItem/inforItem";
 export default function InforTicket(props) {
   const { infor } = props;
-  console.log(infor);
 
   const renderListOfTicket = () => {
     if (!infor) return;

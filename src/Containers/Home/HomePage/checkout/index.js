@@ -252,6 +252,7 @@ export default function CheckOut() {
       });
       setstate(DSG);
     }
+    // eslint-disable-next-line
   }, [dispatch, ticketRoom]);
 
   //check Ghế

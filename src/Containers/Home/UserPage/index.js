@@ -5,30 +5,34 @@ import backgroundImg from "assets/img/background/user__background2.jpg";
 import InforAccount from "./Components/inforAccount/inforAccount";
 import InforTicket from "./Components/inforTicket/inforTicket";
 import { CSSTransitionGroup } from "react-transition-group";
-import Axios from "axios";
+
 import Swal from "sweetalert2/dist/sweetalert2.js";
 import "sweetalert2/src/sweetalert2.scss";
-import { useHistory } from "react-router-dom";
+import { useHistory, useLocation } from "react-router-dom";
+import { getUserInformation } from "./Components/modules/actions";
+import { useDispatch, useSelector } from "react-redux";
+import LoadingComponent from "../Components/loading";
 
 export default function UserComponent() {
   const [selected, setSelected] = useState("inforAccount");
-  const [userInformation, setUserInformation] = useState("");
+  const userInformation = useSelector(
+    (state) => state.userInforReducer.userInfor
+  );
+  const loading = useSelector((state) => state.userInforReducer.loading);
+  const error = useSelector((state) => state.userInforReducer.err);
   const history = useHistory();
+  const location = useLocation();
+  const dispatch = useDispatch();
+
   useEffect(() => {
     const user = JSON.parse(localStorage.getItem("userMember"));
+    // let unmounted = false;
+    // let source = Axios.CancelToken.source();
     if (user) {
-      Axios({
-        url:
-          "https://movie0706.cybersoft.edu.vn/api/QuanLyNguoiDung/ThongTinTaiKhoan",
-        method: "POST",
-        data: { taiKhoan: `${user.taiKhoan}` },
-      })
-        .then((res) => {
-          setUserInformation(res.data);
-        })
-        .catch((err) => {
-          console.log(err.message);
-        });
+      if (location && location.state) {
+        setSelected(location.state.selected);
+      }
+      dispatch(getUserInformation(user.taiKhoan));
     } else {
       Swal.fire({
         icon: "error",
@@ -39,6 +43,11 @@ export default function UserComponent() {
 
       return;
     }
+    // return function () {
+    //   unmounted = true;
+    //   source.cancel("Cancelling in cleanup");
+    // };
+
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
@@ -66,6 +75,7 @@ export default function UserComponent() {
         return null;
     }
   };
+  if (loading) return <LoadingComponent />;
 
   return (
     <>

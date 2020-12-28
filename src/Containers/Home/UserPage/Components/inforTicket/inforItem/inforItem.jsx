@@ -1,9 +1,15 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import dayjs from "dayjs";
 
 export default function InforItem(props) {
     const [toggle, setToggle] = useState(false);
+    const [gioKhoiChieu, setgioKhoiChieu] = useState("");
     const {item} = props;
+
+    useEffect(() => {
+        randomTime();
+        // eslint-disable-next-line
+    }, [])
 
     const renderDanhSachGhe = () => {
         let listOfGhe = [];
@@ -26,6 +32,13 @@ export default function InforItem(props) {
         setToggle(!toggle);
     }
 
+    const randomTime = () => {
+        let hour = Math.random()*8 + 14;
+        let date = dayjs(item.ngayDat).add(Math.random()*3,"day").format("DD/MM/YYYY")
+        
+        setgioKhoiChieu(`${date} - ${Math.floor(hour)}:00`) ;
+    }
+
     return (
         <>
             <li onClick={()=>{handleToggle()}} className="row" key={item.maVe} style={{borderTop:"1px solid gray",paddingTop:"15px",cursor:"pointer"}}>
@@ -35,13 +48,17 @@ export default function InforItem(props) {
             </p>
             <div className="infor__detail col-sm-8 p-0 m-0">
             <p className="movieName col-sm-12">{item.tenPhim}</p>
+            
             <div className={toggle? "col-sm-12 moreInfor active":"col-sm-12 moreInfor"}>
             {/* <div className="col-sm-12 moreInfor" style={{display: toggle? "block" : "none",transition:"all 0.5s"}}> */}
                 <p className="tenHTR"> Hệ thống rạp: {item.danhSachGhe[0].tenHeThongRap} | {item.danhSachGhe[0].tenCumRap}</p>
+                <p className="time">Ngày chiếu:  {gioKhoiChieu}</p>
                 <div className="danhSachGhe pb-2">
-                    Ghế: {renderDanhSachGhe()}
+                    Ghế: {renderDanhSachGhe()} 
                 </div>
-                
+                <p className="giaVe">Tổng hóa đơn: {`${item.danhSachGhe.length*item.giaVe}`.replace(/(\d)(?=(\d{3})+(?!\d))/g, "$1.") + "đ"}    </p> 
+
+                {/* {item.danhSachGhe.length>1? item.giaVe.toString().replace(/(\d)(?=(\d{3})+(?!\d))/g, "$1.") + "đ/ghế":""} */}
             </div>
             </div>
           </li>
