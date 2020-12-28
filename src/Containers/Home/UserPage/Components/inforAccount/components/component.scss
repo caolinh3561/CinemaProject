@@ -1,0 +1,24 @@
+.updateInfor__content {
+  .infor__item {
+    display: flex;
+    align-items: center;
+    .title {
+      height: 27px;
+      line-height: 27px;
+    }
+  }
+  .updateInfor__input {
+    background: inherit;
+    border: none;
+    outline: none;
+    color: white;
+    color: rgb(190, 190, 190);
+    border-bottom: 1px solid rgba(114, 114, 114, 0.822);
+    transition: all 0.3s;
+    &:focus,
+    &:hover {
+      color: white;
+      border-bottom: 1px solid white;
+    }
+  }
+}

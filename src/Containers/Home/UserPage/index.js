@@ -1,17 +1,16 @@
-import React, { useEffect, useState } from "react";
-import HeaderComponent from "./../Components/header/header";
-import "./index.scss";
 import backgroundImg from "assets/img/background/user__background2.jpg";
-import InforAccount from "./Components/inforAccount/inforAccount";
-import InforTicket from "./Components/inforTicket/inforTicket";
+import React, { useEffect, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { useHistory, useLocation } from "react-router-dom";
 import { CSSTransitionGroup } from "react-transition-group";
-
 import Swal from "sweetalert2/dist/sweetalert2.js";
 import "sweetalert2/src/sweetalert2.scss";
-import { useHistory, useLocation } from "react-router-dom";
-import { getUserInformation } from "./Components/modules/actions";
-import { useDispatch, useSelector } from "react-redux";
 import LoadingComponent from "../Components/loading";
+import HeaderComponent from "./../Components/header/header";
+import InforAccount from "./Components/inforAccount/inforAccount";
+import InforTicket from "./Components/inforTicket/inforTicket";
+import { getUserInformation } from "./Components/modules/actions";
+import "./index.scss";
 
 export default function UserComponent() {
   const [selected, setSelected] = useState("inforAccount");
@@ -43,10 +42,6 @@ export default function UserComponent() {
 
       return;
     }
-    // return function () {
-    //   unmounted = true;
-    //   source.cancel("Cancelling in cleanup");
-    // };
 
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
@@ -62,13 +57,13 @@ export default function UserComponent() {
       case "inforAccount":
         return (
           <div className="item" key={1}>
-            <InforAccount user={user} />
+            <InforAccount handleSelect={handleSelect} user={user} />
           </div>
         );
       case "inforTicket":
         return (
           <div className="item" key={2}>
-            <InforTicket infor={userInformation} />
+            <InforTicket handleSelect={handleSelect} infor={userInformation} />
           </div>
         );
       default:
@@ -76,6 +71,7 @@ export default function UserComponent() {
     }
   };
   if (loading) return <LoadingComponent />;
+  if (error) return <h1>Oops... something went wrong!</h1>;
 
   return (
     <>

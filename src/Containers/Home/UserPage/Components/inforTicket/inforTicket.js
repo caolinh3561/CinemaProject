@@ -1,3 +1,4 @@
+import { Button } from "@material-ui/core";
 import React from "react";
 
 import InforItem from "./inforItem/inforItem";
@@ -16,6 +17,15 @@ export default function InforTicket(props) {
 
   return (
     <div className="ticket__content">
+      <Button
+        onClick={() => {
+          props.handleSelect("inforAccount");
+        }}
+        className="btn__comeback"
+      >
+        <i className="material-icons">keyboard_return</i>
+      </Button>
+
       <h3 className="text-center m-4">Danh Sách Vé Đã Đặt</h3>
       <ul className="listOfTicket p-2 m-0">
         <li className="row">

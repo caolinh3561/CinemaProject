@@ -44,7 +44,7 @@ class HeaderComponent extends Component {
             </li>
 
             <Link
-              className="li__item"
+              className="li__item moveVeDaDatLink"
               to={{
                 pathname: "/user",
                 state: { selected: "inforTicket" },

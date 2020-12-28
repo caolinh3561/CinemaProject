@@ -132,7 +132,7 @@ class MovieItem extends Component {
           </div>
           <div
             className="showOrHideDiv"
-            style={showOrHide ? { maxHeight: "500px" } : { maxHeight: "0" }}
+            style={showOrHide ? { maxHeight: "210px" } : { maxHeight: "0" }}
           >
             <h6 className="typeOfMovie">2D Digital</h6>
             <div className="listSuatChieuPhim">
