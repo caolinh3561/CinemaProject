@@ -67,6 +67,7 @@
         white-space: nowrap;
         overflow: hidden;
         transition: all 0.2s;
+        height: 80%;
         p,
         h6 {
           overflow: hidden;
@@ -105,12 +106,5 @@
 .listMovie__content::-webkit-scrollbar-thumb {
   border-radius: 5px;
   background-color: #fff;
-  background-image: -webkit-gradient(
-    linear,
-    40% 0%,
-    75% 84%,
-    from(#4d9c41),
-    to(#19911d),
-    color-stop(0.6, #54de5d)
-  );
+  background-image: -webkit-gradient(linear, 40% 0%, 75% 84%, from(#4d9c41), to(#19911d), color-stop(0.6, #54de5d));
 }
