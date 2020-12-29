@@ -592,6 +592,12 @@ export default function CheckOut() {
     history.replace("/checkout/result");
   };
 
+  const renderTypeOfMovie = (tenPhim) => {
+    const firstChar = tenPhim.charCodeAt(0);
+    if (firstChar <= 70) return <span className="c13">C13</span>;
+    else return <span className="p">P</span>;
+  };
+
   const renderThongTinDatVe = () => {
     if (!ticketRoom || !ticketRoom.thongTinPhim) return;
     const {
@@ -609,7 +615,10 @@ export default function CheckOut() {
             {renderGiaVe()}
           </h1>
 
-          <h5>{tenPhim}</h5>
+          <h5>
+            {renderTypeOfMovie(tenPhim)}
+            {tenPhim}
+          </h5>
           <p>{tenCumRap}</p>
           <p>
             {ngayChieu} - {gioChieu} - {tenRap}

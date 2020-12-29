@@ -28,9 +28,6 @@ export default function UserComponent() {
     // let unmounted = false;
     // let source = Axios.CancelToken.source();
     if (user) {
-      if (location && location.state) {
-        setSelected(location.state.selected);
-      }
       dispatch(getUserInformation(user.taiKhoan));
     } else {
       Swal.fire({
@@ -45,6 +42,12 @@ export default function UserComponent() {
 
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
+
+  useEffect(() => {
+    if (location && location.state) {
+      setSelected(location.state.selected);
+    }
+  }, [location]);
 
   const handleSelect = (value) => {
     setSelected(value);

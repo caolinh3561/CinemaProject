@@ -5,14 +5,10 @@ import "./index.scss";
 
 class HeaderComponent extends Component {
   handleClickTK = () => {
-    if (this.props.location.pathname === "/user") return;
-    this.props.history.push({ pathname: `${this.props.match.path}user` });
-  };
-  handleClickVeDaDat = () => {
+    // if (this.props.location.pathname === "/user") return;
     this.props.history.push({
-      pathname: "/user",
-      hash: "yo",
-      state: { state: "inforTicket" },
+      pathname: `/user`,
+      state: { selected: "inforAccount" },
     });
   };
   handleClickThoat = () => {

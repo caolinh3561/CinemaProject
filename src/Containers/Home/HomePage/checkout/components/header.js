@@ -1,16 +1,61 @@
 import React from "react";
+import { NavLink, useHistory, withRouter } from "react-router-dom";
+import "./index.scss";
 
-export default function Header(props) {
+function Header(props) {
   const { step } = props;
+  const history = useHistory();
+  const handleClickTK = () => {
+    history.push({
+      pathname: `/user`,
+      state: { selected: "inforAccount" },
+    });
+  };
+  const handleClickThoat = () => {
+    // console.log("Logout!");
+    localStorage.removeItem("userMember");
+    history.push("");
+  };
+
   const renderUserInfor = () => {
-    if (!localStorage.getItem("userMember")) return;
-    const user = JSON.parse(localStorage.getItem("userMember")).taiKhoan;
-    return (
-      <h6>
-        <i className="material-icons">account_circle</i>
-        {user}
-      </h6>
-    );
+    const user = JSON.parse(localStorage.getItem("userMember"));
+    if (user)
+      return (
+        <div to="#" href="#" className="signin logged">
+          <i className="fa fa-user-circle"></i>
+          <img src="/img/avatar-login.png" alt="" />
+          <span> {user.taiKhoan}</span>
+          <ul className="dropdown-content">
+            <li
+              className="li__item"
+              onClick={() => {
+                handleClickTK();
+              }}
+            >
+              Tài khoản
+            </li>
+
+            <NavLink
+              className="li__item moveVeDaDatLink"
+              to={{
+                pathname: "/user",
+                state: { selected: "inforTicket" },
+              }}
+            >
+              Vé đã đặt
+            </NavLink>
+
+            <li
+              className="li__item"
+              onClick={() => {
+                handleClickThoat();
+              }}
+            >
+              Thoát
+            </li>
+          </ul>
+        </div>
+      );
   };
 
   return (
@@ -18,7 +63,7 @@ export default function Header(props) {
       className="checkout__header"
       style={{ height: "90px" }} //backgroundColor: "orange",
     >
-      <ul>
+      <ul className="checkout__ul">
         <li className={step === 1 ? "li-item active" : "li-item"}>
           <span className="step">01</span> Chọn ghế & thanh toán
         </li>
@@ -26,7 +71,10 @@ export default function Header(props) {
           <span className="step">02</span> Kết quả đặt vé
         </li>
       </ul>
-      {renderUserInfor()}
+      <div id="user__content" className="user__content">
+        {renderUserInfor()}
+      </div>
     </nav>
   );
 }
+export default withRouter(Header);

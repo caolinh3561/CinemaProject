@@ -75,6 +75,7 @@ header:hover {
   .li__item {
     padding: 5px 10px;
     border-radius: 5px;
+    cursor: pointer;
     &:hover {
       background-color: rgb(114, 113, 113);
     }
