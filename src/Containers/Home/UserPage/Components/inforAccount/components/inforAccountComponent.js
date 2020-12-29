@@ -20,7 +20,7 @@ export default function InforAccountComponent(props) {
       </div>
       <div className="infor__item row">
         <p className="title">Số điện thoại</p>
-        <p className="infor">{user.soDT}</p>
+        <p className="infor">{user.soDT ? user.soDT : user.soDt}</p>
       </div>
     </div>
   );

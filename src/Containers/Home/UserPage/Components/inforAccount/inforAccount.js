@@ -4,6 +4,7 @@ import { useHistory } from "react-router-dom";
 import ChangePasswordComponent from "./components/changePasswordComponent";
 import InforAccountComponent from "./components/inforAccountComponent";
 import UpdateInforComponent from "./components/updateInforComponent";
+import { CSSTransitionGroup } from "react-transition-group";
 
 export default function InforAccount(props) {
   const { user } = props;
@@ -13,11 +14,23 @@ export default function InforAccount(props) {
   const renderComponent = () => {
     switch (key) {
       case "inforAccount":
-        return <InforAccountComponent user={user} />;
+        return (
+          <div className="accComponent" key={1}>
+            <InforAccountComponent user={user} />
+          </div>
+        );
       case "updateInfor":
-        return <UpdateInforComponent user={user} />;
+        return (
+          <div className="accComponent" key={2}>
+            <UpdateInforComponent user={user} />
+          </div>
+        );
       case "changePassword":
-        return <ChangePasswordComponent user={user} />;
+        return (
+          <div className="accComponent" key={3}>
+            <ChangePasswordComponent user={user} />
+          </div>
+        );
       default:
         return;
     }
@@ -90,7 +103,15 @@ export default function InforAccount(props) {
           </ul>
         </nav>
       </div>
-      <div className="user__infor col-sm-8">{renderComponent()}</div>
+      <div className="user__infor col-sm-8">
+        <CSSTransitionGroup
+          transitionName="accComponent"
+          transitionEnterTimeout={500}
+          transitionLeaveTimeout={400}
+        >
+          {renderComponent()}
+        </CSSTransitionGroup>
+      </div>
     </div>
   );
 }

@@ -7,6 +7,12 @@ export default function InforTicket(props) {
 
   const renderListOfTicket = () => {
     if (!infor) return;
+    if (infor.thongTinDatVe.length < 1)
+      return (
+        <div className="col-sm-9 text-center">
+          Oops... hình như bạn chưa từng đặt vé ^^!
+        </div>
+      );
     return infor.thongTinDatVe
       .slice()
       .reverse()

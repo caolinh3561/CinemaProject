@@ -36,7 +36,7 @@ export default function UpdateInforComponent(props) {
         <p className="infor">
           <input
             type="text"
-            defaultValue={user.soDT}
+            defaultValue={user.soDT ? user.soDT : user.soDt}
             className="updateInfor__input"
           />
         </p>

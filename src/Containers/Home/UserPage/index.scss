@@ -21,26 +21,53 @@
     background-size: cover;
   }
 
+  .item-enter {
+    transform: scale(0.01) translateY(800px);
+    opacity: 1;
+    transition: all 0.5s ease-in;
+  }
+
+  .item-enter.item-enter-active {
+    opacity: 1;
+    transform: scale(1) translateY(0px);
+    transition: all 0.5s ease-in;
+  }
+
+  .item-leave {
+    opacity: 0;
+    // height: 0;
+    transform: scale(1) translateY(0px);
+  }
+
+  .item-leave.item-leave-active {
+    opacity: 0;
+    transform: scale(0.01) translateY(400px);
+    // height: 0;
+  }
+
   .cssAnimation__content {
     display: block;
+
     span {
-      display: grid;
-      width: 100%;
-      align-items: center;
-      padding: 0 150px;
+      // display: grid;
+      // width: 100%;
+      // align-items: center;
+      // padding: 0 150px;
       .item {
-        width: 100% !important;
-        grid-column-start: 1;
-        grid-column-end: 2;
-        grid-row-start: 1;
-        grid-row-end: 2;
+        // width: 100% !important;
+        // grid-column-start: 1;
+        // grid-column-end: 2;
+        // grid-row-start: 1;
+        // grid-row-end: 2;
         // width: calc(100% - 300px);
         .user__content,
         .ticket__content {
           position: relative;
           border-radius: 4px;
           z-index: 1;
-          width: 70%;
+          min-width: 60%;
+          max-width: 70%;
+          width: fit-content;
           margin: 0 auto;
           min-height: 300px;
           padding: 15px 0;
@@ -71,6 +98,42 @@
             .title,
             .infor {
               width: 50%;
+            }
+
+            .accComponent-enter {
+              // opacity: 0.01;
+              // transform: translateY(800px);
+              opacity: 0;
+              z-index: 1;
+              transition: all 1s ease-in;
+            }
+
+            .accComponent-enter.accComponent-enter-active {
+              opacity: 1;
+              // transform: translateY(0px);
+              z-index: 2;
+              transition: all 1s ease-in;
+              // transform: 500ms;
+            }
+
+            .accComponent-leave {
+              opacity: 1;
+              z-index: 2;
+              height: 0;
+              // transition: all 0.5s ease-out;
+              // transform: scale(1) translateY(0px);
+              // transform: ;
+
+              // transform: translateX(15%);
+            }
+
+            .accComponent-leave.accComponent-leave-active {
+              opacity: 0;
+              z-index: 1;
+              height: 0;
+              // transform: scale(0.01) translateY(400px);
+              // transition: all 400ms ease-out;
+              // transition: all 0.5s ease-out;
             }
           }
         }
@@ -112,40 +175,6 @@
             }
           }
         }
-      }
-
-      .item-enter {
-        // opacity: 0.01;
-        // transform: translateY(800px);
-        opacity: 0;
-        z-index: 1;
-        transition: all 1s ease-in;
-      }
-
-      .item-enter.item-enter-active {
-        opacity: 1;
-        // transform: translateY(0px);
-        z-index: 2;
-        transition: all 1s ease-in;
-        // transform: 500ms;
-      }
-
-      .item-leave {
-        opacity: 1;
-        z-index: 2;
-        transition: all 0.5s ease-out;
-        // transform: scale(1) translateY(0px);
-        // transform: ;
-
-        // transform: translateX(15%);
-      }
-
-      .item-leave.item-leave-active {
-        opacity: 0;
-        z-index: 1;
-        // transform: scale(0.01) translateY(400px);
-        // transition: all 400ms ease-out;
-        transition: all 0.5s ease-out;
       }
     }
   }

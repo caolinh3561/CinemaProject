@@ -65,11 +65,11 @@ function MovieManagement(props) {
 
   return (
     <>
-      <h1 className="text-center text-success">Movie Management</h1>
-      <nav className="d-flex justify-content-between mb-4">
-        <input type="search" />
+      <h1 className="text-center text-success display-4">Movie Management</h1>
+      <nav className="mb-4 d-flex justify-content-end">
+        {/* <input type="search" /> */}
         <Button
-          className="text-success border-success"
+          className="text-success border-success mr-4"
           variant="outlined"
           data-toggle="modal"
           data-target="#movieModal"

@@ -102,8 +102,8 @@ function UserManagement(props) {
             key={index}
           >
             <td>{item.taiKhoan}</td>
-            <td>{item.matKhau}</td>
             <td>{item.hoTen}</td>
+            <td>{item.email}</td>
             <td>{item.maLoaiNguoiDung}</td>
             <td className="d-flex justify-content-center">
               <Button
@@ -164,10 +164,10 @@ function UserManagement(props) {
       <table className="table mt-5">
         <thead>
           <tr>
-            <th>TàiKhoản</th>
-            <th>MậtKhẩu</th>
-            <th>HọTên</th>
-            <th>LoạiTK</th>
+            <th>Tài Khoản</th>
+            <th>Họ Tên</th>
+            <th>Email</th>
+            <th>Loại TK</th>
             <th className="text-center">Action</th>
           </tr>
         </thead>

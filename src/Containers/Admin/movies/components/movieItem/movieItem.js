@@ -6,6 +6,7 @@ import DeleteIcon from "@material-ui/icons/Delete";
 import { red } from "@material-ui/core/colors";
 import Swal from "sweetalert2/dist/sweetalert2.js";
 import "sweetalert2/src/sweetalert2.scss";
+import dayjs from "dayjs";
 MovieItem.propTypes = {
   movieList: PropTypes.array,
 };
@@ -30,7 +31,7 @@ function MovieItem(props) {
             <td>{item.maPhim}</td>
             <td>{item.tenPhim}</td>
             <td>{item.danhGia}</td>
-            <td>{item.ngayKhoiChieu}</td>
+            <td>{dayjs(item.ngayKhoiChieu).format("DD/MM/YYYY")}</td>
             <td>
               <img
                 src={item.hinhAnh}

@@ -11,8 +11,10 @@ import React from "react";
 import * as Yup from "yup";
 import Swal from "sweetalert2/dist/sweetalert2.js";
 import "sweetalert2/src/sweetalert2.scss";
+import { useHistory, withRouter } from "react-router-dom";
 
-export default function Signup() {
+function Signup() {
+  const history = useHistory();
   let handleSubmit = (values) => {
     delete values.matKhauConfirm;
     Axios({
@@ -21,10 +23,28 @@ export default function Signup() {
       data: values,
     })
       .then((res) => {
-        Swal.fire({
-          icon: "success",
-          title: "Đăng ký thành công!",
-        });
+        setTimeout(() => {
+          let data = { taiKhoan: res.data.taiKhoan, matKhau: res.data.matKhau };
+          Axios({
+            url:
+              "https://movie0706.cybersoft.edu.vn/api/QuanLyNguoiDung/DangNhap",
+            method: "POST",
+            data: data,
+          })
+            .then((result) => {
+              localStorage.setItem("userMember", JSON.stringify(result.data));
+            })
+            .catch((err) => {});
+
+          Swal.fire({
+            icon: "success",
+            title: "Đăng ký thành công!",
+            text:
+              "Hệ thống sẽ tự động đăng nhập với tài khoản bạn vừa đăng ký.",
+          }).then((rs) => {
+            history.push("/");
+          });
+        }, 1000);
       })
       .catch((err) => {
         console.log(err);
@@ -62,7 +82,7 @@ export default function Signup() {
         .required("Không được bỏ trống!")
         .email("Email không hợp lệ!"),
       hoTen: Yup.string().required("Không được bỏ trống!"),
-      soDt: Yup.string().matches(regex, "Số điện thoại không hợp lệ!"),
+      soDt: Yup.string().matches(regex, "Số điện thoại không đúng!"),
       // soDt: Yup.number("", "chỉ được chứa ký tự số!")
       //   .required("Không được bỏ trống!")
       //   .positive("chỉ được chứa ký tự số!"),
@@ -214,3 +234,5 @@ export default function Signup() {
   }
   return <>{renderSignupForm()}</>;
 }
+
+export default withRouter(Signup);
