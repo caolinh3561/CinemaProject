@@ -1,21 +1,37 @@
-import React from "react";
-import { useSelector } from "react-redux";
-import Header from "../components/header";
-import "./index.scss";
 import ticket__bg from "assets/img/background/black_bg.jpg";
+import certified from "assets/img/background/certified.png";
 import infor__bg5 from "assets/img/background/gray_bg.jpg";
 import bg from "assets/img/background/rs__background.jpg";
-
-import certified from "assets/img/background/certified.png";
 import dayjs from "dayjs";
+import React from "react";
+import { useSelector } from "react-redux";
+import { NavLink, withRouter } from "react-router-dom";
+import Header from "../components/header";
+import "./index.scss";
 
-export default function Result() {
+function Result() {
   const ketQuaDatVe = useSelector(
     (state) => state.ticketRoomReducer.ketQuaDatVe
   );
 
-  console.log(ketQuaDatVe);
-  if (!ketQuaDatVe) return <></>;
+  if (!ketQuaDatVe) {
+    return (
+      <div className="mt-5">
+        <h1 className="text-center">Page Not Found!</h1>
+        <p className="text-center mt-4">
+          Note: Bạn có thể kiểm tra lịch sử đặt vé tại{" "}
+          <NavLink
+            to={{
+              pathname: "/user",
+              state: { selected: "inforTicket" },
+            }}
+          >
+            đây.
+          </NavLink>
+        </p>
+      </div>
+    );
+  }
   const { thongTinPhim, danhSachGhe } = ketQuaDatVe;
 
   const stringTime = () => {
@@ -29,7 +45,6 @@ export default function Result() {
       708,
       "minute"
     );
-    console.log(durationTime);
     return `${dayjs(durationTime).format("HH:mm")} ~ ${dayjs(durationTime)
       .add(2, "hour")
       .format("HH:mm")} / 2 giờ`;
@@ -103,7 +118,9 @@ export default function Result() {
               </div>
               <div className="col-sm-7 mb-3">
                 <p className="infor__title">Seats</p>
-                <p className="infor__text">{renderDSG()}</p>
+                <p className="infor__text" style={{ width: "80%" }}>
+                  {renderDSG()}
+                </p>
               </div>
               <div className="col-sm-5 mb-3">
                 <p className="infor__title">Price</p>
@@ -124,3 +141,4 @@ export default function Result() {
     </>
   );
 }
+export default withRouter(Result);

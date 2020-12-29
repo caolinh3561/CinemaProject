@@ -1,15 +1,14 @@
 import { Button } from "@material-ui/core";
 import LoadingComponent from "Containers/Home/Components/loading";
-
-import Swal from "sweetalert2/dist/sweetalert2.js";
-import "sweetalert2/src/sweetalert2.scss";
+import dayjs from "dayjs";
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useHistory, useParams } from "react-router-dom";
-import dayjs from "dayjs";
+import Swal from "sweetalert2/dist/sweetalert2.js";
+import "sweetalert2/src/sweetalert2.scss";
+import Header from "./components/header";
 import "./index.scss";
 import { actBookingTickets, actGetTicketRoom } from "./modules/actions";
-import Header from "./components/header";
 
 export default function CheckOut() {
   const [timeString, settimeString] = useState("");
@@ -589,7 +588,11 @@ export default function CheckOut() {
     thongTinDatVe.danhSachVe = danhSachGheDat;
     // console.log(thongTinDatVe);
     dispatch(actBookingTickets(thongTinDatVe, ketQuaDatVe));
-    history.replace("/checkout/result");
+    setTimeout(() => {
+      // window.open("/checkout/result");
+      // history.replace("/");
+      history.replace("/checkout/result");
+    }, 500);
   };
 
   const renderTypeOfMovie = (tenPhim) => {

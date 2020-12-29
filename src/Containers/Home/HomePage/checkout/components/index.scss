@@ -1,3 +1,10 @@
+.btn__home {
+  transition: all 0.3s;
+  &:hover {
+    color: #f79400;
+  }
+}
+
 #user__content {
   .signin {
     display: flex;

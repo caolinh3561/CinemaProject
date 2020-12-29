@@ -70,6 +70,17 @@ function Header(props) {
         <li className={step === 2 ? "li-item active" : "li-item"}>
           <span className="step">02</span> Kết quả đặt vé
         </li>
+        {step === 2 && (
+          <li
+            onClick={() => {
+              history.push("/");
+            }}
+            className="li-item btn__home"
+            style={{ cursor: "pointer" }}
+          >
+            <span className="step"></span> Quay lại trang Chủ
+          </li>
+        )}
       </ul>
       <div id="user__content" className="user__content">
         {renderUserInfor()}

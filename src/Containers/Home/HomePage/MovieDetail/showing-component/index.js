@@ -1,10 +1,9 @@
 import React from "react";
-import ThongTinComponent from "./thong-tin";
+import { useDispatch, useSelector } from "react-redux";
 import DanhGiaComponent from "./danh-gia";
-import { useSelector, useDispatch } from "react-redux";
 import "./index.scss";
 import LichChieuComponent from "./lich-chieu";
-import { CSSTransitionGroup } from "react-transition-group";
+import ThongTinComponent from "./thong-tin";
 export default function ShowingComponent(props) {
   // console.log(props, "props nè - showingComponent");
   let showing = useSelector((state) => state.movieDetailReducer.showing);
