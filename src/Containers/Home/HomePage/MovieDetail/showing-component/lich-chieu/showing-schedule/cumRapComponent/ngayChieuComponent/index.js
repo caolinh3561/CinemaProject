@@ -110,7 +110,6 @@ export default function NgayChieuComponent(props) {
       }
       // setShowDay({ listShowDayPhimSorted: listRender });
       listDayTime = lstLichChieuTheoPhimSorted;
-      console.log(listRender);
       return listRender;
     } else {
       console.log("false nè");
