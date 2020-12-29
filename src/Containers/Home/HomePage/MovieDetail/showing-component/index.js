@@ -1,19 +1,21 @@
-import React, { useState } from "react";
+import React from "react";
 import ThongTinComponent from "./thong-tin";
 import DanhGiaComponent from "./danh-gia";
+import { useSelector, useDispatch } from "react-redux";
 import "./index.scss";
 import LichChieuComponent from "./lich-chieu";
+import { CSSTransitionGroup } from "react-transition-group";
 export default function ShowingComponent(props) {
   // console.log(props, "props nè - showingComponent");
+  let showing = useSelector((state) => state.movieDetailReducer.showing);
+  const dispatch = useDispatch();
   let movie = props.movieDetail;
   const setShowing = (e) => {
-    setState({
-      showing: e,
-    });
+    let action = { type: "UPDATE_SHOWING", payload: e };
+    dispatch(action);
   };
-  let [state, setState] = useState({ showing: "lichChieu" });
   const renderShowing = () => {
-    switch (state.showing) {
+    switch (showing) {
       case "lichChieu":
         return <LichChieuComponent movie={movie} />;
       case "thongTin":
@@ -28,7 +30,7 @@ export default function ShowingComponent(props) {
         <div className="btnTitleMovie">
           <button
             className={`btnTitle mr-2 ${
-              state.showing === "lichChieu" ? "btnActive" : ""
+              showing === "lichChieu" ? "btnActive" : ""
             }`}
             onClick={() => {
               setShowing("lichChieu");
@@ -38,7 +40,7 @@ export default function ShowingComponent(props) {
           </button>
           <button
             className={`btnTitle mr-2 ${
-              state.showing === "thongTin" ? "btnActive" : ""
+              showing === "thongTin" ? "btnActive" : ""
             }`}
             onClick={() => {
               setShowing("thongTin");
@@ -47,9 +49,7 @@ export default function ShowingComponent(props) {
             Thông Tin
           </button>
           <button
-            className={`btnTitle ${
-              state.showing === "danhGia" ? "btnActive" : ""
-            }`}
+            className={`btnTitle ${showing === "danhGia" ? "btnActive" : ""}`}
             onClick={() => {
               setShowing("danhGia");
             }}
@@ -57,7 +57,18 @@ export default function ShowingComponent(props) {
             Đánh giá
           </button>
         </div>
-        <div className="showing__content">{renderShowing(state.showing)}</div>
+        <div className="showing__content">
+          {/* <div className="cssAnimation__content">
+            <CSSTransitionGroup
+              transitionName="item"
+              transitionEnterTimeout={500}
+              transitionLeaveTimeout={400}
+            >
+              {renderShowing(showing)}
+            </CSSTransitionGroup>
+          </div> */}
+          {renderShowing(showing)}
+        </div>
       </div>
     </div>
   );

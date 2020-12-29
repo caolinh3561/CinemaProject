@@ -104,10 +104,21 @@ class MovieDetailComponent extends Component {
                   {dayjs(`${movieDetail.ngayKhoiChieu}`).format("DD.MM.YYYY")}
                 </span>
               </div>
-              <div className="mb-3">
+              <div className="mb-4">
                 <span className="nameMovie">{movieDetail.tenPhim}</span>
+                <div className="">
+                  <span className="">120 phút - 0 IMDb - 2D/Digital</span>
+                </div>
               </div>
-              <a className="btnMovieDetail" href="#showing__main" to="/">
+
+              <a
+                className="btnMovieDetail"
+                href="#showing__main"
+                to="/"
+                onClick={() => {
+                  this.props.actFetchShowing();
+                }}
+              >
                 Mua vé
               </a>
             </div>
@@ -166,6 +177,7 @@ const mapStateToProps = (state) => {
     movieDetail: state.movieDetailReducer.movieDetail,
     loading: state.movieDetailReducer.loading,
     err: state.movieDetailReducer.err,
+    showing: state.movieDetailReducer.showing,
   };
 };
 
@@ -174,6 +186,8 @@ const mapDispatchToProps = (dispatch) => {
     actGetMovieDetail: (id) => {
       dispatch(actGetMovieDetail(id));
     },
+    actFetchShowing: () =>
+      dispatch({ type: "UPDATE_SHOWING", payload: "lichChieu" }),
   };
 };
 

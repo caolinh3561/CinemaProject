@@ -8,10 +8,14 @@ let initialState = {
   movieDetail: null,
   loading: false,
   err: null,
+  showing: "lichChieu",
 };
 
 const movieDetailReducer = (state = initialState, action) => {
   switch (action.type) {
+    case "UPDATE_SHOWING":
+      state.showing = action.payload;
+      return { ...state };
     case GET_MOVIE_DETAIL_REQUEST:
       state.loading = true;
       return { ...state };

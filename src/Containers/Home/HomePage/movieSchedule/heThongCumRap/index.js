@@ -42,7 +42,7 @@ class HeThongCumRapComponent extends Component {
   };
 
   handleRenderItem = () => {
-    const { maCR, HTCRList } = this.props;
+    const { maCR, HTCRList, maHTR } = this.props;
     return HTCRList.map((item, index) => {
       return (
         <HTCRItem
@@ -50,6 +50,7 @@ class HeThongCumRapComponent extends Component {
           item={item}
           maCR={maCR}
           maCumRap={this.getMaCumRap}
+          maHTR={maHTR}
         />
       );
     });

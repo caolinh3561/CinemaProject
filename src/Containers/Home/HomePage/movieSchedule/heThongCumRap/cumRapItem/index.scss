@@ -16,13 +16,12 @@
 .LotteCinima {
     color: #ca4137;
 }
-.infoTheater {
-    cursor: pointer;
-    .addressTheater {
-        padding-left: 10px;
-        line-height: 1.7;
-        font-size: 13px;
-        color: #9b9b9b;
-        margin-bottom: 0;
-    }
+.titleTheater {
+    margin-bottom: 0;
+}
+.addressTheater {
+    line-height: 1.7;
+    font-size: 13px;
+    color: #9b9b9b;
+    margin-bottom: 0;
 }

@@ -98,10 +98,12 @@
                 border: none;
                 color: #fff;
                 font-weight: 500;
+                &:hover {
+                    background-color: #b42a14;
+                    text-decoration: none;
+                }
             }
-            .btnMovieDetail:hover {
-                background-color: #b42a14;
-            }
+
             .reviewScore {
                 position: relative;
                 width: 220px;
