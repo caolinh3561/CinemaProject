@@ -25,8 +25,6 @@ export default function UserComponent() {
 
   useEffect(() => {
     const user = JSON.parse(localStorage.getItem("userMember"));
-    // let unmounted = false;
-    // let source = Axios.CancelToken.source();
     if (user) {
       dispatch(getUserInformation(user.taiKhoan));
     } else {
@@ -36,7 +34,6 @@ export default function UserComponent() {
         text: "Bạn vẫn chưa đăng nhập.",
       });
       history.push("/login");
-
       return;
     }
 
@@ -54,6 +51,7 @@ export default function UserComponent() {
   };
 
   const renderUserContent = () => {
+    console.log(userInformation);
     const user = JSON.parse(localStorage.getItem("userMember"));
     if (!user) return;
     switch (selected) {

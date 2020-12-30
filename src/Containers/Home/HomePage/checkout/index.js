@@ -584,35 +584,39 @@ export default function CheckOut() {
   };
 
   const handleOnSubmit = () => {
+    let isCheck = false;
     if (!radioButtonValue) {
       Swal.fire({
         icon: "info",
         title: "Bạn chưa chọn hình thức thanh toán",
       });
-      return;
-    }
-    let thongTinDatVe = { ...datVe };
-    let ketQuaDatVe = {
-      payment: radioButtonValue,
-      thongTinPhim: ticketRoom.thongTinPhim,
-      danhSachGhe: listGheDangChon,
-    };
-    let danhSachGheDat = [];
-    for (let i = 0; i < listGheDangChon.length; i++) {
-      let item = {
-        maGhe: listGheDangChon[i].maGhe,
-        giaVe: listGheDangChon[i].giaVe,
+    } else isCheck = true;
+
+    if (isCheck) {
+      debugger;
+      let thongTinDatVe = { ...datVe };
+      let ketQuaDatVe = {
+        payment: radioButtonValue,
+        thongTinPhim: ticketRoom.thongTinPhim,
+        danhSachGhe: listGheDangChon,
       };
-      danhSachGheDat.push(item);
+      let danhSachGheDat = [];
+      for (let i = 0; i < listGheDangChon.length; i++) {
+        let item = {
+          maGhe: listGheDangChon[i].maGhe,
+          giaVe: listGheDangChon[i].giaVe,
+        };
+        danhSachGheDat.push(item);
+      }
+      thongTinDatVe.danhSachVe = danhSachGheDat;
+      // console.log(thongTinDatVe);
+      dispatch(actBookingTickets(thongTinDatVe, ketQuaDatVe));
+      setTimeout(() => {
+        // window.open("/checkout/result");
+        // history.replace("/");
+        history.replace("/checkout/result");
+      }, 500);
     }
-    thongTinDatVe.danhSachVe = danhSachGheDat;
-    // console.log(thongTinDatVe);
-    dispatch(actBookingTickets(thongTinDatVe, ketQuaDatVe));
-    setTimeout(() => {
-      // window.open("/checkout/result");
-      // history.replace("/");
-      history.replace("/checkout/result");
-    }, 500);
   };
 
   const renderTypeOfMovie = (tenPhim) => {
