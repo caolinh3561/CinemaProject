@@ -75,7 +75,7 @@ export const actAddNewUser = (user) => {
         Swal.fire({
           title: "Thêm Người Dùng Mới thất bại!",
           icon: "error",
-          text: `${err.message}`,
+          text: `Tên tài khoản hoặc email này đã tồn tại!`,
         });
         dispatch(actAddNewUserFail(err.message));
       });

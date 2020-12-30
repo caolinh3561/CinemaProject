@@ -593,7 +593,6 @@ export default function CheckOut() {
     } else isCheck = true;
 
     if (isCheck) {
-      debugger;
       let thongTinDatVe = { ...datVe };
       let ketQuaDatVe = {
         payment: radioButtonValue,
@@ -635,7 +634,7 @@ export default function CheckOut() {
       tenCumRap,
     } = ticketRoom.thongTinPhim;
 
-    const user = JSON.parse(localStorage.getItem("adminMember"));
+    const user = JSON.parse(localStorage.getItem("userMember"));
 
     return (
       <>

@@ -103,7 +103,15 @@ function UserManagement(props) {
           >
             <td>{item.taiKhoan}</td>
             <td>{item.hoTen}</td>
-            <td>{item.email}</td>
+            <td
+              style={{
+                maxWidth: "290px",
+                overflow: "hidden",
+                textOverflow: "ellipsis",
+              }}
+            >
+              {item.email}
+            </td>
             <td>{item.maLoaiNguoiDung}</td>
             <td className="d-flex justify-content-center">
               <Button

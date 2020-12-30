@@ -91,11 +91,16 @@ function Result() {
       });
       if (vFlag && tFlag)
         return (
-          <p className="infor__text">
-            {tongGiaVe} <br />{" "}
-            <small>
-              {giaVeThuong},{giaVeVip}
-            </small>{" "}
+          <p className="infor__text row p-0">
+            <span className="col-sm-6 p-0">{tongGiaVe}</span>
+            <span className="col-sm-6 row p-0">
+              <small className="col-sm-12 p-0" style={{ fontSize: 14 }}>
+                {giaVeThuong}
+              </small>
+              <small className="col-sm-12 p-0" style={{ fontSize: 14 }}>
+                {giaVeVip}
+              </small>
+            </span>
           </p>
         );
       else if (vFlag && !tFlag)

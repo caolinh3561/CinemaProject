@@ -66,6 +66,8 @@ export const actPostNewMovie = (movie) => {
       data: movie,
       headers: {
         Authorization: `Bearer ${accessToken}`,
+        "Access-Control-Allow-Origin": "*",
+        "Content-Type": "application/json",
       },
     })
       .then((res) => {
@@ -73,7 +75,8 @@ export const actPostNewMovie = (movie) => {
         Swal.fire({
           icon: "success",
           title: "Thêm phim mới thành công!",
-          timer: 1500,
+        }).then((rs) => {
+          window.location.reload();
         });
       })
       .catch((err) => {
@@ -103,11 +106,9 @@ export const actUpdateMovie = (movie) => {
         Swal.fire({
           icon: "success",
           title: "Cập nhật phim thành công!",
-          timer: 5000,
-        });
-        setTimeout(() => {
+        }).then((rs) => {
           window.location.reload();
-        }, 1000);
+        });
       })
       .catch((err) => {
         Swal.fire({
@@ -135,11 +136,9 @@ export const actUpdateMovieWithoutImage = (movie) => {
         Swal.fire({
           icon: "success",
           title: "Cập nhật phim thành công!",
-          timer: 5000,
-        });
-        setTimeout(() => {
+        }).then((rs) => {
           window.location.reload();
-        }, 1000);
+        });
       })
       .catch((err) => {
         Swal.fire({
@@ -162,6 +161,8 @@ export const actDeleteMovie = (movieID) => {
       method: "DELETE",
       headers: {
         Authorization: `Bearer ${accessToken}`,
+        "Access-Control-Allow-Origin": "*",
+        "Content-Type": "application/json",
       },
     })
       .then((res) => {
@@ -169,20 +170,24 @@ export const actDeleteMovie = (movieID) => {
         Swal.fire({
           icon: "success",
           title: "Xóa phim thành công!",
-          timer: 5000,
-        });
-        setTimeout(() => {
+        }).then((res) => {
           window.location.reload();
-        }, 1000);
+        });
       })
       .catch((err) => {
-        // dispatch(actPostNewMovieFail(err.message));
-        Swal.fire({
-          icon: "error",
-          title: "Xóa phim thất bại!",
-          text: "Phim đã có lịch chiếu, không thể xóa!",
-          timer: 5000,
-        });
+        if (err.message === "Request failed with status code 500")
+          Swal.fire({
+            icon: "error",
+            title: "Xóa phim thất bại!",
+            text: "Phim đã xếp lịch chiếu, không thể xóa!",
+          });
+        else
+          Swal.fire({
+            icon: "success",
+            title: "Xóa phim thành công!",
+          }).then((res) => {
+            window.location.reload();
+          });
       });
   };
 };

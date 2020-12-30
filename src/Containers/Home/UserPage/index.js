@@ -51,7 +51,6 @@ export default function UserComponent() {
   };
 
   const renderUserContent = () => {
-    console.log(userInformation);
     const user = JSON.parse(localStorage.getItem("userMember"));
     if (!user) return;
     switch (selected) {

@@ -29,9 +29,11 @@ function MovieItem(props) {
             key={item.maPhim}
           >
             <td>{item.maPhim}</td>
-            <td>{item.tenPhim}</td>
-            <td>{item.danhGia}</td>
-            <td>{dayjs(item.ngayKhoiChieu).format("DD/MM/YYYY")}</td>
+            <td style={{ maxWidth: "300px" }}>{item.tenPhim}</td>
+            <td className="text-center">{item.danhGia}</td>
+            <td className="text-center">
+              {dayjs(item.ngayKhoiChieu).format("DD/MM/YYYY")}
+            </td>
             <td>
               <img
                 src={item.hinhAnh}

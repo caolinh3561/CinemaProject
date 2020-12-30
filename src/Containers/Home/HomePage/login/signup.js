@@ -16,11 +16,12 @@ import { useHistory, withRouter } from "react-router-dom";
 function Signup() {
   const history = useHistory();
   let handleSubmit = (values) => {
-    delete values.matKhauConfirm;
+    let valuesClone = { ...values };
+    delete valuesClone.matKhauConfirm;
     Axios({
       url: "https://movie0706.cybersoft.edu.vn/api/QuanLyNguoiDung/DangKy",
       method: "POST",
-      data: values,
+      data: valuesClone,
     })
       .then((res) => {
         setTimeout(() => {
@@ -47,14 +48,12 @@ function Signup() {
         }, 1000);
       })
       .catch((err) => {
-        console.log(err);
         Swal.fire({
           icon: "error",
-          title: "Oop...",
-          text: `${err.message}`,
+          title: "Oops...",
+          text: `Tên tài khoản hoặc email này đã tồn tại`,
         });
       });
-    console.log(values);
   };
 
   function renderSignupForm() {
@@ -83,9 +82,6 @@ function Signup() {
         .email("Email không hợp lệ!"),
       hoTen: Yup.string().required("Không được bỏ trống!"),
       soDt: Yup.string().matches(regex, "Số điện thoại không đúng!"),
-      // soDt: Yup.number("", "chỉ được chứa ký tự số!")
-      //   .required("Không được bỏ trống!")
-      //   .positive("chỉ được chứa ký tự số!"),
     });
     return (
       <>
@@ -93,11 +89,9 @@ function Signup() {
           initialValues={initialState}
           validationSchema={validationSchema}
           enableReinitialize
-          // onSubmit={(values) => console.log(values)}
           onSubmit={(values, actions) => {
             setTimeout(() => {
               handleSubmit(values);
-
               actions.resetForm({
                 taiKhoan: "",
                 matKhau: "",

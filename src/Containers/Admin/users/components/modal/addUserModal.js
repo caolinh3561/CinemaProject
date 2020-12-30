@@ -60,7 +60,7 @@ export default function AddUserModal(props) {
               const { touched, errors } = formikProps;
               // console.log({ values, touched, errors });
               return (
-                <Form>
+                <Form autoComplete="off">
                   {/* <Paper
                         elevation={4}
                         style={{ padding: "20px 15px", marginTop: "30px" }}
@@ -118,11 +118,17 @@ export default function AddUserModal(props) {
                     style={{ width: "48%", marginRight: "2%" }}
                     margin="normal"
                     error={!!errors.matKhau && touched.matKhau}
+                    autoComplete="new-password"
                   >
                     <InputLabel>Mật khẩu</InputLabel>
                     <Field name="matKhau">
                       {({ field }) => (
-                        <Input type="password" fullWidth {...field} />
+                        <Input
+                          autoComplete="new-password"
+                          type="password"
+                          fullWidth
+                          {...field}
+                        />
                       )}
                     </Field>
                     {touched.matKhau && (
