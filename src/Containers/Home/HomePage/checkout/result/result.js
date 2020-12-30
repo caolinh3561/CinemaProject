@@ -32,7 +32,7 @@ function Result() {
       </div>
     );
   }
-  const { thongTinPhim, danhSachGhe } = ketQuaDatVe;
+  const { thongTinPhim, danhSachGhe, payment } = ketQuaDatVe;
 
   const stringTime = () => {
     let dateParts = thongTinPhim.ngayChieu.split("/");
@@ -53,7 +53,10 @@ function Result() {
   const renderDSG = () => {
     let listGhe = [];
     danhSachGhe.forEach((item) => {
-      listGhe.push(item.tenGhe);
+      let loaiGhe;
+      if (item.loaiGhe === "Thuong") loaiGhe = "T";
+      else loaiGhe = "V";
+      listGhe.push(`${item.tenGhe}(${loaiGhe})`);
     });
     return listGhe.join(", ");
   };
@@ -63,15 +66,51 @@ function Result() {
     tongGiaVe = danhSachGhe.reduce((a, b) => {
       return a + b.giaVe;
     }, 0);
+
     tongGiaVe =
       tongGiaVe.toString().replace(/(\d)(?=(\d{3})+(?!\d))/g, "$1.") + "đ";
     if (danhSachGhe.length > 1) {
-      let giaVe =
-        danhSachGhe[0].giaVe
-          .toString()
-          .replace(/(\d)(?=(\d{3})+(?!\d))/g, "$1.") + "đ";
-      return `${tongGiaVe} (${giaVe}/seat)`;
-    } else return tongGiaVe;
+      let giaVeThuong, giaVeVip;
+      let vFlag = false,
+        tFlag = false;
+      danhSachGhe.forEach((item) => {
+        if (item.loaiGhe === "Thuong" && tFlag === false) {
+          giaVeThuong =
+            item.giaVe
+              .toString() //`${tongGiaVe} (${giaVe}/seat)`;
+              .replace(/(\d)(?=(\d{3})+(?!\d))/g, "$1.") + "đ/T";
+          tFlag = true;
+        }
+        if (item.loaiGhe === "Vip" && vFlag === false) {
+          giaVeVip =
+            item.giaVe
+              .toString() //`${tongGiaVe} (${giaVe}/seat)`;
+              .replace(/(\d)(?=(\d{3})+(?!\d))/g, "$1.") + "đ/V";
+          vFlag = true;
+        }
+      });
+      if (vFlag && tFlag)
+        return (
+          <p className="infor__text">
+            {tongGiaVe} <br />{" "}
+            <small>
+              {giaVeThuong},{giaVeVip}
+            </small>{" "}
+          </p>
+        );
+      else if (vFlag && !tFlag)
+        return (
+          <p className="infor__text">
+            {tongGiaVe} <br /> <small>{giaVeVip}</small>{" "}
+          </p>
+        );
+      else
+        return (
+          <p className="infor__text">
+            {tongGiaVe} <br /> <small>{giaVeThuong}</small>{" "}
+          </p>
+        );
+    } else return <p className="infor__text">{tongGiaVe}</p>;
   };
 
   const renderTypeOfMovie = () => {
@@ -124,11 +163,15 @@ function Result() {
               </div>
               <div className="col-sm-5 mb-3">
                 <p className="infor__title">Price</p>
-                <p className="infor__text">{renderPrice()}</p>
+                {renderPrice()}
               </div>
               <div className="col-sm-7 mb-3">
                 <p className="infor__title">Popcorn and drinks</p>
                 <p className="infor__text">None</p>
+              </div>
+              <div className="col-sm-5 mb-3">
+                <p className="infor__title">Payments</p>
+                <p className="infor__text">{payment}</p>
               </div>
             </div>
           </div>

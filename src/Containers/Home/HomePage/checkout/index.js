@@ -1,4 +1,11 @@
-import { Button } from "@material-ui/core";
+import {
+  Button,
+  FormControl,
+  FormControlLabel,
+  FormLabel,
+  Radio,
+  RadioGroup,
+} from "@material-ui/core";
 import LoadingComponent from "Containers/Home/Components/loading";
 import dayjs from "dayjs";
 import React, { useEffect, useState } from "react";
@@ -25,6 +32,11 @@ export default function CheckOut() {
     danhSachVe: [],
   });
   const [listGheDangChon, setListGheDangChon] = useState([]);
+  const [radioButtonValue, setradioButtonValue] = useState("");
+
+  const handleRadioButtonChange = (event) => {
+    setradioButtonValue(event.target.value);
+  };
 
   // lấy thông tin phòng chiếu và thông tin người đặt vé
   useEffect(() => {
@@ -572,8 +584,16 @@ export default function CheckOut() {
   };
 
   const handleOnSubmit = () => {
+    if (!radioButtonValue) {
+      Swal.fire({
+        icon: "info",
+        title: "Bạn chưa chọn hình thức thanh toán",
+      });
+      return;
+    }
     let thongTinDatVe = { ...datVe };
     let ketQuaDatVe = {
+      payment: radioButtonValue,
       thongTinPhim: ticketRoom.thongTinPhim,
       danhSachGhe: listGheDangChon,
     };
@@ -611,6 +631,8 @@ export default function CheckOut() {
       tenCumRap,
     } = ticketRoom.thongTinPhim;
 
+    const user = JSON.parse(localStorage.getItem("adminMember"));
+
     return (
       <>
         <div className="ticketRoom__info" style={{ padding: "0 15px" }}>
@@ -635,13 +657,48 @@ export default function CheckOut() {
 
           <form>
             <label className="d-block">Email:</label>
-            <input style={{ width: "100%" }} type="email" />
+            <input
+              style={{ width: "100%" }}
+              defaultValue={user.email}
+              type="email"
+              required
+            />
             <label className="d-block">Số ĐT:</label>
-            <input style={{ width: "100%" }} type="tel" />
+            <input
+              style={{ width: "100%" }}
+              defaultValue={user.soDT}
+              type="tel"
+              required
+            />
           </form>
           <hr />
           <div className="payType" style={{ minHeight: "200px" }}>
-            <h6>Hình thức thanh toán</h6>
+            {/* <h6>Hình thức thanh toán</h6> */}
+            <FormControl component="fieldset">
+              <FormLabel component="legend">Hình thức thanh toán</FormLabel>
+              <RadioGroup
+                aria-label="payments"
+                name="radioButtonGroup"
+                value={radioButtonValue}
+                onChange={handleRadioButtonChange}
+              >
+                <FormControlLabel
+                  value="ATM nội địa"
+                  control={<Radio color="primary" />}
+                  label="ATM nội địa"
+                />
+                <FormControlLabel
+                  value="Ví Momo"
+                  control={<Radio color="primary" />}
+                  label="Ví Momo"
+                />
+                <FormControlLabel
+                  value="ZaloPay"
+                  control={<Radio color="primary" />}
+                  label="ZaloPay"
+                />
+              </RadioGroup>
+            </FormControl>
           </div>
         </div>
         <hr />

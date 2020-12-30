@@ -154,6 +154,8 @@
 }
 
 .ticketRoom__info {
+  height: calc(100vh - 75px);
+  overflow-y: auto;
   h1 {
     color: rgb(247, 148, 0);
     height: 90px;

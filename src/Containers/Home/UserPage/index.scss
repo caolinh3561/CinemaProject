@@ -21,30 +21,6 @@
     background-size: cover;
   }
 
-  .item-enter {
-    transform: scale(0.01) translateY(800px);
-    opacity: 1;
-    transition: all 0.5s ease-in;
-  }
-
-  .item-enter.item-enter-active {
-    opacity: 1;
-    transform: scale(1) translateY(0px);
-    transition: all 0.5s ease-in;
-  }
-
-  .item-leave {
-    opacity: 0;
-    // height: 0;
-    transform: scale(1) translateY(0px);
-  }
-
-  .item-leave.item-leave-active {
-    opacity: 0;
-    transform: scale(0.01) translateY(400px);
-    // height: 0;
-  }
-
   .cssAnimation__content {
     display: block;
 
@@ -105,14 +81,14 @@
               // transform: translateY(800px);
               opacity: 0;
               z-index: 1;
-              transition: all 1s ease-in;
+              transition: all 0.5s ease-in;
             }
 
             .accComponent-enter.accComponent-enter-active {
               opacity: 1;
               // transform: translateY(0px);
               z-index: 2;
-              transition: all 1s ease-in;
+              transition: all 0.5s ease-in;
               // transform: 500ms;
             }
 
@@ -120,27 +96,16 @@
               opacity: 1;
               z-index: 2;
               height: 0;
-              // transition: all 0.5s ease-out;
-              // transform: scale(1) translateY(0px);
-              // transform: ;
-
-              // transform: translateX(15%);
             }
 
             .accComponent-leave.accComponent-leave-active {
               opacity: 0;
               z-index: 1;
               height: 0;
-              // transform: scale(0.01) translateY(400px);
-              // transition: all 400ms ease-out;
-              // transition: all 0.5s ease-out;
             }
           }
         }
         .ticket__content {
-          min-width: 70%;
-          width: fit-content;
-          max-width: 85%;
           .movieName {
             overflow: hidden;
             white-space: nowrap;
@@ -175,6 +140,29 @@
             }
           }
         }
+      }
+      .item-enter {
+        transform: scale(0.01);
+        opacity: 1;
+        transition: all 0.5s ease-in;
+      }
+
+      .item-enter.item-enter-active {
+        opacity: 1;
+        transform: scale(1);
+        transition: all 0.5s ease-in;
+      }
+
+      .item-leave {
+        opacity: 0;
+        // height: 0;
+        transform: scale(1);
+      }
+
+      .item-leave.item-leave-active {
+        opacity: 0;
+        transform: scale(0.01);
+        // height: 0;
       }
     }
   }
