@@ -49,7 +49,8 @@ class MovieItem extends Component {
   render() {
     return (
       <>
-        <div className="col-md-3 col-sm-6 my-4 movieItem clear">
+        {/* <div className="col-md-3 col-sm-6 my-4 movieItem clear"> */}
+        <div className=" movieItem clear">
           <div className="card">
             <div
               className="showMovieItem"
