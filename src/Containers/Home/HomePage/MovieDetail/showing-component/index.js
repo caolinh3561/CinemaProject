@@ -2,6 +2,7 @@ import React from "react";
 import { useDispatch, useSelector } from "react-redux";
 import DanhGiaComponent from "./danh-gia";
 import "./index.scss";
+import { CSSTransitionGroup } from "react-transition-group";
 import LichChieuComponent from "./lich-chieu";
 import ThongTinComponent from "./thong-tin";
 export default function ShowingComponent(props) {
@@ -16,11 +17,23 @@ export default function ShowingComponent(props) {
   const renderShowing = () => {
     switch (showing) {
       case "lichChieu":
-        return <LichChieuComponent movie={movie} />;
+        return (
+          <div className="showing_css" key={1}>
+            <LichChieuComponent movie={movie} />
+          </div>
+        );
       case "thongTin":
-        return <ThongTinComponent movie={movie} />;
+        return (
+          <div className="showing_css" key={2}>
+            <ThongTinComponent movie={movie} />
+          </div>
+        );
       default:
-        return <DanhGiaComponent movie={movie} />;
+        return (
+          <div className="showing_css" key={3}>
+            <DanhGiaComponent movie={movie} />
+          </div>
+        );
     }
   };
   return (
@@ -57,16 +70,16 @@ export default function ShowingComponent(props) {
           </button>
         </div>
         <div className="showing__content">
-          {/* <div className="cssAnimation__content">
+          <div className="cssAnimation__content">
             <CSSTransitionGroup
-              transitionName="item"
-              transitionEnterTimeout={500}
-              transitionLeaveTimeout={400}
+              transitionName="showing_css"
+              transitionEnterTimeout={300}
+              transitionLeaveTimeout={200}
             >
               {renderShowing(showing)}
             </CSSTransitionGroup>
-          </div> */}
-          {renderShowing(showing)}
+          </div>
+          {/* {renderShowing(showing)} */}
         </div>
       </div>
     </div>

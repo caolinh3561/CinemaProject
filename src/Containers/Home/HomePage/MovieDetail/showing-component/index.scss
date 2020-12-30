@@ -50,37 +50,33 @@
     }
 }
 .cssAnimation__content {
-    .item-enter {
-        // opacity: 0.01;
-        // transform: translateY(800px);
+    display: block;
+}
+.showing_css-enter {
+    animation: fadein 0.3s;
+    -webkit-animation: fadein 0.3s;
+    -moz-animation: fadein 0.3s;
+    -ms-animation: fadein 0.3s;
+    -o-animation: fadein 0.3s;
+    opacity: 1;
+}
+
+.showing_css-enter.showing_css-enter-active {
+    opacity: 1;
+}
+
+.showing_css-leave {
+    opacity: 0;
+}
+
+.showing_css-leave.showing_css-leave-active {
+    opacity: 0;
+}
+@keyframes fadein {
+    from {
         opacity: 0;
-        z-index: 1;
-        transition: all 1s ease-in;
     }
-
-    .item-enter.item-enter-active {
+    to {
         opacity: 1;
-        // transform: translateY(0px);
-        z-index: 2;
-        transition: all 1s ease-in;
-        // transform: 500ms;
-    }
-
-    .item-leave {
-        opacity: 1;
-        z-index: 2;
-        transition: all 1s ease-out;
-        // transform: scale(1) translateY(0px);
-        // transform: ;
-
-        // transform: translateX(15%);
-    }
-
-    .item-leave.item-leave-active {
-        opacity: 0;
-        z-index: 1;
-        // transform: scale(0.01) translateY(400px);
-        // transition: all 400ms ease-out;
-        transition: all 1s ease-out;
     }
 }
