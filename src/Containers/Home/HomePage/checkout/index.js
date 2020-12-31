@@ -2,12 +2,16 @@ import {
   Button,
   FormControl,
   FormControlLabel,
+  FormHelperText,
   FormLabel,
+  Input,
+  InputLabel,
   Radio,
   RadioGroup,
 } from "@material-ui/core";
 import LoadingComponent from "Containers/Home/Components/loading";
 import dayjs from "dayjs";
+import { Field, Form, Formik } from "formik";
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useHistory, useParams } from "react-router-dom";
@@ -16,6 +20,7 @@ import "sweetalert2/src/sweetalert2.scss";
 import Header from "./components/header";
 import "./index.scss";
 import { actBookingTickets, actGetTicketRoom } from "./modules/actions";
+import * as Yup from "yup";
 
 export default function CheckOut() {
   const [timeString, settimeString] = useState("");
@@ -91,14 +96,17 @@ export default function CheckOut() {
   useEffect(() => {
     if (ticketRoom && ticketRoom.danhSachGhe) {
       const { ngayChieu, gioChieu } = ticketRoom.thongTinPhim;
-      const gioChieuChuan = dayjs(`2020/12/28T${gioChieu}`)
-        .add(12, "hour")
-        .format("HH:mm");
-      const date = dayjs().format("DD/MM/YYYY");
-      const time = dayjs().format("HH:mm");
+      const partTimes = ngayChieu.split("/");
 
-      if (date < ngayChieu || (date === ngayChieu && time < gioChieuChuan)) {
-      } else {
+      const timeChieuChuan = dayjs(
+        `${+partTimes[2]}/${partTimes[1]}/${+partTimes[0]}T${gioChieu}`
+      )
+        .add(708, "minute")
+        .format();
+      const timeBooking = dayjs().format();
+      console.log(timeChieuChuan, timeBooking);
+      console.log(ngayChieu, gioChieu);
+      if (dayjs(timeBooking).diff(timeChieuChuan) > 0) {
         history.push("/");
         Swal.fire({
           icon: "info",
@@ -583,7 +591,7 @@ export default function CheckOut() {
     }
   };
 
-  const handleOnSubmit = () => {
+  const handleOnSubmit = (values) => {
     let isCheck = false;
     if (!radioButtonValue) {
       Swal.fire({
@@ -591,8 +599,13 @@ export default function CheckOut() {
         title: "Bạn chưa chọn hình thức thanh toán",
       });
     } else isCheck = true;
-
-    if (isCheck) {
+    if (!isCheck) return;
+    if (!values.soDt || !values.email) {
+      Swal.fire({
+        icon: "info",
+        title: "Bạn vui lòng điền email và số điện thoại",
+      });
+    } else {
       let thongTinDatVe = { ...datVe };
       let ketQuaDatVe = {
         payment: radioButtonValue,
@@ -624,6 +637,129 @@ export default function CheckOut() {
     else return <span className="p">P</span>;
   };
 
+  const renderCheckoutForm = () => {
+    const user = JSON.parse(localStorage.getItem("userMember"));
+    const regex = /\(?([0-9]{3})\)?([ .-]?)([0-9]{3})\2([0-9]{4})/;
+    let initialState = {
+      email: user.email,
+      soDt: user.soDT,
+    };
+    const validationSchema = Yup.object().shape({
+      email: Yup.string()
+        .required("Không được bỏ trống!")
+        .email("Email không hợp lệ!"),
+      soDt: Yup.string()
+        .required("Không được bỏ trống!")
+        .matches(regex, "Số điện thoại không đúng!"),
+    });
+    return (
+      <>
+        <Formik
+          initialValues={initialState}
+          validationSchema={validationSchema}
+          enableReinitialize
+          onSubmit={(values, actions) => {
+            //   setTimeout(() => {
+            handleOnSubmit(values);
+            //     actions.resetForm({
+            //       email: "",
+            //       soDt: "",
+            //     });
+            //     actions.setSubmitting(false);
+            //   }, 1000);
+          }}
+        >
+          {(formikProps) => {
+            const { touched, errors } = formikProps;
+
+            return (
+              <Form>
+                <FormControl
+                  fullWidth
+                  margin="normal"
+                  error={!!errors.email && touched.email}
+                >
+                  <InputLabel>Email</InputLabel>
+                  <Field name="email">
+                    {({ field }) => <Input fullWidth {...field} />}
+                  </Field>
+                  {touched.email && (
+                    <FormHelperText>{errors.email}</FormHelperText>
+                  )}
+                </FormControl>
+
+                <FormControl
+                  fullWidth
+                  margin="normal"
+                  error={!!errors.soDt && touched.soDt}
+                >
+                  <InputLabel>Số Điện Thoại</InputLabel>
+                  <Field name="soDt">
+                    {({ field }) => <Input type="tel" fullWidth {...field} />}
+                  </Field>
+                  {touched.soDt && (
+                    <FormHelperText>{errors.soDt}</FormHelperText>
+                  )}
+                </FormControl>
+                <FormControl component="fieldset">
+                  <FormLabel component="legend">Hình thức thanh toán</FormLabel>
+                  <RadioGroup
+                    aria-label="payments"
+                    name="radioButtonGroup"
+                    value={radioButtonValue}
+                    onChange={handleRadioButtonChange}
+                  >
+                    <FormControlLabel
+                      value="ATM nội địa"
+                      control={<Radio color="primary" />}
+                      label="ATM nội địa"
+                    />
+                    <FormControlLabel
+                      value="Ví Momo"
+                      control={<Radio color="primary" />}
+                      label="Ví Momo"
+                    />
+                    <FormControlLabel
+                      value="ZaloPay"
+                      control={<Radio color="primary" />}
+                      label="ZaloPay"
+                    />
+                  </RadioGroup>
+                </FormControl>
+                {/* </Paper> */}
+                <div className="checkout__fixed">
+                  <p className="note">
+                    Note: Vé đã đặt không thể hoàn trả. Thông tin đặt vé sẽ được
+                    gửi qua tin nhắn(Zalo) và email của bạn. Xin cám ơn!
+                  </p>
+                  <Button
+                    // onClick={() => {
+                    //   handleOnSubmit();
+                    // }}
+                    type="submit"
+                    disabled={warning}
+                    fullWidth
+                    className="btnDatVe"
+                  >
+                    Đặt vé
+                  </Button>
+                </div>
+              </Form>
+            );
+          }}
+        </Formik>
+      </>
+    );
+  };
+
+  const renderNgayChieu = (ngayChieu) => {
+    const now = dayjs().format("DD/MM/YYYY");
+    const tomorrow = dayjs().add(1, "day").format("DD/MM/YYYY");
+    if (now === ngayChieu) return `Hôm nay ${ngayChieu}`;
+    else if (tomorrow === ngayChieu) return `Ngày mai ${ngayChieu}`;
+    else return ngayChieu;
+  };
+
   const renderThongTinDatVe = () => {
     if (!ticketRoom || !ticketRoom.thongTinPhim) return;
     const {
@@ -634,8 +770,6 @@ export default function CheckOut() {
       tenCumRap,
     } = ticketRoom.thongTinPhim;
 
-    const user = JSON.parse(localStorage.getItem("userMember"));
-
     return (
       <>
         <div className="ticketRoom__info" style={{ padding: "0 15px" }}>
@@ -643,13 +777,13 @@ export default function CheckOut() {
             {renderGiaVe()}
           </h1>
 
-          <h5>
+          <h5 style={{ fontSize: 17 }}>
             {renderTypeOfMovie(tenPhim)}
             {tenPhim}
           </h5>
-          <p>{tenCumRap}</p>
-          <p>
-            {ngayChieu} - {gioChieu} - {tenRap}
+          <p style={{ fontSize: 15 }}>{tenCumRap}</p>
+          <p style={{ fontSize: 15 }}>
+            {renderNgayChieu(ngayChieu)} - {gioChieu} - {tenRap}
           </p>
           <hr />
 
@@ -657,64 +791,8 @@ export default function CheckOut() {
             Ghế: {renderDSGhe()}
             <hr />
           </div>
-
-          <form>
-            <label className="d-block">Email:</label>
-            <input
-              style={{ width: "100%" }}
-              defaultValue={user.email}
-              type="email"
-              required
-            />
-            <label className="d-block">Số ĐT:</label>
-            <input
-              style={{ width: "100%" }}
-              defaultValue={user.soDT}
-              type="tel"
-              required
-            />
-          </form>
-          <hr />
-          <div className="payType" style={{ minHeight: "200px" }}>
-            {/* <h6>Hình thức thanh toán</h6> */}
-            <FormControl component="fieldset">
-              <FormLabel component="legend">Hình thức thanh toán</FormLabel>
-              <RadioGroup
-                aria-label="payments"
-                name="radioButtonGroup"
-                value={radioButtonValue}
-                onChange={handleRadioButtonChange}
-              >
-                <FormControlLabel
-                  value="ATM nội địa"
-                  control={<Radio color="primary" />}
-                  label="ATM nội địa"
-                />
-                <FormControlLabel
-                  value="Ví Momo"
-                  control={<Radio color="primary" />}
-                  label="Ví Momo"
-                />
-                <FormControlLabel
-                  value="ZaloPay"
-                  control={<Radio color="primary" />}
-                  label="ZaloPay"
-                />
-              </RadioGroup>
-            </FormControl>
-          </div>
+          {renderCheckoutForm()}
         </div>
-        <hr />
-        <Button
-          onClick={() => {
-            handleOnSubmit();
-          }}
-          disabled={warning}
-          fullWidth
-          className="btnDatVe"
-        >
-          Đặt vé
-        </Button>
       </>
     );
   };

@@ -73,21 +73,35 @@
 .checkout__right {
   position: relative;
   height: 100%;
-  .btnDatVe {
+  .checkout__fixed {
+    .note {
+      // margin: 0;
+      color: chocolate;
+      text-align: center;
+      border-top: 1px solid;
+      margin: 0.75px 15px;
+      font-size: 80%;
+    }
     position: absolute;
     bottom: 0;
     right: 0;
     left: 0;
-    outline: none;
-    height: 75px;
-    font-size: 20px;
-    color: white;
-    background-image: linear-gradient(223deg, #f79400 0, #ffe867 100%);
-    border-radius: 0;
-  }
-  .MuiButton-root.Mui-disabled {
-    background-color: rgb(170, 170, 170);
-    background-image: none;
+    .btnDatVe {
+      // position: absolute;
+      // bottom: 0;
+      // right: 0;
+      // left: 0;
+      outline: none;
+      height: 75px;
+      font-size: 20px;
+      color: white;
+      background-image: linear-gradient(223deg, #f79400 0, #ffe867 100%);
+      border-radius: 0;
+    }
+    .MuiButton-root.Mui-disabled {
+      background-color: rgb(170, 170, 170);
+      background-image: none;
+    }
   }
 }
 
@@ -154,7 +168,7 @@
 }
 
 .ticketRoom__info {
-  height: calc(100vh - 75px);
+  height: calc(100vh - 133.5px);
   overflow-y: auto;
   h1 {
     color: rgb(247, 148, 0);
@@ -170,7 +184,7 @@
       border-radius: 4px;
       padding: 0 8px;
       margin-right: 5px;
-      font-size: 18px;
+      font-size: 16px;
       min-width: 33px;
       text-align: center;
     }
@@ -180,5 +194,26 @@
     .p {
       background-color: #00ac4d;
     }
+  }
+  &::-webkit-scrollbar-track {
+    box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.1);
+    background-color: #bdbdbd;
+    border-radius: 5px;
+  }
+  &::-webkit-scrollbar {
+    width: 5px;
+    background-color: #dfdbdb;
+  }
+  &::-webkit-scrollbar-thumb {
+    border-radius: 5px;
+    background: linear-gradient(to bottom, #f79400, #f76f00);
+    // background-image: -webkit-gradient(
+    //   linear,
+    //   40% 0%,
+    //   75% 84%,
+    //   from(#f79400),
+    //   to(#fb4226),
+    //   color-stop(0.6, #f76f00)
+    // );
   }
 }
