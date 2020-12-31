@@ -207,15 +207,15 @@
   }
   &::-webkit-scrollbar-thumb {
     border-radius: 5px;
-    background-color: #bdbdbd;
+    // background-color: #bdbdbd;
     // background: linear-gradient(to bottom, #f79400, #f76f00);
-    // background-image: -webkit-gradient(
-    //   linear,
-    //   40% 0%,
-    //   75% 84%,
-    //   from(#f79400),
-    //   to(#fb4226),
-    //   color-stop(0.6, #f76f00)
-    // );
+    background-image: -webkit-gradient(
+      linear,
+      40% 0%,
+      75% 84%,
+      from(#cccccc),
+      to(#8d8c8c),
+      color-stop(0.6, #bdbdbd)
+    );
   }
 }

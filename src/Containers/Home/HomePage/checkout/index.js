@@ -104,8 +104,7 @@ export default function CheckOut() {
         .add(768, "minute")
         .format();
       const timeBooking = dayjs().format();
-      console.log(timeChieuChuan, timeBooking);
-      console.log(ngayChieu, gioChieu);
+
       if (dayjs(timeBooking).diff(timeChieuChuan) > 0) {
         history.push("/");
         Swal.fire({
@@ -701,7 +700,7 @@ export default function CheckOut() {
                     <FormHelperText>{errors.soDt}</FormHelperText>
                   )}
                 </FormControl>
-                <FormControl component="fieldset">
+                <FormControl className="mt-3" component="fieldset">
                   <FormLabel component="legend">Hình thức thanh toán</FormLabel>
                   <RadioGroup
                     aria-label="payments"

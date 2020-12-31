@@ -33,7 +33,7 @@ class HeThongRapComponent extends Component {
               style={{
                 width: "50px",
                 height: "50px",
-                opacity: item.maHeThongRap === maHeThongRap ? 1 : 0.4,
+                opacity: item.maHeThongRap === maHeThongRap ? 1 : 0.55,
               }}
             />
           </li>

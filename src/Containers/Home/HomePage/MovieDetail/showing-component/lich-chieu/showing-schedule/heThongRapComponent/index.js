@@ -36,7 +36,7 @@ export default function HeThongRapComponent(props) {
               style={{
                 width: "50px",
                 height: "50px",
-                opacity: item.maHeThongRap === maHTR ? 1 : 0.3,
+                opacity: item.maHeThongRap === maHTR ? 1 : 0.55,
               }}
             />
           </li>

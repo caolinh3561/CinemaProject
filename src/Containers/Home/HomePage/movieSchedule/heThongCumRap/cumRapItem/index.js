@@ -57,7 +57,7 @@ class HTCRItem extends Component {
         }}
       >
         <img
-          style={{ opacity: item.maCumRap === maCR ? 1 : 0.4 }}
+          style={{ opacity: item.maCumRap === maCR ? 1 : 0.55 }}
           src={
             item.maCumRap.includes("glx-nguyen-du")
               ? `/img/imagesTheater/glx-nguyen-du.png`
@@ -68,7 +68,7 @@ class HTCRItem extends Component {
 
         <div
           className="content__right"
-          style={{ opacity: item.maCumRap === maCR ? 1 : 0.4 }}
+          style={{ opacity: item.maCumRap === maCR ? 1 : 0.55 }}
         >
           <h6 className="titleTheater">
             {this.renderTitleTheater(item, maHTR)}

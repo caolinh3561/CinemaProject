@@ -16,6 +16,7 @@ export default function InforTicket(props) {
     return infor.thongTinDatVe
       .slice()
       .reverse()
+      .slice(0, 20)
       .map((item) => {
         return <InforItem key={item.maVe} item={item} />;
       });
