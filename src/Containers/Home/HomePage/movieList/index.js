@@ -29,7 +29,7 @@ class MovieList extends Component {
       speed: 500,
       slidesPerRow: 2,
       slidesToShow: 4,
-      slidesToScroll: 8,
+      slidesToScroll: 4,
       arrows: true,
     };
 
@@ -45,9 +45,13 @@ class MovieList extends Component {
             })}
         </div> */}
         <Slider className="example1" {...settings}>
-          {movieList.reverse().map((item, index) => {
-            return <MovieItem key={index} movie={item} />;
-          })}
+          {movieList
+            .slice()
+            .reverse()
+            .slice(0, 15)
+            .map((item, index) => {
+              return <MovieItem key={index} movie={item} />;
+            })}
         </Slider>
       </div>
     );
