@@ -101,7 +101,7 @@ export default function CheckOut() {
       const timeChieuChuan = dayjs(
         `${+partTimes[2]}/${partTimes[1]}/${+partTimes[0]}T${gioChieu}`
       )
-        .add(708, "minute")
+        .add(768, "minute")
         .format();
       const timeBooking = dayjs().format();
       console.log(timeChieuChuan, timeBooking);
