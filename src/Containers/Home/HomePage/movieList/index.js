@@ -7,7 +7,41 @@ import "slick-carousel/slick/slick-theme.css";
 import "./index.scss";
 import LoadingComponent from "Containers/Home/Components/loading";
 import Slider from "react-slick";
+import Swal from "sweetalert2/dist/sweetalert2.js";
+import "sweetalert2/src/sweetalert2.scss";
+import ModalVideo from "react-modal-video";
+
 class MovieList extends Component {
+  constructor() {
+    super();
+    this.state = {
+      isOpen: false,
+      videoId: "",
+    };
+    this.openModal = this.openModal.bind(this);
+  }
+
+  openModal() {
+    this.setState({ isOpen: true });
+  }
+
+  onPlayTrailer = (url) => {
+    // eslint-disable-next-line
+    var regExp = /^.*((youtu.be\/)|(v\/)|(\/u\/\w\/)|(embed\/)|(watch\?))\??v?=?([^#\&\?]*).*/;
+    var match = url.match(regExp);
+    if (match && match[7].length === 11) {
+      var videoId = match[7];
+    } else {
+      Swal.fire({
+        icon: "error",
+        title: "Oops...",
+        text: "Phim này hiện chưa có trailer...",
+      });
+      return;
+    }
+    this.setState({ videoId: videoId, isOpen: true });
+  };
+
   componentDidMount() {
     this.props.getMovies();
   }
@@ -50,9 +84,24 @@ class MovieList extends Component {
             .reverse()
             .slice(0, 15)
             .map((item, index) => {
-              return <MovieItem key={index} movie={item} />;
+              return (
+                <MovieItem
+                  onPlayTrailer={this.onPlayTrailer}
+                  key={index}
+                  movie={item}
+                />
+              );
             })}
         </Slider>
+        <ModalVideo
+          youtube={{
+            autoplay: "true",
+          }}
+          channel="youtube"
+          isOpen={this.state.isOpen}
+          videoId={this.state.videoId}
+          onClose={() => this.setState({ isOpen: false })}
+        />
       </div>
     );
   }

@@ -1,7 +1,5 @@
 import React, { Component } from "react";
-import ModalVideo from "react-modal-video";
 import "react-modal-video/scss/modal-video.scss";
-import Swal from "sweetalert2/dist/sweetalert2.js";
 import "sweetalert2/src/sweetalert2.scss";
 import { connect } from "react-redux";
 import { withRouter } from "react-router-dom";
@@ -10,34 +8,8 @@ import { actGetMovieTrailerSource } from "./../../../Components/movieTrailerModa
 import "./index.scss";
 
 class MovieItem extends Component {
-  constructor() {
-    super();
-    this.state = {
-      isOpen: false,
-      videoId: "",
-    };
-    this.openModal = this.openModal.bind(this);
-  }
-
-  openModal() {
-    this.setState({ isOpen: true });
-  }
-
   handlePlayTrailer = (url) => {
-    // eslint-disable-next-line
-    var regExp = /^.*((youtu.be\/)|(v\/)|(\/u\/\w\/)|(embed\/)|(watch\?))\??v?=?([^#\&\?]*).*/;
-    var match = url.match(regExp);
-    if (match && match[7].length === 11) {
-      var videoId = match[7];
-    } else {
-      Swal.fire({
-        icon: "error",
-        title: "Oops...",
-        text: "Phim này hiện chưa có trailer...",
-      });
-      return;
-    }
-    this.setState({ videoId: videoId, isOpen: true });
+    this.props.onPlayTrailer(url);
   };
 
   handleClickDetailMovie = (e) => {
@@ -49,7 +21,6 @@ class MovieItem extends Component {
   render() {
     return (
       <>
-        {/* <div className="col-md-3 col-sm-6 my-4 movieItem clear"> */}
         <div className=" movieItem clear">
           <div className="card">
             <div
@@ -95,7 +66,7 @@ class MovieItem extends Component {
             </div>
           </div>
         </div>
-        <ModalVideo
+        {/* <ModalVideo
           youtube={{
             autoplay: "true",
           }}
@@ -103,7 +74,7 @@ class MovieItem extends Component {
           isOpen={this.state.isOpen}
           videoId={this.state.videoId}
           onClose={() => this.setState({ isOpen: false })}
-        />
+        /> */}
       </>
     );
   }
