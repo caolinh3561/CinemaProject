@@ -2,8 +2,40 @@ import React, { Component } from "react";
 import { Link, withRouter } from "react-router-dom";
 import tixLogo from "assets/img/tix-logo.png";
 import "./index.scss";
+import Select from "react-select";
 
 class HeaderComponent extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      locationSelect: { value: 1, label: "Hồ Chí Minh" },
+      locationSelectOpen: false,
+    };
+  }
+
+  locationList = () => {
+    return [
+      { value: 1, label: "Hồ Chí Minh" },
+      { value: 2, label: "Hà Nội" },
+      { value: 3, label: "Hải Phòng" },
+      { value: 4, label: "Đà Nẵng" },
+      { value: 5, label: "Đồng Nai" },
+      { value: 6, label: "Bà Rịa" },
+      { value: 7, label: "Vũng Tàu" },
+    ];
+  };
+
+  handleLocationChange = (value) => {
+    // console.log(e.target.value);
+    this.setState({
+      locationSelect: value,
+      // locationSelectOpen: false,
+    });
+    // setTimeout(() => {
+    //   window.location.reload();
+    // }, 500);
+  };
+
   handleClickTK = () => {
     // if (this.props.location.pathname === "/user") return;
     this.props.history.push({
@@ -134,7 +166,25 @@ class HeaderComponent extends Component {
             </li>
           </ul>
         </nav>
-        {this.renderUserInfor()}
+        <div className="header__right__content">
+          {this.renderUserInfor()}
+          <div className="location">
+            <i
+              className="locationIcon material-icons"
+              style={{ color: "#b9b9b9" }}
+            >
+              location_on
+            </i>
+            {/* <InputLabel htmlFor="locationSelect">Age</InputLabel> */}
+            <Select
+              className="selectLocation"
+              isSearchable={false}
+              value={this.state.locationSelect}
+              onChange={this.handleLocationChange}
+              options={this.locationList()}
+            />
+          </div>
+        </div>
       </header>
     );
   }

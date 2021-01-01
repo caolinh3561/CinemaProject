@@ -17,8 +17,8 @@ export default function InforTicket(props) {
       .slice()
       .reverse()
       .slice(0, 20)
-      .map((item) => {
-        return <InforItem key={item.maVe} item={item} />;
+      .map((item, index) => {
+        return <InforItem index={index} key={item.maVe} item={item} />;
       });
   };
 

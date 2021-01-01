@@ -4,10 +4,14 @@ import dayjs from "dayjs";
 export default function InforItem(props) {
     const [toggle, setToggle] = useState(false);
     const [gioKhoiChieu, setgioKhoiChieu] = useState("");
-    const {item} = props;
+    const {item,index} = props;
 
     useEffect(() => {
         randomTime();
+        setTimeout(() => {
+            if(index === 0)
+            setToggle(true)
+        }, 700);
         // eslint-disable-next-line
     }, [])
 
@@ -51,8 +55,10 @@ export default function InforItem(props) {
             
             <div className={toggle? "col-sm-12 moreInfor active":"col-sm-12 moreInfor"}>
             {/* <div className="col-sm-12 moreInfor" style={{display: toggle? "block" : "none",transition:"all 0.5s"}}> */}
-                <p className="tenHTR"> Hệ thống rạp: {item.danhSachGhe[0].tenHeThongRap} | {item.danhSachGhe[0].tenCumRap}</p>
+                <p className="maVe">Mã vé: {item.maVe}</p>
                 <p className="time">Ngày chiếu:  {gioKhoiChieu}</p>
+                <p className="tenHTR"> Hệ thống rạp: {item.danhSachGhe[0].tenHeThongRap} | {item.danhSachGhe[0].tenCumRap}</p>
+                
                 <div className="danhSachGhe pb-2">
                     Ghế: {renderDanhSachGhe()} 
                 </div>

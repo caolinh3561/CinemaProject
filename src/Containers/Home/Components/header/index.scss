@@ -12,6 +12,66 @@ header {
   z-index: 999999;
   background-color: rgba(255, 255, 255, 1);
   transition: all 0.2s;
+  .header__right__content {
+    display: flex;
+    // justify-content: center;
+    align-items: center;
+    .location {
+      // display: flex;
+      // align-items: center;
+      position: relative;
+      .locationIcon {
+        position: absolute;
+        top: 4px;
+        left: 2px;
+        z-index: 5;
+        font-size: 18px;
+      }
+      display: flex;
+      width: 150px;
+      height: 26px;
+      border-left: 1px solid #b9b9b9;
+      font-size: 14px;
+      align-items: center;
+      justify-content: center;
+
+      .selectLocation {
+        cursor: pointer;
+        width: -webkit-fill-available;
+        // . css-g1d714-ValueContainer{}
+        .css-1uccc91-singleValue {
+          color: #3e3c3c;
+          padding-left: 15px;
+        }
+        .css-1pahdxg-control,
+        .css-1fhf3k1-control {
+          outline: none !important;
+          border: none !important;
+          box-shadow: none;
+
+          &:hover,
+          &:focus {
+            outline: none !important;
+            border: none !important;
+            box-shadow: none;
+          }
+        }
+        .css-1okebmr-indicatorSeparator {
+          width: 0;
+        }
+        .css-yk16xz-control {
+          border: none;
+          outline: none;
+        }
+      }
+    }
+  }
+  .header__menu {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+  }
 }
 header:hover {
   background-color: white;
@@ -20,6 +80,7 @@ header:hover {
   width: 60px;
 }
 .header__menu ul {
+  padding: 0;
   list-style: none;
 }
 .movie__item p {
@@ -40,14 +101,16 @@ header:hover {
 }
 
 .signin {
+  cursor: pointer;
   display: flex;
   position: relative;
   align-items: center;
   text-decoration: none;
-  color: #9b9b9b;
-  margin: 0;
-  padding: 20px 0;
+  color: #3e3c3c;
+  margin: 19px 8px;
   font-size: 14px;
+  height: 32px;
+  padding-right: 8px;
   img {
     height: auto;
     width: 30px;
