@@ -57,7 +57,7 @@ export default function UserComponent() {
       case "inforAccount":
         return (
           <div className="item" key={1}>
-            <InforAccount handleSelect={handleSelect} user={user} />
+            <InforAccount handleSelect={handleSelect} user={userInformation} />
           </div>
         );
       case "inforTicket":

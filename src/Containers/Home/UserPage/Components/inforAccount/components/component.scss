@@ -1,4 +1,38 @@
+.changePassword__content {
+  .form__row {
+    height: 50px;
+    justify-content: space-between;
+    align-items: center;
+  }
+  .btn__content {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    .btnCapNhat {
+      width: 40%;
+      color: white;
+      outline: none;
+    }
+  }
+}
+
 .updateInfor__content {
+  .form__row {
+    height: 50px;
+    justify-content: space-between;
+    align-items: end;
+  }
+  .btn__content {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    .btnCapNhat {
+      width: 40%;
+      color: white;
+      outline: none;
+    }
+  }
+
   .infor__item {
     display: flex;
     align-items: center;

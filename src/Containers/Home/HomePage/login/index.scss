@@ -83,17 +83,25 @@
       width: 100%;
     }
   }
-  .logo__item {
-    margin-right: 7px;
-    border-radius: 7px;
-    &:hover {
-      border: 2 solid rgb(103, 103, 255);
-    }
-  }
 
   .login__content.signUp__mode {
     transform: translate(500px, -50%) scale(0.1);
     opacity: 0;
     // transform: translateX(1000px);
+  }
+}
+.social__logo {
+  height: 50px;
+  display: flex;
+  justify-content: center;
+  align-items: flex-end;
+  .logo__item {
+    margin-right: 7px;
+    border-radius: 7px;
+    transition: all 0.35s;
+    &:hover {
+      border: 2 solid rgb(103, 103, 255);
+      margin-bottom: 10px;
+    }
   }
 }

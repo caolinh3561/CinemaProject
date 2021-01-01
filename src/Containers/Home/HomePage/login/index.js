@@ -183,7 +183,7 @@ class UserLogin extends Component {
               Đăng ký ngay!
             </Link>
           </p>
-          <p className="text-white ">Hoặc đăng nhập với</p>
+          <p className="text-white mb-1">Hoặc đăng nhập với</p>
           <div className="social__logo">{this.renderSocialLogo()}</div>
         </div>
       </div>
