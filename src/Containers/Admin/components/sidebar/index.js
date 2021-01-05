@@ -10,41 +10,33 @@ function SidebarComponent() {
       </div>
       <div>
         <ul className="sideBar__list">
-          <li>
-            <Link
-              to="/admin/users"
-              className="text-success text-decoration-none display-5"
-            >
-              User
-            </Link>
-          </li>
-          <li>
-            <Link
-              to="/admin/movies"
-              className="text-success text-decoration-none display-5"
-            >
-              Movie
-            </Link>
-          </li>
-          <li>
-            <Link
-              to="/"
-              className="text-success text-decoration-none display-5"
-            >
-              Home
-            </Link>
-          </li>
-          <li>
-            <Link
-              to="/"
-              className="text-success text-decoration-none display-5 p-0"
-              onClick={() => {
-                localStorage.removeItem("adminMember");
-              }}
-            >
-              Logout
-            </Link>
-          </li>
+          <Link
+            to="/admin/users"
+            className="text-success text-decoration-none display-5"
+          >
+            <li>User</li>
+          </Link>
+
+          <Link
+            to="/admin/movies"
+            className="text-success text-decoration-none display-5"
+          >
+            <li>Movie</li>
+          </Link>
+
+          <Link to="/" className="text-success text-decoration-none display-5">
+            <li>Home</li>
+          </Link>
+
+          <Link
+            to="/"
+            className="text-success text-decoration-none display-5 p-0"
+            onClick={() => {
+              localStorage.removeItem("adminMember");
+            }}
+          >
+            <li>Logout</li>
+          </Link>
         </ul>
       </div>
     </>

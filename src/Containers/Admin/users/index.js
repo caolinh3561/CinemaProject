@@ -89,7 +89,6 @@ function UserManagement(props) {
 
   const handleUpdate = (user) => {
     const newUser = { ...user, maNhom: "GP01" };
-    // console.log(newUser);
     dispatch(actUpdateUser(newUser));
   };
 
@@ -122,12 +121,14 @@ function UserManagement(props) {
                 }}
                 data-toggle="modal"
                 data-target="#userModal"
+                title="Cập nhật tài khoản"
               >
                 <BuildIcon fontSize="small" style={{ color: green[500] }} />
               </Button>
               <Button
                 size="small"
                 style={{ outline: "none" }}
+                title="Xóa tài khoản"
                 onClick={() => {
                   handleDelete(item.taiKhoan);
                 }}
@@ -141,7 +142,7 @@ function UserManagement(props) {
     }
   }
   return (
-    <div>
+    <div id="userAdmin__content">
       <h1 className="text-center display-4 text-success">User Management</h1>
       <nav className="d-flex justify-content-between mb-4">
         <Input

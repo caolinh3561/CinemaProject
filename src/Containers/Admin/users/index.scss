@@ -10,3 +10,11 @@
     }
   }
 }
+#userAdmin__content {
+  .MuiPaginationItem-page.Mui-selected {
+    background-color: rgba(0, 0, 0, 0.38) !important;
+  }
+  .MuiPaginationItem-page:hover {
+    background-color: rgba(0, 0, 0, 0.14);
+  }
+}

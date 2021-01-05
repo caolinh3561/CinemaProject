@@ -3,6 +3,9 @@ import { useDispatch } from "react-redux";
 import { useHistory } from "react-router-dom";
 import "./index.scss";
 import { actLogin } from "./modules/action";
+import bg from "assets/img/background/rs__background.jpg";
+import { Button } from "@material-ui/core";
+
 function LoginPage() {
   const [user, setUser] = useState({ taiKhoan: "", matKhau: "" });
   const history = useHistory();
@@ -20,14 +23,15 @@ function LoginPage() {
     dispatch(actLogin(user, history));
   }
   return (
-    <div className="background__Login">
-      <div className="login__container">
-        <h1 className="display-4 text-center text-success">Login</h1>
+    <div
+      className="background__Login"
+      style={{ backgroundImage: `url(${bg})` }}
+    >
+      <div className="login__container" style={{ color: "lightgray" }}>
+        <h1 className="display-4 text-center">Login</h1>
         <form className="login__form" onSubmit={handleSubmit}>
           <div className="form-group">
-            <label htmlFor="exampleInputEmail1" className="text-success">
-              Username
-            </label>
+            <label htmlFor="exampleInputEmail1">Username</label>
             <input
               type="text"
               className="form-control"
@@ -39,9 +43,7 @@ function LoginPage() {
             />
           </div>
           <div className="form-group">
-            <label htmlFor="exampleInputPassword1" className="text-success">
-              Password
-            </label>
+            <label htmlFor="exampleInputPassword1">Password</label>
             <input
               type="password"
               className="form-control"
@@ -51,9 +53,9 @@ function LoginPage() {
               onChange={handleOnChange}
             />
           </div>
-          <button type="submit" className="btn btn-success">
+          <Button type="submit" variant="contained" style={{ outline: "none" }}>
             Login
-          </button>
+          </Button>
         </form>
       </div>
     </div>

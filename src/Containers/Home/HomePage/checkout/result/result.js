@@ -42,7 +42,7 @@ function Result() {
 
   const durationTime = () => {
     let durationTime = dayjs(`2000-01-01T${thongTinPhim.gioChieu}`).add(
-      708,
+      720,
       "minute"
     );
     return `${dayjs(durationTime).format("HH:mm")} ~ ${dayjs(durationTime)

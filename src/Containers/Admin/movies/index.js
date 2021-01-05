@@ -10,6 +10,8 @@ import {
 import MovieItem from "./components/movieItem/movieItem";
 import MovieModal from "./components/movieModal/MovieModal";
 import ScheduleModal from "./components/scheduleModal/scheduleModal";
+import "./index.scss";
+import dayjs from 'dayjs';
 
 function MovieManagement(props) {
   const responseData = useSelector(
@@ -20,7 +22,7 @@ function MovieManagement(props) {
   const movieNeedUpdate = useSelector(
     (state) => state.movieListWithPaginationReducer.movieNeedUpdate
   );
-  const [movie, setMovie] = useState({
+  const movie = {
     maPhim: 0,
     tenPhim: "",
     biDanh: "",
@@ -30,7 +32,7 @@ function MovieManagement(props) {
     maNhom: "GP01",
     ngayKhoiChieu: "",
     danhGia: 0,
-  });
+  };
   const [movieNeedAddSchedule, setMovieNeedAddSchedule] = useState({
     maPhim: 0,
     tenPhim: "",
@@ -48,15 +50,15 @@ function MovieManagement(props) {
   }
 
   function handleUpdate(item) {
-    const { name, value } = item;
-    console.log(item);
     setUpdatingMovie(true);
-    setMovie({
-      ...movie,
-      [name]: value,
-    });
+    let cloneItem = {...item,ngayKhoiChieu:dayjs(item.ngayKhoiChieu).format("DD/MM/YYYY").toString() }
+    
+    // setMovie({
+    //   ...movie,
+    //   [name]: value,
+    // });
 
-    dispatch(actSendMovieUpdating(item));
+    dispatch(actSendMovieUpdating(cloneItem));
   }
 
   function handleDelete(id) {
@@ -102,7 +104,7 @@ function MovieManagement(props) {
           />
         </tbody>
       </table>
-      <div>
+      <div id="paginationId">
         <Pagination
           count={responseData ? responseData.totalPages : 10}
           page={page}
@@ -114,9 +116,6 @@ function MovieManagement(props) {
       <MovieModal
         movie={updatingMovie ? movieNeedUpdate : movie}
         updatingMovie={updatingMovie}
-        // handleUpdate={handleUpdate}
-        // handleSubmit={handleSubmit}
-        // handleOnChange={handleOnChange}
       />
       <ScheduleModal movie={movieNeedAddSchedule} />
     </>

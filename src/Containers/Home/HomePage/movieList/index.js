@@ -82,7 +82,7 @@ class MovieList extends Component {
           {movieList
             .slice()
             .reverse()
-            .slice(0, 15)
+            .slice(2, 17)
             .map((item, index) => {
               return (
                 <MovieItem

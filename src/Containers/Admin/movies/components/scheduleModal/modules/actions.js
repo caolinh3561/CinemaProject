@@ -84,7 +84,7 @@ export const actPostNewSchedule = (newSchedule) => {
         Swal.fire({
           icon: "error",
           title: "Thêm lịch chiếu thất bại!",
-          text: `${err.message}`,
+          text: `Lịch chiếu đã bị trùng!`,
         });
       });
   };

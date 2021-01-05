@@ -49,6 +49,7 @@ function MovieItem(props) {
                   minWidth: "32px",
                   marginRight: "10px",
                 }}
+                title="Cập nhật phim"
                 onClick={() => {
                   handleUpdate(item);
                 }}
@@ -69,6 +70,7 @@ function MovieItem(props) {
                   minWidth: "32px",
                   marginRight: "10px",
                 }}
+                title="Thêm lịch chiếu"
                 onClick={() => {
                   props.handleSchedule(item);
                 }}
@@ -82,6 +84,7 @@ function MovieItem(props) {
               <Button
                 size="small"
                 style={{ outline: "none", minWidth: "32px" }}
+                title="Xóa phim"
                 onClick={() => {
                   Swal.fire({
                     allowOutsideClick: false,

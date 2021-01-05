@@ -66,7 +66,6 @@ function MovieModal(props) {
 
   function handleImageChange(e, setFieldValue) {
     if (!e.target.files[0]) return;
-    console.log(e.target.files[0]);
     setpicture(e.target.files[0]);
     setFieldValue("hinhAnh", e.target.files[0].name, false);
 
@@ -76,7 +75,6 @@ function MovieModal(props) {
   //tenPhim,moTa,trailer,hinhAnh,ngayKhoiChieu|maPhim,danhGia,maNhom,biDanh
   function createNewMovie(values) {
     var frm = new FormData();
-    console.log(picture, picture.name);
     frm.append("hinhAnh", picture, picture.name);
     frm.append("tenPhim", values.tenPhim);
     frm.append("moTa", values.moTa);
@@ -105,7 +103,6 @@ function MovieModal(props) {
     fileReader.readAsDataURL(file);
     fileReader.onload = (e) => {
       setpreviewImage(e.target.result);
-      console.log(previewImage);
     };
   }
 
