@@ -115,7 +115,7 @@ export default function LichChieuComponent(props) {
 
   return (
     <div className="renderLichChieu" style={{}}>
-      {renderLichChieu()}
+      {renderLichChieu().reverse()}
     </div>
   );
 }

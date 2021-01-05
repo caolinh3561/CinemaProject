@@ -59,6 +59,7 @@ class MovieItem extends Component {
                   onClick={() =>
                     this.props.history.push(`/movie/${this.props.movie.maPhim}`)
                   }
+                  style={{ outline: "none" }}
                 >
                   Đặt Vé
                 </button>
