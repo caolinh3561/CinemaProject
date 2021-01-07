@@ -45,8 +45,25 @@ class MovieList extends Component {
   componentDidMount() {
     this.props.getMovies();
   }
+
+  renderMovieList = () => {
+    let index = this.props.movieList.findIndex((x) => x.maPhim === 4665);
+    return this.props.movieList
+      .slice(index, index + 15)
+      .reverse()
+      .map((item, index) => {
+        return (
+          <MovieItem
+            onPlayTrailer={this.onPlayTrailer}
+            key={index}
+            movie={item}
+          />
+        );
+      });
+  };
+
   render() {
-    const { movieList, loading, err } = this.props;
+    const { loading, err } = this.props;
     // console.log(movieList);
     if (err) {
       // TODO: <ErrorMessage />
@@ -79,19 +96,7 @@ class MovieList extends Component {
             })}
         </div> */}
         <Slider className="example1" {...settings}>
-          {movieList
-            .slice()
-            .reverse()
-            .slice(12, 27)
-            .map((item, index) => {
-              return (
-                <MovieItem
-                  onPlayTrailer={this.onPlayTrailer}
-                  key={index}
-                  movie={item}
-                />
-              );
-            })}
+          {this.renderMovieList()}
         </Slider>
         <ModalVideo
           youtube={{

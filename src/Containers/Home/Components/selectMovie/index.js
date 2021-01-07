@@ -74,17 +74,15 @@ class SelectMovie extends Component {
     let movieNameList = [];
     // console.log(movieList);
     if (!movieList || movieList.length <= 0) return;
+    let index = movieList.findIndex((x) => x.maPhim === 5125);
     movieList
-      .slice(0, movieList.length - 12)
+      .slice(0, index + 1)
       .reverse()
       .forEach((item) => {
         movieNameList.push({
           value: `${item.maPhim}`,
           label: `${item.tenPhim}`,
         });
-        // <option key={item.maPhim} value={item.maPhim}>
-        //   {item.tenPhim}
-        // </option>
       });
     // console.log(movieNameList);
     return movieNameList;
