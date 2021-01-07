@@ -8,6 +8,7 @@ import {
   InputLabel,
   Radio,
   RadioGroup,
+  makeStyles,
 } from "@material-ui/core";
 import LoadingComponent from "Containers/Home/Components/loading";
 import dayjs from "dayjs";
@@ -22,7 +23,28 @@ import "./index.scss";
 import { actBookingTickets, actGetTicketRoom } from "./modules/actions";
 import * as Yup from "yup";
 
+const useStyles = makeStyles((theme) => ({
+  root: {
+    "& .MuiFormLabel-root.Mui-focused": {
+      color: "#f79400",
+    },
+    "& .MuiInput-underline:after": {
+      borderBottom: "2px solid #f79400",
+    },
+    "& .MuiInput-underline.Mui-focused:after": {
+      borderColor: "#f79400",
+    },
+    "& .MuiRadio-colorSecondary.Mui-checked": {
+      color: "#f79400",
+    },
+    "& .MuiFormControl-root": {
+      height: "55px",
+    },
+  },
+}));
+
 export default function CheckOut() {
+  const classes = useStyles();
   const [timeString, settimeString] = useState("");
   const ticketRoom = useSelector((state) => state.ticketRoomReducer.ticketRoom);
   const loading = useSelector((state) => state.ticketRoomReducer.loading);
@@ -672,7 +694,7 @@ export default function CheckOut() {
             const { touched, errors } = formikProps;
 
             return (
-              <Form>
+              <Form className={classes.root}>
                 <FormControl
                   fullWidth
                   margin="normal"
@@ -710,17 +732,17 @@ export default function CheckOut() {
                   >
                     <FormControlLabel
                       value="ATM nội địa"
-                      control={<Radio color="primary" />}
+                      control={<Radio />}
                       label="ATM nội địa"
                     />
                     <FormControlLabel
                       value="Ví Momo"
-                      control={<Radio color="primary" />}
+                      control={<Radio />}
                       label="Ví Momo"
                     />
                     <FormControlLabel
                       value="ZaloPay"
-                      control={<Radio color="primary" />}
+                      control={<Radio />}
                       label="ZaloPay"
                     />
                   </RadioGroup>
