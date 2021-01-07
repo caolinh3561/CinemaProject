@@ -75,7 +75,7 @@ class SelectMovie extends Component {
     // console.log(movieList);
     if (!movieList || movieList.length <= 0) return;
     movieList
-      .slice(0, movieList.length - 2)
+      .slice(0, movieList.length - 12)
       .reverse()
       .forEach((item) => {
         movieNameList.push({

@@ -10,6 +10,9 @@ import "./index.scss";
 import dayjs from "dayjs";
 import CircularDeterminate from "./circle-component";
 import ShowingComponent from "./showing-component";
+import Swal from "sweetalert2/dist/sweetalert2.js";
+import "sweetalert2/src/sweetalert2.scss";
+
 class MovieDetailComponent extends Component {
   constructor() {
     super();
@@ -21,13 +24,17 @@ class MovieDetailComponent extends Component {
     this.openModal = this.openModal.bind(this);
   }
   handlePlayTrailer = (url) => {
-    var regExp =
-      "/^.*((youtu.be/)|(v/)|(/u/w/)|(embed/)|(watch?))??v?=?([^#&?]*).*/";
+    // eslint-disable-next-line
+    var regExp = /^.*((youtu.be\/)|(v\/)|(\/u\/\w\/)|(embed\/)|(watch\?))\??v?=?([^#\&\?]*).*/;
     var match = url.match(regExp);
     if (match && match[7].length === 11) {
       var videoId = match[7];
     } else {
-      alert("Phim không có trailer!");
+      Swal.fire({
+        icon: "error",
+        title: "Oops...",
+        text: "Phim này hiện chưa có trailer...",
+      });
       return;
     }
     this.setState({ videoId: videoId, isOpen: true });
