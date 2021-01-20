@@ -392,8 +392,8 @@ export default function CheckOut() {
         });
         return true;
       }
-      for (let i = +item.stt - 2; i <= +item.stt - 7; i--) {
-        if (state[i].daDat === true) return false;
+      for (let i = +item.stt - 2; i >= +item.stt - 7; i--) {
+        // if (state[i].daDat === true) return false;
         if (state[i].dangChon === false) {
           Swal.fire({
             icon: "error",
@@ -474,14 +474,14 @@ export default function CheckOut() {
 
     if (listGheDangChon.length > 1) {
       for (let i = 0; i < listGheDangChon.length - 1; i++) {
-        if (
-          listGheDangChon[i].stt % 16 === 3 ||
-          listGheDangChon[i].stt % 16 === 4 ||
-          listGheDangChon[i].stt % 16 === 11 ||
-          listGheDangChon[i].stt % 16 === 12
-        ) {
-          continue;
-        }
+        // if (
+        //   listGheDangChon[i].stt % 16 === 3 ||
+        //   listGheDangChon[i].stt % 16 === 4 ||
+        //   listGheDangChon[i].stt % 16 === 11 ||
+        //   listGheDangChon[i].stt % 16 === 12
+        // ) {
+        //   continue;
+        // }
         if (
           listGheDangChon[i].stt - listGheDangChon[i + 1].stt === -2 &&
           listGheDangChon[i].tenGhe.charAt(0) ===
@@ -531,7 +531,9 @@ export default function CheckOut() {
   };
 
   const renderSeats = () => {
+    // console.log("render Again!!");
     if (ticketRoom && ticketRoom.danhSachGhe) {
+      // console.log("render Ghe Cang");
       return state.map((item) => {
         if (item.daDat === true) {
           return (

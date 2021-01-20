@@ -25,7 +25,7 @@ const useStyles = makeStyles((theme) => ({
       color: "white",
     },
     "& .MuiInput-underline:before": {
-      borderBottomColor: "wheat",
+      borderBottomColor: "white",
     },
     "& .MuiInput-underline:hover:not(.Mui-disabled):before": {
       borderBottomColor: "gray",
@@ -43,7 +43,7 @@ const useStyles = makeStyles((theme) => ({
       animation: "none",
     },
     "& .MuiSvgIcon-root": {
-      color: "wheat",
+      color: "white",
     },
   },
 }));

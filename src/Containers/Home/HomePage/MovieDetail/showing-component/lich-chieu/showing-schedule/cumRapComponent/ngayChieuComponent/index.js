@@ -112,7 +112,7 @@ export default function NgayChieuComponent(props) {
       listDayTime = lstLichChieuTheoPhimSorted;
       return listRender;
     } else {
-      console.log("false nè");
+      // console.log("false nè");
       let listRender = [];
       for (let i = 0; i <= 7; i++) {
         listRender.push(
